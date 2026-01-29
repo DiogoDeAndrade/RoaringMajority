@@ -42,10 +42,12 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 
 Image process notes:
 * Generate the image or get some stock art
-* Reduce resolution (640x360)
+* Reduce resolution (Background: 640x360 / Characters: avg. 160 height)
+* Select all (Shift-Click on layer)
 * Quantize color (archimedes 64 palette)
 * Back to RGB
-* (Background) Desaturate -35
+* (Characters) Extract background (contract selection 1 pixel)
+* (Background) Desaturate -100, Lightness -25
 
 - Font [Boomer Tantrum](https://chequered.ink/product/boomer-tantrum/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - Font [Fake News](https://chequered.ink/product/fake-news/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
