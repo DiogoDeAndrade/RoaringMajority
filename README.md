@@ -40,10 +40,18 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 
 ## Art
 
+Image process notes:
+* Generate the image or get some stock art
+* Reduce resolution (640x360)
+* Quantize color (archimedes 64 palette)
+* Back to RGB
+* (Background) Desaturate -35
+
 - Font [Boomer Tantrum](https://chequered.ink/product/boomer-tantrum/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - Font [Fake News](https://chequered.ink/product/fake-news/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - Font [Front Page News](https://chequered.ink/product/front-page-news/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - [Nanner 32 Palette](https://lospec.com/palette-list/nanner-32) by [Afterimage](https://lospec.com/afterimage)
+- [archimedes 64 Palette](https://lospec.com/palette-list/archimedes-64) by [Pythagoras_314](https://lospec.com/pythagoras314)
 - Everything else done by [Diogo de Andrade], [CC0] license.
 
 ## Sound
