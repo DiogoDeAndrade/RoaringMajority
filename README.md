@@ -54,6 +54,7 @@ Image process notes:
 - Font [Front Page News](https://chequered.ink/product/front-page-news/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - [Nanner 32 Palette](https://lospec.com/palette-list/nanner-32) by [Afterimage](https://lospec.com/afterimage)
 - [archimedes 64 Palette](https://lospec.com/palette-list/archimedes-64) by [Pythagoras_314](https://lospec.com/pythagoras314)
+- Most background and character art generated with Dall-E and processed by [Diogo de Andrade]
 - Everything else done by [Diogo de Andrade], [CC0] license.
 
 ## Sound
@@ -65,6 +66,10 @@ Image process notes:
 - Uses [Unity Common], [MIT] license.
 - [NaughtyAttributes](https://github.com/dbrizov/NaughtyAttributes.git#upm) by Denis Rizov available through the [MIT] license.
 - All remaining game source code by Diogo de Andrade is licensed under the [MIT] license.
+
+## Screenshots
+
+![Art Test](Screenshots/dev_art_test.png)
 
 ## Metadata
 
