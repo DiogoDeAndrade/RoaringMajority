@@ -18,16 +18,17 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 
 ## Current
 
-* Location view
-  * Background (university)
-  * Stat UI
+* Tooltip system working
 * Crowd spawn (base)
+  * Protester system
+    * Head animation
+    * Body animation
+    * Walk animation
   * Basic protester
 
 ## Todo
 
 * Map view
-* Tooltip system working
 * HQ
   * Buy signs
   * Buy ads
@@ -49,6 +50,10 @@ Image process notes:
 * (Characters) Extract background (contract selection 1 pixel)
 * (Background) Desaturate -100, Lightness -25
 
+- [Fist icons](https://www.flaticon.com/free-icons/fist) created by Freepik - [Flaticon], free to use with attribution.
+- [Heart icons](https://www.flaticon.com/free-icons/heart) created by Chanut - [Flaticon], free to use with attribution.
+- [Visibility icons](https://www.flaticon.com/free-icons/visibility) created by Andrean Prabowo - [Flaticon], free to use with attribution.
+- [Dollar icons](https://www.flaticon.com/free-icons/dollar) created by Gregor Cresnar - [Flaticon], free to use with attribution.
 - Font [Boomer Tantrum](https://chequered.ink/product/boomer-tantrum/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - Font [Fake News](https://chequered.ink/product/fake-news/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - Font [Front Page News](https://chequered.ink/product/front-page-news/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
@@ -83,4 +88,5 @@ Image process notes:
 [CC-BY 4.0]:https://creativecommons.org/licenses/by/4.0/
 [CC-BY-NC 4.0]:https://creativecommons.org/licenses/by-nc/4.0/
 [Unity Common]:https://github.com/DiogoDeAndrade/UnityCommon
+[Flaticon]:https://www.flaticon.com
 [MIT]:LICENSE

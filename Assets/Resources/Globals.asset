@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98310639a72ba5c46926df2b47d3b5e5, type: 3}
+  m_Name: Globals
+  m_EditorClassIdentifier: Assembly-CSharp::Globals
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _healthResource: {fileID: 0}
+  _weaponSlot: {fileID: 0}
+  _statMorale: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
+  _statTension: {fileID: 11400000, guid: 11bbbb5d5ab46c648a7c13ff037c13bc, type: 2}
+  _statVisibility: {fileID: 11400000, guid: a05ff27077a194b40a50d92323ceac7b, type: 2}
+  _statSupport: {fileID: 11400000, guid: 962eb74031323074495362fd6073ea0a, type: 2}
+  _statVolatility: {fileID: 11400000, guid: 16f574bd92b50be499d41fd2fa7280f2, type: 2}
+  _statAwareness: {fileID: 11400000, guid: f1baa8d805eea6349aeef0ae7826a8ca, type: 2}
+  _statMoney: {fileID: 11400000, guid: 43713b7f478a85444a28516755ee6a23, type: 2}
+  _tagBackground: {fileID: 11400000, guid: b58bb9f03b1f5354090bb622fbb75b47, type: 2}
+  _startMorale: 50
+  _startTension: 50
+  _startVisibility: 10
+  _startSupport: 5
+  _startVolatility: 0
+  _startAwareness: 10
+  _startMoney: 10
