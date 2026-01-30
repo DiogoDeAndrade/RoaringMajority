@@ -18,13 +18,8 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 
 ## Current
 
-* Tooltip system working
-* Crowd spawn (base)
-  * Protester system
-    * Head animation
-    * Body animation
-    * Walk animation
-  * Basic protester
+* Basic protester action
+* Morale loss over time
 
 ## Todo
 
@@ -37,7 +32,11 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 * Opposing crowd system
 * Tick system (update simulation)
 * Location action system 
+* Location background linked to actual location SO
 * Stance system
+* Polish
+  * Better tooltip font (spacing is crap)
+  * Sort/Rescale with Y
 
 ## Art
 

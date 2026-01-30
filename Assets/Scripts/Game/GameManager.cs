@@ -1,9 +1,13 @@
 using NaughtyAttributes;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UC;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] 
+    private Protester           protesterPrefab;
     [Header("Debug")]
     [SerializeField]
     private bool                autoStartGame; 
@@ -86,7 +90,41 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        UpdateDerivedStats();
+        if (isOnLocation)
+        {
+            UpdateRecruitmentButtons();
+        }
+    }
+
+    void UpdateDerivedStats()
+    {
+        // Max. Protester Points
+        float support = Mathf.Clamp01(Get(Globals.statSupport) * 0.01f);
+        float maxPP = Mathf.Floor(Globals.ppRange.x + (Globals.ppRange.y - Globals.ppRange.x) * Mathf.Pow(support, Globals.ppPower));
+        Set(Globals.statMaxPP, maxPP);
+
+        // Current Protester Points
+        int pp = 0;
+        foreach (var location in locations.Values)
+        {
+            pp += location.GetPP();
+        }
+        Set(Globals.statPP, pp);
+    }
+
+    void UpdateRecruitmentButtons()
+    {
+        var buttons = FindObjectsByType<RecruitButton>(FindObjectsSortMode.None);
+        foreach (var button in buttons)
+        {
+            button.gameObject.SetActive(IsAvailable(button.protesterType));
+        }
+    }
+
+    public bool IsAvailable(ProtesterDef type)
+    {
+        return true;
     }
 
     public float Get(Stat stat)
@@ -110,9 +148,47 @@ public class GameManager : MonoBehaviour
 
         values[stat] = value;
 
-        onChangeStat?.Invoke(stat, oldValue, value);
+        if (oldValue != value)
+            onChangeStat?.Invoke(stat, oldValue, value);
+    }
+
+    public bool Spawn(ProtesterDef def)
+    {
+        // Check if we have enough PP
+        if (!def.CanSpawn()) return false;
+
+        // Add logic entity
+        ProtesterData pd = new ProtesterData(def);
+        currentLocationData.AddProtester(pd);
+
+        Spawn(pd, true, true);
+
+        return true;
+    }
+
+    public void Spawn(ProtesterData pd, bool leftSide, bool animate)
+    {
+        var protester = Instantiate(protesterPrefab);
+        protester.protesterData = pd;
+
+        var stagingAreaTag = (leftSide) ? (Globals.tagProtestArea) : (Globals.tagOppositeArea);
+        var targetPos = stagingAreaTag.FindFirst<PolygonCollider2D>().Random();
+
+        if (animate)
+        {
+            var spawnAreaTag = (leftSide) ? (Globals.tagProtestSpawnArea) : (Globals.tagOppositeSpawnArea);
+            var spawnPos = spawnAreaTag.FindFirst<PolygonCollider2D>().Random();
+
+            protester.transform.position = spawnPos;
+            protester.MoveTo(targetPos);
+        }
+        else
+        {
+            protester.transform.position = targetPos;
+        }
     }
 
     public bool isOnLocation => _currentLocation != null;
     public LocationData currentLocationData => _currentLocationData;
+    public int availablePP => Mathf.FloorToInt(Get(Globals.statMaxPP) - Get(Globals.statPP));
 }

@@ -1,8 +1,6 @@
 using NaughtyAttributes;
-using System;
 using TMPro;
 using UC;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,11 +18,14 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField]
     private TextMeshProUGUI valueText;
 
-    Tooltip tooltip;
-    string  baseText;
+    Tooltip             tooltip;
+    string              baseText;
+    TooltipDynamicText  dynamicText;
 
     void Start()
     {
+        dynamicText = GetComponent<TooltipDynamicText>();
+
         GameManager.instance.onChangeStat += UpdateStat;
         
         baseText = valueText.text;
@@ -74,8 +75,11 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        var s = stat.tooltipText;
+        if (dynamicText) s = dynamicText.ModifyText(s);
+
         tooltip = TooltipManager.CreateTooltip();
-        tooltip.SetText(stat.tooltipText);
+        tooltip.SetText(s);
     }
 
     public void OnPointerExit(PointerEventData eventData)

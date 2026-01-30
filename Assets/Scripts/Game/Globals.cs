@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System.Collections.Generic;
 using UC;
 using UnityEngine;
 
@@ -14,9 +15,17 @@ public class Globals : GlobalsBase
     [SerializeField] private Stat _statVolatility;
     [SerializeField] private Stat _statAwareness;
     [SerializeField] private Stat _statMoney;
+    [SerializeField] private Stat _statMaxPP;
+    [SerializeField] private Stat _statPP;
+    [Header("Data Lists")]
+    [SerializeField] private List<ProtesterDef> _protesterTypeList;
+    [SerializeField] private List<Stat>         _statList;
     [Header("Tags")]
-    [SerializeField] 
-    private Hypertag _tagBackground;
+    [SerializeField] private Hypertag _tagBackground;
+    [SerializeField] private Hypertag _tagProtestArea;
+    [SerializeField] private Hypertag _tagOppositeArea;
+    [SerializeField] private Hypertag _tagProtestSpawnArea;
+    [SerializeField] private Hypertag _tagOppositeSpawnArea;
     [Header("Start Values")]
     [SerializeField] private float _startMorale = 50.0f;
     [SerializeField] private float _startTension = 0.0f;
@@ -25,6 +34,9 @@ public class Globals : GlobalsBase
     [SerializeField] private float _startVolatility = 0.0f;
     [SerializeField] private float _startAwareness = 10.0f;
     [SerializeField] private float _startMoney = 10.0f;
+    [Header("Balancing")]
+    [SerializeField] private Vector2Int _ppRange = new Vector2Int(5, 50);
+    [SerializeField] private float      _ppPower = 1.5f;
 
     public static Stat statTension => instance._statTension;
     public static Stat statMorale => instance._statMorale;
@@ -33,6 +45,8 @@ public class Globals : GlobalsBase
     public static Stat statVolatility => instance._statVolatility;
     public static Stat statAwareness => instance._statAwareness;
     public static Stat statMoney => instance._statMoney;
+    public static Stat statMaxPP => instance._statMaxPP;
+    public static Stat statPP => instance._statPP;
     public static float startTension => instance._startTension;
     public static float startMorale => instance._startMorale;
     public static float startVisibility => instance._startVisibility;
@@ -41,6 +55,16 @@ public class Globals : GlobalsBase
     public static float startAwareness => instance._startAwareness;
     public static float startMoney => instance._startMoney;
     public static Hypertag tagBackground => instance._tagBackground;
+    public static Hypertag tagProtestArea => instance._tagProtestArea;
+    public static Hypertag tagOppositeArea => instance._tagOppositeArea;
+    public static Hypertag tagProtestSpawnArea => instance._tagProtestSpawnArea;
+    public static Hypertag tagOppositeSpawnArea => instance._tagOppositeSpawnArea;
+
+    public static Vector2Int ppRange => instance._ppRange;
+    public static float ppPower => instance._ppPower;
+
+    public static List<ProtesterDef> protesterTypeList => instance._protesterTypeList;
+    public static List<Stat> statList => instance._statList;
 
     protected static Globals _instance = null;
 

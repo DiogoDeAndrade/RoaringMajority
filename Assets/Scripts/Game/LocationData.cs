@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +12,8 @@ public class LocationData
 {
     private Location                location;
     private LocationState           state;
-    private Dictionary<Stat, float> values;
+    private Dictionary<Stat, float> values = new();
+    private List<ProtesterData>     protesters = new();
 
     public event OnChangeStat onChangeStat;
 
@@ -20,7 +22,6 @@ public class LocationData
     public LocationData(Location location)
     {
         this.location = location;
-        values = new Dictionary<Stat, float>();
         state = LocationState.Idle;
     }
 
@@ -48,5 +49,20 @@ public class LocationData
         Set(Globals.statTension, Globals.startTension);
         Set(Globals.statMorale, Globals.startMorale);
         Set(Globals.statVisibility, Globals.startVisibility);
+    }
+
+    public int GetPP()
+    {
+        int pp = 0;
+        foreach (var p in protesters)
+        {
+            pp += p.def.cost;
+        }
+        return pp;
+    }
+
+    public void AddProtester(ProtesterData pd)
+    {
+        protesters.Add(pd);
     }
 }

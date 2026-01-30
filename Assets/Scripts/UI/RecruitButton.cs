@@ -1,0 +1,63 @@
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UC;
+
+public class RecruitButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+{
+    [SerializeField] 
+    private ProtesterDef    def;
+    [SerializeField]
+    private Image           border;
+    [SerializeField]
+    private Image           icon;
+    [SerializeField]
+    private Color           colorNormal = Color.white;
+    [SerializeField]
+    private Color           colorHighlight = Color.white;
+    [SerializeField]
+    private Color           colorClick = Color.white;
+    [SerializeField]
+    private Color           colorClickFail = Color.red;
+
+    Tooltip             tooltip;
+    TooltipDynamicText  dynamicText;
+
+    public ProtesterDef protesterType => def;
+
+    void Start()
+    {
+        dynamicText = GetComponent<TooltipDynamicText>();
+
+        icon.sprite = def.icon;
+        border.color = colorNormal;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (GameManager.instance.Spawn(def))
+            border.color = colorClick;
+        else
+            border.color = colorClickFail;
+        border.FadeTo(colorHighlight, 0.2f);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        border.FadeTo(colorHighlight, 0.1f);
+
+        var s = def.tooltipText;
+        if (dynamicText) s = dynamicText.ModifyText(s);
+
+        tooltip = TooltipManager.CreateTooltip();
+        tooltip.SetText(s);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        border.FadeTo(colorNormal, 0.1f);
+
+        tooltip?.Remove();
+        tooltip = null;
+    }
+}
