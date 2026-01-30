@@ -1,10 +1,13 @@
 using NaughtyAttributes;
 using System;
 using TMPro;
+using UC;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class StatDisplay : MonoBehaviour
+public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] 
     private Stat        stat;
@@ -17,7 +20,8 @@ public class StatDisplay : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI valueText;
 
-    string baseText;
+    Tooltip tooltip;
+    string  baseText;
 
     void Start()
     {
@@ -66,5 +70,17 @@ public class StatDisplay : MonoBehaviour
     void ForceUpdate()
     {
         UpdateStat(null, 0.0f, 0.0f);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        tooltip = TooltipManager.CreateTooltip();
+        tooltip.SetText(stat.tooltipText);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        tooltip?.Remove();
+        tooltip = null;
     }
 }

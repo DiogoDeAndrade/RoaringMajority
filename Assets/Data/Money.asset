@@ -16,3 +16,4 @@ MonoBehaviour:
   displayName: Money
   color: {r: 0.9529412, g: 0.85882354, b: 0.43529412, a: 1}
   icon: {fileID: 21300000, guid: a3a467ff2c5981d4288b91255227ddd3, type: 3}
+  tooltipText: Financial resources used to sustain and influence the campaign.

@@ -9,6 +9,8 @@ public class Stat : ScriptableObject
     public string   displayName;
     public Color    color;
     public Sprite   icon;
+    [TextArea]
+    public string   tooltipText;
 
     public bool isLocal => type == StatType.Local;
 }
