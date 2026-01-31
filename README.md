@@ -30,11 +30,9 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
   * Buy bots (internet campaign)
   * TV system
 * Opposing crowd system
-* Location background linked to actual location SO
 * Stance system
 * Polish
   * Better tooltip font (spacing is crap)
-  * Sort/Rescale with Y
   * Combat text on change variables
 
 ## Art

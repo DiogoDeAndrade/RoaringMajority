@@ -21,12 +21,6 @@ public class Globals : GlobalsBase
     [SerializeField] private List<ProtesterDef> _protesterTypeList;
     [SerializeField] private List<Stat>         _statList;
     [SerializeField] private List<ProtesterDef> _startProtesters;
-    [Header("Tags")]
-    [SerializeField] private Hypertag _tagBackground;
-    [SerializeField] private Hypertag _tagProtestArea;
-    [SerializeField] private Hypertag _tagOppositeArea;
-    [SerializeField] private Hypertag _tagProtestSpawnArea;
-    [SerializeField] private Hypertag _tagOppositeSpawnArea;
     [Header("Prefabs")]
     [SerializeField] private Protester      _prefabProtester;
     [SerializeField] private DialogBox      _prefabDialogBox;
@@ -68,12 +62,6 @@ public class Globals : GlobalsBase
     public static float startVolatility => instance._startVolatility;
     public static float startAwareness => instance._startAwareness;
     public static float startMoney => instance._startMoney;
-    public static Hypertag tagBackground => instance._tagBackground;
-    public static Hypertag tagProtestArea => instance._tagProtestArea;
-    public static Hypertag tagOppositeArea => instance._tagOppositeArea;
-    public static Hypertag tagProtestSpawnArea => instance._tagProtestSpawnArea;
-    public static Hypertag tagOppositeSpawnArea => instance._tagOppositeSpawnArea;
-
     public static Protester prefabProtester => instance._prefabProtester;
     public static DialogBox prefabDialogBox => instance._prefabDialogBox;
     public static ActionButton prefabActionButton => instance._prefabActionButton;

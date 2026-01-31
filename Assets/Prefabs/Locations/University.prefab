@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5255140810669956444}
   - component: {fileID: 3614300517361089358}
-  - component: {fileID: 7499144461047103108}
   m_Layer: 0
   m_Name: OpposingSpawnArea
   m_TagString: Untagged
@@ -79,24 +78,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 327.12692, y: -128.72119}
-      - {x: 350.23947, y: -127.859886}
-      - {x: 376.80524, y: -176.08871}
-      - {x: 322.66043, y: -177.4593}
+    - - {x: 322.7724, y: -99.328224}
+      - {x: 349.15085, y: -107.17596}
+      - {x: 365.91898, y: -135.80946}
+      - {x: 322.66043, y: -143.7118}
   m_UseDelaunayMesh: 1
---- !u!114 &7499144461047103108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2268590103178857797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc938798f9cbdba48b70a952094371e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UC.HypertaggedObject
-  hypertag: {fileID: 11400000, guid: 0ae58fd3a5ed6a94ab795fb5ee6a4acc, type: 2}
 --- !u!1 &4900086846499286656
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +93,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9057815057413395410}
   - component: {fileID: 3050974576840344978}
-  - component: {fileID: 2024250451537855644}
   m_Layer: 0
   m_Name: StagingSpawnArea
   m_TagString: Untagged
@@ -176,24 +161,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -378.01828, y: -140.29482}
-      - {x: -324.00977, y: -137.13214}
-      - {x: -323.85175, y: -177.02325}
-      - {x: -380.3329, y: -178.55136}
+    - - {x: -376.9296, y: -94.572426}
+      - {x: -325.0984, y: -94.67563}
+      - {x: -322.7631, y: -143.27576}
+      - {x: -365.0921, y: -135.00623}
   m_UseDelaunayMesh: 1
---- !u!114 &2024250451537855644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4900086846499286656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc938798f9cbdba48b70a952094371e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UC.HypertaggedObject
-  hypertag: {fileID: 11400000, guid: 674e331dfe2431d4d90aacdb22a8c7b5, type: 2}
 --- !u!1 &5559901810777845451
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +176,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7701831142306344832}
   - component: {fileID: 2737201550547668108}
-  - component: {fileID: 3073028231720216030}
   m_Layer: 0
   m_Name: StagingArea
   m_TagString: Untagged
@@ -273,25 +244,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -309.79648, y: -129.08028}
-      - {x: -136.1661, y: -90.40486}
-      - {x: -76.75323, y: -89.81131}
-      - {x: -79.00081, y: -177.95781}
-      - {x: -313.98016, y: -178.55136}
+    - - {x: -261.7413, y: -86.57704}
+      - {x: -132.9002, y: -58.834633}
+      - {x: -76.75323, y: -57.15246}
+      - {x: -83.355316, y: -136.58992}
+      - {x: -261.79956, y: -140.58318}
   m_UseDelaunayMesh: 1
---- !u!114 &3073028231720216030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5559901810777845451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc938798f9cbdba48b70a952094371e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UC.HypertaggedObject
-  hypertag: {fileID: 11400000, guid: d91246dab43e88d41bc95782ed794a3d, type: 2}
 --- !u!1 &7973096007838596967
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +260,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7915461542278125285}
   - component: {fileID: 7763601397421942401}
-  - component: {fileID: 5189121779758986968}
   m_Layer: 0
   m_Name: OpposingArea
   m_TagString: Untagged
@@ -371,25 +328,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 82.91201, y: -91.72468}
-      - {x: 133.676, y: -90.404854}
-      - {x: 320.334, y: -123.187164}
-      - {x: 319.79797, y: -177.9578}
-      - {x: 89.9586, y: -177.4593}
+    - - {x: 81.82337, y: -57.977196}
+      - {x: 138.03052, y: -57.746002}
+      - {x: 282.46347, y: -91.06359}
+      - {x: 278.9292, y: -138.89496}
+      - {x: 93.22449, y: -136.09142}
   m_UseDelaunayMesh: 1
---- !u!114 &5189121779758986968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7973096007838596967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc938798f9cbdba48b70a952094371e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UC.HypertaggedObject
-  hypertag: {fileID: 11400000, guid: beecdec1f4cb84f4984eb59fa3bffff4, type: 2}
 --- !u!1 &9195040292592524992
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5677062790645917159}
   - component: {fileID: 4176207101792669787}
-  - component: {fileID: 235628935959979094}
+  - component: {fileID: 7646253759115422711}
   m_Layer: 0
   m_Name: University
   m_TagString: Untagged
@@ -486,7 +430,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &235628935959979094
+--- !u!114 &7646253759115422711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -495,7 +439,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 9195040292592524992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc938798f9cbdba48b70a952094371e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c0630b114b667c419441cef7f6e4413, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UC.HypertaggedObject
-  hypertag: {fileID: 11400000, guid: b58bb9f03b1f5354090bb622fbb75b47, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::LocationObject
+  location: {fileID: 11400000, guid: 51c095496e265b747aebb6ccf56a735a, type: 2}
+  backgroundImage: {fileID: 4176207101792669787}
+  _leftSpawnArea: {fileID: 3050974576840344978}
+  _leftProtestArea: {fileID: 2737201550547668108}
+  _rightSpawnArea: {fileID: 3614300517361089358}
+  _rightProtestArea: {fileID: 7763601397421942401}
+  scaleArea: {x: -147.45, y: -56.26}
+  scale: {x: 1, y: 0.3}
+  zPos: {x: -4, y: 4}

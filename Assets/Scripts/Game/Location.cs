@@ -7,6 +7,7 @@ public class Location : ScriptableObject
     public string               displayName;
     public Sprite               backgroundImage;
     public string               newsName;
+    public LocationObject       prefab;
     [SerializeReference]
     public List<UpkeepFunction> upkeepFunctions;
     [SerializeReference]

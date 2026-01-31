@@ -15,8 +15,10 @@ MonoBehaviour:
   displayName: University
   backgroundImage: {fileID: 21300000, guid: 0a019aba8e1c83a4f8cdf977069765a1, type: 3}
   newsName: the University
+  prefab: {fileID: 7646253759115422711, guid: 563490fe4712b4b41bfbacd102ff59b7, type: 3}
   upkeepFunctions:
   - rid: 8767884664732647505
+  actions: []
   references:
     version: 2
     RefIds:

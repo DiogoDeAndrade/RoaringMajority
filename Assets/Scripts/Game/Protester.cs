@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UC;
 using UnityEngine;
@@ -52,6 +53,16 @@ public class Protester : MonoBehaviour
             }
         }
     }
+
+    private void Update()
+    {
+        float scaleY = LocationObject.GetScaleFactor(transform.position.y);
+        transform.localScale = new Vector3(scaleY, scaleY, 1.0f);
+
+        float posZ = LocationObject.GetZ(transform.position.y);
+        transform.position = transform.position.ChangeZ(posZ);
+    }
+
 
     void UpdateVisuals()
     {

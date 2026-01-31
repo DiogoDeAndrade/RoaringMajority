@@ -104,11 +104,13 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
             }
         }
 
-        var backgroundSprite = Globals.tagBackground.FindFirst<SpriteRenderer>();
-        if (backgroundSprite)
+        var obj = FindFirstObjectByType<LocationObject>();
+        if (obj)
         {
-            backgroundSprite.sprite = _currentLocation.backgroundImage;
+            Destroy(obj.gameObject);
         }
+
+        Instantiate(_currentLocation.prefab, Vector3.zero, Quaternion.identity);
     }
 
     void Update()
@@ -385,8 +387,8 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
         var protester = Instantiate(Globals.prefabProtester);
         protester.protesterData = pd;
 
-        var stagingAreaTag = (leftSide) ? (Globals.tagProtestArea) : (Globals.tagOppositeArea);
-        var targetPos = stagingAreaTag.FindFirst<PolygonCollider2D>().Random();
+        var stagingArea = (leftSide) ? (LocationObject.leftProtestArea) : (LocationObject.rightProtestArea);
+        var targetPos = stagingArea.Random();
 
         if (animate)
         {
@@ -405,8 +407,8 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
 
     Vector3 GetSpawnPos(bool leftSide)
     {
-        var spawnAreaTag = (leftSide) ? (Globals.tagProtestSpawnArea) : (Globals.tagOppositeSpawnArea);
-        var spawnPos = spawnAreaTag.FindFirst<PolygonCollider2D>().Random();
+        var spawnArea = (leftSide) ? (LocationObject.leftSpawnArea) : (LocationObject.rightSpawnArea);
+        var spawnPos = spawnArea.Random();
 
         return spawnPos;
     }
