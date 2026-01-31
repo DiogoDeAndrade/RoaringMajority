@@ -1,6 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
-using TMPro;
 using UC;
 using UnityEngine;
 
@@ -16,6 +14,8 @@ public class Protester : MonoBehaviour
     private SpriteRenderer  bodyRenderer;
     [SerializeField]
     private SpriteRenderer  maskRenderer;
+    [SerializeField]
+    private Speech          speech;
 
     BounceBody      bounceBody;
     BounceWalk      bounceWalk;
@@ -95,5 +95,10 @@ public class Protester : MonoBehaviour
             bounceWalk.enabled = false;
             doneFunction?.Invoke();
         });
+    }
+
+    public void Say(string text, float duration)
+    {
+        speech.Say(text, duration);
     }
 }

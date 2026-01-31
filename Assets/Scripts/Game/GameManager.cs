@@ -97,11 +97,6 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
             _currentLocationData = new LocationData(_currentLocation);
             _currentLocationData.onChangeStat += (stat, oldValue, newValue) => onChangeStat?.Invoke(stat, oldValue, newValue);
             locations[_currentLocation] = _currentLocationData;
-
-            if (autoStartProtest)
-            {
-                StartProtest();
-            }
         }
 
         var obj = FindFirstObjectByType<LocationObject>();
@@ -111,6 +106,11 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
         }
 
         Instantiate(_currentLocation.prefab, Vector3.zero, Quaternion.identity);
+
+        if (autoStartProtest)
+        {
+            StartProtest();
+        }
     }
 
     void Update()
@@ -222,7 +222,11 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
             float morale = location.Value.Get(Globals.statMorale);
             if (morale < Globals.leaveThreshould)
             {
-                float p = Mathf.Pow((morale - Globals.leaveThreshould) / (1.0f - Globals.leaveThreshould), Globals.leaveThreshouldPower);
+                float t = (Globals.leaveThreshould - morale) / Globals.leaveThreshould; // 0 at threshold, 1 at 0
+                t = Mathf.Clamp01(t);
+
+                float p = Mathf.Pow(t, Globals.leaveThreshouldPower);
+                
                 if (Random.Range(0.0f, 1.0f) < p)
                 {
                     // One person leaves!
@@ -232,6 +236,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
                     var protesterObject = GetGameObject(protester);
                     if (protesterObject)
                     {
+                        protesterObject.Say(Globals.leaveSentences.Random(), 2.0f);
                         protesterObject.MoveTo(GetSpawnPos(true), () =>
                         {
                             Destroy(protesterObject.gameObject);
@@ -384,7 +389,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
 
     public void Spawn(ProtesterData pd, bool leftSide, bool animate)
     {
-        var protester = Instantiate(Globals.prefabProtester);
+        var protester = Instantiate(Globals.prefabProtester, LocationObject.instance.transform);
         protester.protesterData = pd;
 
         var stagingArea = (leftSide) ? (LocationObject.leftProtestArea) : (LocationObject.rightProtestArea);

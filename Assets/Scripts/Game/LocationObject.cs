@@ -21,7 +21,7 @@ public class LocationObject : MonoBehaviour
     [SerializeField]
     private Vector2         zPos;
 
-    static LocationObject instance;
+    public static LocationObject instance;
 
     private void Awake()
     {

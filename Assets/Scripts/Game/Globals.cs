@@ -41,10 +41,11 @@ public class Globals : GlobalsBase
     [SerializeField] private float      _leaveThreshould = 0.4f;
     [SerializeField] private float      _leaveThreshouldPower = 2.0f;
     [Header("Flavour")]
-    [SerializeField] private Vector2    _newsUpdateTimerRange = new Vector2(10.0f, 20.0f);
-    [SerializeField] private float      _newsUpdateProbJoke = 0.25f;
-    [SerializeField] private float      _newsUpdateProSide = 0.5f;
-    [SerializeField] private Vector2    _newsDefaultDurationRange = new Vector2(25.0f, 35.0f);
+    [SerializeField] private Vector2        _newsUpdateTimerRange = new Vector2(10.0f, 20.0f);
+    [SerializeField] private float          _newsUpdateProbJoke = 0.25f;
+    [SerializeField] private float          _newsUpdateProSide = 0.5f;
+    [SerializeField] private Vector2        _newsDefaultDurationRange = new Vector2(25.0f, 35.0f);
+    [SerializeField] private List<string>   _leaveSentences;
 
     public static Stat statTension => instance._statTension;
     public static Stat statMorale => instance._statMorale;
@@ -81,6 +82,7 @@ public class Globals : GlobalsBase
     public static float newsUpdateProbJoke => instance._newsUpdateProbJoke;
     public static float newsUpdateProSide => instance._newsUpdateProSide;
     public static Vector2 newsDefaultDurationRange => instance._newsDefaultDurationRange;
+    public static List<string> leaveSentences => instance._leaveSentences;
 
 
     protected static Globals _instance = null;
