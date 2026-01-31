@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UC;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class Protester : MonoBehaviour
     private SpriteRenderer  maskRenderer;
     [SerializeField]
     private Speech          speech;
+    [SerializeField]
+    private Emoter          emoter;
 
     BounceBody      bounceBody;
     BounceWalk      bounceWalk;
@@ -100,5 +103,10 @@ public class Protester : MonoBehaviour
     public void Say(string text, float duration)
     {
         speech.Say(text, duration);
+    }
+
+    public void Emote(List<Sprite> sprites, int emoteCount)
+    {
+        emoter.Emote(sprites, emoteCount);
     }
 }

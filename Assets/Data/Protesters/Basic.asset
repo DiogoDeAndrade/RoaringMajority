@@ -84,6 +84,14 @@ MonoBehaviour:
         conditions: []
         cooldown:
           rid: 8767884664732647703
+        sentences:
+          originalElements: []
+          withReplacement: 1
+        emotes:
+        - sprites:
+          - {fileID: 21300000, guid: 1a453b88d5721aa44b44e78be5b7d769, type: 3}
+          - {fileID: 21300000, guid: efed0aa0634c50b4ebd0155cb4568f96, type: 3}
+          emoteCount: 5
         statsToChange:
         - scaleMode: 1
           stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
@@ -114,6 +122,38 @@ MonoBehaviour:
         conditions: []
         cooldown:
           rid: 8767884664732647704
+        sentences:
+          originalElements:
+          - value: Stand together!
+            weight: 1
+          - value: Enough is enough!
+            weight: 1
+          - value: "We won\u2019t back down!"
+            weight: 1
+          - value: "You can\u2019t silence us!"
+            weight: 1
+          - value: This ends now!
+            weight: 1
+          - value: We are not alone!
+            weight: 1
+          - value: Change is coming!
+            weight: 1
+          - value: We deserve better!
+            weight: 1
+          - value: Hold the line!
+            weight: 1
+          - value: "Don\u2019t give up!"
+            weight: 1
+          - value: Stay strong!
+            weight: 1
+          - value: "We\u2019re still here!"
+            weight: 1
+          - value: Keep pushing!
+            weight: 1
+          - value: 
+            weight: 4
+          withReplacement: 1
+        emotes: []
         statsToChange:
         - scaleMode: 1
           stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
@@ -144,6 +184,20 @@ MonoBehaviour:
         conditions: []
         cooldown:
           rid: 8767884664732647705
+        sentences:
+          originalElements:
+          - value: "Take one \u2014 it explains why we\u2019re here."
+            weight: 1
+          - value: "We\u2019re asking for awareness, not trouble."
+            weight: 1
+          - value: This affects all of us.
+            weight: 1
+          - value: Share this with friends.
+            weight: 1
+          - value: 
+            weight: 3
+          withReplacement: 1
+        emotes: []
         statsToChange:
         - scaleMode: 1
           stat: {fileID: 11400000, guid: a05ff27077a194b40a50d92323ceac7b, type: 2}

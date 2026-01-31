@@ -6,6 +6,7 @@ using UnityEngine;
 public interface IActionProvider
 {
     public abstract LocationData GetLocation();
+    public abstract Protester GetProtester();
 }
 
 [Serializable]
@@ -30,6 +31,13 @@ public abstract class CooldownFunction
 [Serializable]
 public abstract class ActionFunction
 {
+    [Serializable]
+    struct Emote
+    {
+        public List<Sprite> sprites;
+        public int          emoteCount;
+    }
+
     [SerializeField] 
     private string _displayName;
     [SerializeField] 
@@ -47,6 +55,10 @@ public abstract class ActionFunction
     private List<ConditionFunction> conditions;
     [SerializeReference]
     private CooldownFunction        cooldown;
+    [SerializeField]
+    private StringProbList          sentences;
+    [SerializeField]
+    private List<Emote>             emotes;
 
     public string displayName => _displayName;
     public string tooltipName => string.IsNullOrEmpty(_tooltipName) ? displayName : _tooltipName;
@@ -108,6 +120,27 @@ public abstract class ActionFunction
                 if (!string.IsNullOrEmpty(str))
                 {
                     Ticker.AddNews(str, 15.0f);
+                }
+            }
+
+            if ((sentences != null) && (sentences.Count > 0))
+            {
+                var text = sentences.Get();
+
+                if (!string.IsNullOrEmpty(text))
+                {
+                    var protester = mainObject.GetProtester();
+                    protester?.Say(text, 2.0f);
+                }
+            }
+
+            if ((emotes != null) && (emotes.Count > 0))
+            {
+                var emote = emotes.Random();
+                if ((emote.sprites != null) && (emote.sprites.Count > 0) && (emote.emoteCount > 0))
+                {
+                    var protester = mainObject.GetProtester();
+                    protester?.Emote(emote.sprites, emote.emoteCount);
                 }
             }
         }

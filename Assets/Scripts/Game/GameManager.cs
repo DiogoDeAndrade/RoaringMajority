@@ -233,7 +233,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
                     var protester = location.Value.protesters.Random();
                     location.Value.RemoveProtester(protester);
 
-                    var protesterObject = GetGameObject(protester);
+                    var protesterObject = GetProtester(protester);
                     if (protesterObject)
                     {
                         protesterObject.Say(Globals.leaveSentences.Random(), 2.0f);
@@ -478,7 +478,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
         return locationData.protesterCount;
     }
 
-    public Protester GetGameObject(ProtesterData data)
+    public Protester GetProtester(ProtesterData data)
     {
         var allProtesters = FindObjectsByType<Protester>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach (var protester in allProtesters)
@@ -488,4 +488,5 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
 
         return null;
     }
+
 }

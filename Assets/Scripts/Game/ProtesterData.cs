@@ -18,6 +18,11 @@ public class ProtesterData : IUpkeepProvider, IActionProvider
         return location;
     }
 
+    public Protester GetProtester()
+    {
+        return GameManager.instance.GetProtester(this);
+    }
+
     public void GetUpkeep(Dictionary<Stat, float> deltaStat)
     {
         def.GetUpkeep(deltaStat, this);

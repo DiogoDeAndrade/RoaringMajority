@@ -65,4 +65,9 @@ public class Cause : ScriptableObject, IActionProvider
     {
         return null;
     }
+
+    public Protester GetProtester()
+    {
+        return null;
+    }
 }

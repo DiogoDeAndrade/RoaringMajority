@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1014024859520658455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5590441435390501833}
+  - component: {fileID: 3227493640453507463}
+  m_Layer: 0
+  m_Name: Emoter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5590441435390501833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014024859520658455}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.4, y: 145.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1534229181846289886}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3227493640453507463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014024859520658455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c001bdcf569b974d97108c97dc0a350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Emoter
+  emotePrefab: {fileID: 6689671682480971093, guid: 94a7263ab50ef7b45a2be9d20c33ac22, type: 3}
 --- !u!1 &1922665540935754432
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,6 +324,7 @@ Transform:
   m_Children:
   - {fileID: 2465989520244295740}
   - {fileID: 2202495775253587767}
+  - {fileID: 5590441435390501833}
   - {fileID: 7780911245892700353}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -300,6 +346,7 @@ MonoBehaviour:
   bodyRenderer: {fileID: 8516654133771675046}
   maskRenderer: {fileID: 1023730727271193281}
   speech: {fileID: 9059957742911821986}
+  emoter: {fileID: 3227493640453507463}
 --- !u!114 &7017650052615774934
 MonoBehaviour:
   m_ObjectHideFlags: 0
