@@ -20,7 +20,6 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 
 * Basic protester action
 * Ticker with messages (like this was a TV show)
-* Start protest (needs 3 available slots - spawns 3 basics immediately)
 
 ## Todo
 

@@ -20,12 +20,16 @@ public class Globals : GlobalsBase
     [Header("Data Lists")]
     [SerializeField] private List<ProtesterDef> _protesterTypeList;
     [SerializeField] private List<Stat>         _statList;
+    [SerializeField] private List<ProtesterDef> _startProtesters;
     [Header("Tags")]
     [SerializeField] private Hypertag _tagBackground;
     [SerializeField] private Hypertag _tagProtestArea;
     [SerializeField] private Hypertag _tagOppositeArea;
     [SerializeField] private Hypertag _tagProtestSpawnArea;
     [SerializeField] private Hypertag _tagOppositeSpawnArea;
+    [Header("Prefabs")]
+    [SerializeField] private Protester _prefabProtester;
+    [SerializeField] private DialogBox _prefabDialogBox;
     [Header("Start Values")]
     [SerializeField] private float _startMorale = 50.0f;
     [SerializeField] private float _startTension = 0.0f;
@@ -62,6 +66,9 @@ public class Globals : GlobalsBase
     public static Hypertag tagProtestSpawnArea => instance._tagProtestSpawnArea;
     public static Hypertag tagOppositeSpawnArea => instance._tagOppositeSpawnArea;
 
+    public static Protester prefabProtester => instance._prefabProtester;
+    public static DialogBox prefabDialogBox => instance._prefabDialogBox;
+
     public static Vector2Int ppRange => instance._ppRange;
     public static float ppPower => instance._ppPower;
     public static float tickTime => instance._tickTime;
@@ -69,6 +76,7 @@ public class Globals : GlobalsBase
 
     public static List<ProtesterDef> protesterTypeList => instance._protesterTypeList;
     public static List<Stat> statList => instance._statList;
+    public static List<ProtesterDef> startProtesters => instance._startProtesters;
 
     protected static Globals _instance = null;
 

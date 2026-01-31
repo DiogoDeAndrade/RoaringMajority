@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
+using UC;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,8 +9,8 @@ public class GameManager : MonoBehaviour
     public enum GameState { Menu, Started };
     [SerializeField]
     public GameState            state = GameState.Menu;
-    [SerializeField] 
-    private Protester           protesterPrefab;
+    [SerializeField]
+    private RectTransform       mainUI;
     [Header("Debug")]
     [SerializeField]
     private bool                autoStartGame; 
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     private float                               tickTimer;
     private float                               recruitCooldown = 0.0f;
     private float                               recruitCooldownMax = 1.0f;
+    private DialogBox                           startProtestDialog;
 
     public event OnChangeStat onChangeStat;
 
@@ -88,7 +90,7 @@ public class GameManager : MonoBehaviour
 
             if (autoStartProtest)
             {
-                _currentLocationData.StartProtest();
+                StartProtest();
             }
         }
 
@@ -124,6 +126,36 @@ public class GameManager : MonoBehaviour
         if (isOnLocation)
         {
             UpdateRecruitmentButtons();
+
+            if (!currentLocationData.isProtesting)
+            {
+                if (startProtestDialog == null)
+                {
+                    int requireCount = 0;
+                    foreach (var p in Globals.startProtesters)
+                    {
+                        requireCount += p.cost;
+                    }
+
+                    var message = "START PROTEST?";
+                    message += "\n\n";
+                    message += $"Requires <color=#{Globals.statPP.color.ToHex()}>{requireCount} PP</color>";
+                    startProtestDialog = DialogBox.CreateBox(message, true, Globals.prefabDialogBox, mainUI,
+                        yesAction : (dialogBox) =>
+                        {
+                            return StartProtest();
+                        },
+                        noAction : (dialogBox) =>
+                        {
+                            dialogBox = null;
+                            return true;
+                        },
+                        yesCondition : (dialogBox) =>
+                        {
+                            return (Get(Globals.statPP) + requireCount) <= Get(Globals.statMaxPP);
+                        });
+                }
+            }
         }
     }
 
@@ -161,7 +193,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateRecruitmentButtons()
     {
-        var buttons = FindObjectsByType<RecruitButton>(FindObjectsSortMode.None);
+        var buttons = FindObjectsByType<RecruitButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach (var button in buttons)
         {
             button.gameObject.SetActive(IsAvailable(button.protesterType));
@@ -170,6 +202,8 @@ public class GameManager : MonoBehaviour
 
     public bool IsAvailable(ProtesterDef type)
     {
+        if (!currentLocationData.isProtesting) return false;
+
         return true;
     }
 
@@ -227,7 +261,7 @@ public class GameManager : MonoBehaviour
 
     public void Spawn(ProtesterData pd, bool leftSide, bool animate)
     {
-        var protester = Instantiate(protesterPrefab);
+        var protester = Instantiate(Globals.prefabProtester);
         protester.protesterData = pd;
 
         var stagingAreaTag = (leftSide) ? (Globals.tagProtestArea) : (Globals.tagOppositeArea);
@@ -272,4 +306,17 @@ public class GameManager : MonoBehaviour
     public bool isOnLocation => _currentLocation != null;
     public LocationData currentLocationData => _currentLocationData;
     public int availablePP => Mathf.FloorToInt(Get(Globals.statMaxPP) - Get(Globals.statPP));
+
+    bool StartProtest()
+    {
+        if (_currentLocationData == null) return false;
+
+        _currentLocationData.StartProtest();
+        for (int i = 0; i < Globals.startProtesters.Count; i++)
+        {
+            Spawn(Globals.startProtesters[i]);
+        }
+
+        return true;
+    }
 }

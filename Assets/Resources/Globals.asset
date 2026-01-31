@@ -40,11 +40,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 11bbbb5d5ab46c648a7c13ff037c13bc, type: 2}
   - {fileID: 11400000, guid: a05ff27077a194b40a50d92323ceac7b, type: 2}
   - {fileID: 11400000, guid: 16f574bd92b50be499d41fd2fa7280f2, type: 2}
+  _startProtesters:
+  - {fileID: 11400000, guid: 30da5eae037357c448f59917be511ed2, type: 2}
+  - {fileID: 11400000, guid: 30da5eae037357c448f59917be511ed2, type: 2}
+  - {fileID: 11400000, guid: 30da5eae037357c448f59917be511ed2, type: 2}
   _tagBackground: {fileID: 11400000, guid: b58bb9f03b1f5354090bb622fbb75b47, type: 2}
   _tagProtestArea: {fileID: 11400000, guid: d91246dab43e88d41bc95782ed794a3d, type: 2}
   _tagOppositeArea: {fileID: 11400000, guid: beecdec1f4cb84f4984eb59fa3bffff4, type: 2}
   _tagProtestSpawnArea: {fileID: 11400000, guid: 674e331dfe2431d4d90aacdb22a8c7b5, type: 2}
   _tagOppositeSpawnArea: {fileID: 11400000, guid: 0ae58fd3a5ed6a94ab795fb5ee6a4acc, type: 2}
+  _prefabProtester: {fileID: 2140368942696141523, guid: 3e1a85e082c945f4bb1bb1b7698933d2, type: 3}
+  _prefabDialogBox: {fileID: 4714612813715113559, guid: 6428ae13822386644b8ab0e9ee080e83, type: 3}
   _startMorale: 50
   _startTension: 50
   _startVisibility: 10
@@ -52,5 +58,7 @@ MonoBehaviour:
   _startVolatility: 0
   _startAwareness: 10
   _startMoney: 10
+  _tickTime: 15
+  _recruitCooldownRange: {x: 2, y: 20}
   _ppRange: {x: 5, y: 50}
   _ppPower: 1.5
