@@ -1,7 +1,9 @@
 using NaughtyAttributes;
 using System.Collections.Generic;
 using UC;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
 public class GameManager : MonoBehaviour, IUpkeepProvider
 {
@@ -10,6 +12,8 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
     public GameState            state = GameState.Menu;
     [SerializeField]
     private RectTransform       mainUI;
+    [SerializeField]
+    private RectTransform       actionButtonContainer;
     [Header("Debug")]
     [SerializeField]
     private bool                autoStartGame;
@@ -30,6 +34,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
     private float                               recruitCooldownMax = 1.0f;
     private DialogBox                           startProtestDialog;
     private float                               newsTimer;
+    private bool                                refreshActions;
 
     public event OnChangeStat onChangeStat;
 
@@ -153,9 +158,16 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
             tickTimer = Globals.tickTime;
         }
         UpdateDerivedStats();
+
+        currentLocationData.ElapseSimulation(deltaTime);
+
         if (isOnLocation)
         {
             UpdateRecruitmentButtons();
+            if (refreshActions)
+            {
+                UpdateActionButtons();
+            }
 
             if (!currentLocationData.isProtesting)
             {
@@ -230,27 +242,79 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
         }
     }
 
-    public bool IsAvailable(ProtesterDef type)
+    void UpdateActionButtons()
     {
-        if (!currentLocationData.isProtesting) return false;
+        // Delete old buttons
+        var buttons = FindObjectsByType<ActionButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (var button in buttons)
+        {
+            Destroy(button.gameObject);
+        }
+
+        // Get action from cause
+        Dictionary<string, (ActionFunction function, IActionProvider provider)> actions = new();
+
+        foreach (var action in _currentCause.actions)
+        {
+            if (actions.ContainsKey(action.displayName)) continue;
+
+            actions.Add(action.displayName, (action, _currentCause));
+        }
+
+        // Get action from location
+        foreach (var action in _currentLocationData.location.actions)
+        {
+            if (actions.ContainsKey(action.displayName)) continue;
+
+            actions.Add(action.displayName, (action, _currentLocationData));
+        }
+
+        // Get actions from protesters
+        var protesters = _currentLocationData.protesters;
+        foreach (var protester in protesters)
+        {
+            foreach (var action in protester.def.actions)
+            {
+                if (actions.ContainsKey(action.displayName)) continue;
+
+                actions.Add(action.displayName, (action, protester));
+            }
+        }
+
+        // Add action buttons
+        foreach (var action in actions)
+        {
+            var actionButton = Instantiate(Globals.prefabActionButton, actionButtonContainer);
+            actionButton.Set(action.Value.function, action.Value.provider);
+        }
+
+        refreshActions = false;
+    }
+
+    public bool IsAvailable(ProtesterDef type, LocationData location = null)
+    {
+        var loc = (location == null) ? (_currentLocationData) : (location);
+        if (!loc.isProtesting) return false;
 
         return true;
     }
 
-    public float Get(Stat stat)
+    public float Get(Stat stat, LocationData location = null)
     {
-        if (stat.isLocal) return _currentLocationData?.Get(stat) ?? 0.0f;
+        var loc = (location == null) ? (_currentLocationData) : (location);
+        if (stat.isLocal) return loc?.Get(stat) ?? 0.0f;
 
         if (values.TryGetValue(stat, out float value)) return value;
 
         return 0.0f;
     }
 
-    public void Set(Stat stat, float value)
+    public void Set(Stat stat, float value, LocationData location = null)
     {
         if (stat.isLocal)
         {
-            _currentLocationData.Set(stat, value);
+            var loc = (location == null) ? (_currentLocationData) : (location);
+            loc.Set(stat, value);
             return;
         }
 
@@ -263,18 +327,22 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
             onChangeStat?.Invoke(stat, oldValue, value);
     }
 
-    public bool Spawn(ProtesterDef def)
+    public bool Spawn(ProtesterDef def, LocationData location = null)
     {
         // Check if we have enough PP
         if (!def.CanSpawn()) return false;
 
         // Add logic entity
         ProtesterData pd = new ProtesterData(def, currentLocationData);
-        currentLocationData.AddProtester(pd);
+
+        var loc = (location == null) ? (_currentLocationData) : (location);
+        loc.AddProtester(pd);
 
         Spawn(pd, true, true);
 
         recruitCooldownMax = recruitCooldown = GetRecruitmentCooldown();
+
+        refreshActions = true;
 
         return true;
     }
@@ -309,6 +377,8 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
         {
             protester.transform.position = targetPos;
         }
+
+        refreshActions = true;
     }
 
     public Dictionary<Stat, float> GetUpkeeps()
@@ -345,6 +415,9 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
         if (_currentLocationData == null) return false;
 
         _currentLocationData.StartProtest();
+
+        UpdateDerivedStats();
+
         for (int i = 0; i < Globals.startProtesters.Count; i++)
         {
             Spawn(Globals.startProtesters[i]);
@@ -359,5 +432,12 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
         Ticker.AddNews(item, 30.0f);
 
         return true;
+    }
+
+    public float GetCrowdSize(LocationData locationData)
+    {
+        if (locationData == null) return currentLocationData.protesterCount;
+
+        return locationData.protesterCount;
     }
 }

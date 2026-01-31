@@ -62,7 +62,7 @@ public class Ticker : MonoBehaviour
             n.duration -= Time.deltaTime;
         }
 
-        news.RemoveAll((n) => (n.duration < 0.0f) && (n != current));
+        news.RemoveAll((n) => (n.duration < 0.0f) && (n != current) && (n.count > 0));
     }
 
     void GetNextNewsItems()

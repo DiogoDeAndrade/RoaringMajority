@@ -23,6 +23,8 @@ public class ProtesterDef : ScriptableObject
     public int                  cost = 1;
     [SerializeReference]
     public List<UpkeepFunction> upkeepFunctions;
+    [SerializeReference]
+    public List<ActionFunction> actions;
 
     public bool CanSpawn()
     {

@@ -19,7 +19,8 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 ## Current
 
 * Basic protester action
-* Ticker with messages (like this was a TV show)
+  * Emotes on action
+* People dropping out when morale is low
 
 ## Todo
 
@@ -54,6 +55,10 @@ Image process notes:
 - [Heart icons](https://www.flaticon.com/free-icons/heart) created by Chanut - [Flaticon], free to use with attribution.
 - [Visibility icons](https://www.flaticon.com/free-icons/visibility) created by Andrean Prabowo - [Flaticon], free to use with attribution.
 - [Dollar icons](https://www.flaticon.com/free-icons/dollar) created by Gregor Cresnar - [Flaticon], free to use with attribution.
+- [Chanting icons](https://www.flaticon.com/free-icons/chanting) created by Freepik - [Flaticon], free to use with attribution.
+- [Announcement icons](https://www.flaticon.com/free-icons/chanting) created by Dewi Sari - [Flaticon], free to use with attribution.
+- [Brochure icons](https://www.flaticon.com/free-icons/chanting) created by Freepik - [Flaticon], free to use with attribution.
+
 - Font [Boomer Tantrum](https://chequered.ink/product/boomer-tantrum/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - Font [Fake News](https://chequered.ink/product/fake-news/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - Font [Front Page News](https://chequered.ink/product/front-page-news/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)

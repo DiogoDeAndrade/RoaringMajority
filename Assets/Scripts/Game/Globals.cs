@@ -28,8 +28,9 @@ public class Globals : GlobalsBase
     [SerializeField] private Hypertag _tagProtestSpawnArea;
     [SerializeField] private Hypertag _tagOppositeSpawnArea;
     [Header("Prefabs")]
-    [SerializeField] private Protester _prefabProtester;
-    [SerializeField] private DialogBox _prefabDialogBox;
+    [SerializeField] private Protester      _prefabProtester;
+    [SerializeField] private DialogBox      _prefabDialogBox;
+    [SerializeField] private ActionButton   _prefabActionButton;
     [Header("Start Values")]
     [SerializeField] private float _startMorale = 50.0f;
     [SerializeField] private float _startTension = 0.0f;
@@ -73,6 +74,7 @@ public class Globals : GlobalsBase
 
     public static Protester prefabProtester => instance._prefabProtester;
     public static DialogBox prefabDialogBox => instance._prefabDialogBox;
+    public static ActionButton prefabActionButton => instance._prefabActionButton;
 
     public static Vector2Int ppRange => instance._ppRange;
     public static float ppPower => instance._ppPower;

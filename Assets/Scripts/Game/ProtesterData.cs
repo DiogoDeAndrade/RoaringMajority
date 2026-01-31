@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProtesterData : IUpkeepProvider
+public class ProtesterData : IUpkeepProvider, IActionProvider
 {
     public ProtesterDef def;
     public LocationData location;
@@ -11,6 +11,11 @@ public class ProtesterData : IUpkeepProvider
     {
         this.def = def;
         this.location = location;
+    }
+
+    public LocationData GetLocation()
+    {
+        return location;
     }
 
     public void GetUpkeep(Dictionary<Stat, float> deltaStat)

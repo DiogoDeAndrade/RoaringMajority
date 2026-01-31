@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Cause", menuName = "RM/Cause")]
-public class Cause : ScriptableObject
+public class Cause : ScriptableObject, IActionProvider
 {
     public string   displayName;
     public News     newsItems;
@@ -12,6 +12,8 @@ public class Cause : ScriptableObject
 
     [SerializeReference]
     public List<UpkeepFunction> upkeepFunctions;
+    [SerializeReference]
+    public List<ActionFunction> actions;
 
     public void GetUpkeep(Dictionary<Stat, float> deltaStat, IUpkeepProvider provider)
     {
@@ -57,5 +59,10 @@ public class Cause : ScriptableObject
             }
         }
         return txt;
+    }
+
+    public LocationData GetLocation()
+    {
+        return null;
     }
 }

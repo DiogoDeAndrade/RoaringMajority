@@ -9,6 +9,8 @@ public class Location : ScriptableObject
     public string               newsName;
     [SerializeReference]
     public List<UpkeepFunction> upkeepFunctions;
+    [SerializeReference]
+    public List<ActionFunction> actions;
 
     public void GetUpkeep(Dictionary<Stat, float> deltaStat, LocationData locationData)
     {
