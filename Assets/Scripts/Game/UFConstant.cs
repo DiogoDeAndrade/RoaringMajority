@@ -10,7 +10,7 @@ public class UFConstant : UpkeepFunction
     public Stat     stat;
     public float    constantValue;
 
-    public override void RunUpkeep(Dictionary<Stat, float> deltaStat, object mainObject)
+    public override void RunUpkeep(Dictionary<Stat, float> deltaStat, IUpkeepProvider mainObject)
     {
         if (deltaStat.TryGetValue(stat, out var value))
         {

@@ -1,10 +1,9 @@
 using NaughtyAttributes;
-using System;
 using System.Collections.Generic;
 using UC;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IUpkeepProvider
 {
     public enum GameState { Menu, Started };
     [SerializeField]
@@ -13,12 +12,15 @@ public class GameManager : MonoBehaviour
     private RectTransform       mainUI;
     [Header("Debug")]
     [SerializeField]
-    private bool                autoStartGame; 
+    private bool                autoStartGame;
+    [SerializeField]
+    private Cause               autoStartCause;
     [SerializeField] 
     private Location            debugStartLocation;
     [SerializeField, ShowIf(nameof(hasDebugStartLocation))]
     private bool                autoStartProtest;
 
+    private Cause                               _currentCause;
     private Location                            _currentLocation;
     private LocationData                        _currentLocationData;
     private Dictionary<Stat, float>             values = new();
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
     private float                               recruitCooldown = 0.0f;
     private float                               recruitCooldownMax = 1.0f;
     private DialogBox                           startProtestDialog;
+    private float                               newsTimer;
 
     public event OnChangeStat onChangeStat;
 
@@ -56,7 +59,7 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         if (autoStartGame)
         {
-            StartGame();
+            StartGame(autoStartCause);
         }
         if (debugStartLocation != null)
         {
@@ -68,8 +71,9 @@ public class GameManager : MonoBehaviour
         tickTimer = Time.time;
     }
 
-    void StartGame()
+    void StartGame(Cause cause)
     {
+        _currentCause = cause;
         state = GameState.Started;
 
         Set(Globals.statSupport, Globals.startSupport);
@@ -78,6 +82,7 @@ public class GameManager : MonoBehaviour
         Set(Globals.statVolatility, Globals.startVolatility);
 
         recruitCooldown = 0.0f;
+        newsTimer = Globals.newsUpdateTimerRange.Random();
     }
 
     void InitLocation()
@@ -103,14 +108,39 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        float simulationTimeScale = 1.0f;
+        if (state == GameState.Started)
+        {
+            UpdateTicker();
 
-        if (Input.GetKey(KeyCode.Alpha1)) simulationTimeScale = 2.0f;
-        if (Input.GetKey(KeyCode.Alpha2)) simulationTimeScale = 4.0f;
-        if (Input.GetKey(KeyCode.Alpha3)) simulationTimeScale = 8.0f;
-        if (Input.GetKey(KeyCode.Alpha4)) simulationTimeScale = 16.0f;
+            float simulationTimeScale = 1.0f;
 
-        ElapseSimulation(Time.deltaTime * simulationTimeScale);
+            if (Input.GetKey(KeyCode.Alpha1)) simulationTimeScale = 2.0f;
+            if (Input.GetKey(KeyCode.Alpha2)) simulationTimeScale = 4.0f;
+            if (Input.GetKey(KeyCode.Alpha3)) simulationTimeScale = 8.0f;
+            if (Input.GetKey(KeyCode.Alpha4)) simulationTimeScale = 16.0f;
+
+            ElapseSimulation(Time.deltaTime * simulationTimeScale);
+        }
+    }
+
+    void UpdateTicker()
+    {
+        newsTimer -= Time.deltaTime;
+        if (newsTimer <= 0.0f)
+        {
+            string txt = "";
+            if (Random.Range(0.0f, 1.0f) < Globals.newsUpdateProbJoke)
+            {
+                txt = _currentCause.GetJoke();
+            }
+            else
+            {
+                txt = _currentCause.GetNews(Random.Range(0.0f, 1.0f) < Globals.newsUpdateProSide);
+            }
+            float duration = Globals.newsDefaultDurationRange.Random();
+            Ticker.AddNews(txt, duration);
+            newsTimer = duration + Globals.newsUpdateTimerRange.Random();
+        }
     }
 
     void ElapseSimulation(float deltaTime)
@@ -284,6 +314,9 @@ public class GameManager : MonoBehaviour
     public Dictionary<Stat, float> GetUpkeeps()
     {
         Dictionary<Stat, float> deltaStats = new();
+        
+        _currentCause.GetUpkeep(deltaStats, this);
+
         foreach (var location in locations)
         {
             location.Value.GetUpkeep(deltaStats);
@@ -316,6 +349,14 @@ public class GameManager : MonoBehaviour
         {
             Spawn(Globals.startProtesters[i]);
         }
+
+        var translator = new Dictionary<string, string>
+        {
+            ["{LOCATION_NAME}"] = _currentLocation.newsName,
+        };
+        string item = _currentCause.GetStartText(translator);
+
+        Ticker.AddNews(item, 30.0f);
 
         return true;
     }

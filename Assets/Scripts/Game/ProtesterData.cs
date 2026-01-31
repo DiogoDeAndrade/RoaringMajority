@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProtesterData
+public class ProtesterData : IUpkeepProvider
 {
     public ProtesterDef def;
     public LocationData location;

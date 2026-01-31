@@ -13,7 +13,7 @@ public class UFBoredom : UpkeepFunction
     public float    inactivityBaseValue = 0.15f;
     public float    inactivityScaleValue = 0.0f;
 
-    public override void RunUpkeep(Dictionary<Stat, float> deltaStat, object mainObject)
+    public override void RunUpkeep(Dictionary<Stat, float> deltaStat, IUpkeepProvider mainObject)
     {
         var locationData = mainObject as LocationData;
         if (locationData == null)

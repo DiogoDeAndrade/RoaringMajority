@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Location
   displayName: University
   backgroundImage: {fileID: 21300000, guid: 0a019aba8e1c83a4f8cdf977069765a1, type: 3}
+  newsName: the University
   upkeepFunctions:
   - rid: 8767884664732647505
   references:

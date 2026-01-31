@@ -8,7 +8,7 @@ public enum LocationState
     Protest
 }
 
-public class LocationData
+public class LocationData : IUpkeepProvider
 {
     private Location                location;
     private LocationState           state;

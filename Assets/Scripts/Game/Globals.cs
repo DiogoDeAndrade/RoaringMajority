@@ -43,6 +43,11 @@ public class Globals : GlobalsBase
     [SerializeField] private Vector2    _recruitCooldownRange = new Vector2(2.0f, 20.0f);
     [SerializeField] private Vector2Int _ppRange = new Vector2Int(5, 50);
     [SerializeField] private float      _ppPower = 1.5f;
+    [Header("Flavour")]
+    [SerializeField] private Vector2    _newsUpdateTimerRange = new Vector2(10.0f, 20.0f);
+    [SerializeField] private float      _newsUpdateProbJoke = 0.25f;
+    [SerializeField] private float      _newsUpdateProSide = 0.5f;
+    [SerializeField] private Vector2    _newsDefaultDurationRange = new Vector2(25.0f, 35.0f);
 
     public static Stat statTension => instance._statTension;
     public static Stat statMorale => instance._statMorale;
@@ -77,6 +82,12 @@ public class Globals : GlobalsBase
     public static List<ProtesterDef> protesterTypeList => instance._protesterTypeList;
     public static List<Stat> statList => instance._statList;
     public static List<ProtesterDef> startProtesters => instance._startProtesters;
+
+    public static Vector2 newsUpdateTimerRange => instance._newsUpdateTimerRange;
+    public static float newsUpdateProbJoke => instance._newsUpdateProbJoke;
+    public static float newsUpdateProSide => instance._newsUpdateProSide;
+    public static Vector2 newsDefaultDurationRange => instance._newsDefaultDurationRange;
+
 
     protected static Globals _instance = null;
 

@@ -6,6 +6,7 @@ public class Location : ScriptableObject
 {
     public string               displayName;
     public Sprite               backgroundImage;
+    public string               newsName;
     [SerializeReference]
     public List<UpkeepFunction> upkeepFunctions;
 
