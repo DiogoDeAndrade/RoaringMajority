@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     private Dictionary<Stat, float>             values = new();
     private Dictionary<Location, LocationData>  locations = new();
     private float                               tickTimer;
+    private float                               recruitCooldown = 0.0f;
+    private float                               recruitCooldownMax = 1.0f;
 
     public event OnChangeStat onChangeStat;
 
@@ -72,6 +74,8 @@ public class GameManager : MonoBehaviour
         Set(Globals.statAwareness, Globals.startAwareness);
         Set(Globals.statMoney, Globals.startMoney);
         Set(Globals.statVolatility, Globals.startVolatility);
+
+        recruitCooldown = 0.0f;
     }
 
     void InitLocation()
@@ -104,7 +108,13 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha3)) simulationTimeScale = 8.0f;
         if (Input.GetKey(KeyCode.Alpha4)) simulationTimeScale = 16.0f;
 
-        tickTimer -= Time.deltaTime * simulationTimeScale;
+        ElapseSimulation(Time.deltaTime * simulationTimeScale);
+    }
+
+    void ElapseSimulation(float deltaTime)
+    {
+        recruitCooldown -= deltaTime;
+        tickTimer -= deltaTime;
         if (tickTimer <= 0.0f)
         {
             GameTick();
@@ -200,7 +210,19 @@ public class GameManager : MonoBehaviour
 
         Spawn(pd, true, true);
 
+        recruitCooldownMax = recruitCooldown = GetRecruitmentCooldown();
+
         return true;
+    }
+
+    public float SpawnAvailabilityPercentage(ProtesterDef def)
+    {
+        if (!def.CanSpawn()) return 0.0f;
+
+        float cd = GetRecruitmentCooldown();
+        float t = 1.0f - Mathf.Clamp01(recruitCooldown / recruitCooldownMax);
+
+        return t;
     }
 
     public void Spawn(ProtesterData pd, bool leftSide, bool animate)
@@ -234,6 +256,17 @@ public class GameManager : MonoBehaviour
         }
 
         return deltaStats;
+    }
+
+    public float GetRecruitmentCooldown()
+    {
+        float awareness = Get(Globals.statAwareness);
+        float t = Mathf.Clamp01(awareness / 100f);
+        float easeOut = 1f - Mathf.Pow(t, 1.5f);
+        var range = Globals.recruitCooldownRange;
+        float cooldown = range.x + (range.y - range.x) * easeOut;
+
+        return cooldown;
     }
 
     public bool isOnLocation => _currentLocation != null;

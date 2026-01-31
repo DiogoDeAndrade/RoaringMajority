@@ -36,6 +36,7 @@ public class Globals : GlobalsBase
     [SerializeField] private float _startMoney = 10.0f;
     [Header("Balancing")]
     [SerializeField] private float      _tickTime = 15.0f;
+    [SerializeField] private Vector2    _recruitCooldownRange = new Vector2(2.0f, 20.0f);
     [SerializeField] private Vector2Int _ppRange = new Vector2Int(5, 50);
     [SerializeField] private float      _ppPower = 1.5f;
 
@@ -64,6 +65,7 @@ public class Globals : GlobalsBase
     public static Vector2Int ppRange => instance._ppRange;
     public static float ppPower => instance._ppPower;
     public static float tickTime => instance._tickTime;
+    public static Vector2 recruitCooldownRange => instance._recruitCooldownRange;
 
     public static List<ProtesterDef> protesterTypeList => instance._protesterTypeList;
     public static List<Stat> statList => instance._statList;

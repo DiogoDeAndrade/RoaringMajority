@@ -12,6 +12,8 @@ public class RecruitButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField]
     private Image           icon;
     [SerializeField]
+    private Image           filler;
+    [SerializeField]
     private Color           colorNormal = Color.white;
     [SerializeField]
     private Color           colorHighlight = Color.white;
@@ -33,20 +35,39 @@ public class RecruitButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         border.color = colorNormal;
     }
 
+    void Update()
+    {
+        filler.fillAmount = 1.0f - GameManager.instance.SpawnAvailabilityPercentage(def);
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (GameManager.instance.Spawn(def))
-            border.color = colorClick;
-        else
-            border.color = colorClickFail;
-        border.FadeTo(colorHighlight, 0.2f);
+        if (GameManager.instance.SpawnAvailabilityPercentage(def) >= 1.0f)
+        {
+            if (GameManager.instance.Spawn(def))
+                border.color = colorClick;
+            else
+                border.color = colorClickFail;
+
+            if (GameManager.instance.SpawnAvailabilityPercentage(def) >= 1.0f)
+                border.FadeTo(colorHighlight, 0.2f);
+            else
+                border.FadeTo(colorNormal, 0.2f);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        border.FadeTo(colorHighlight, 0.1f);
+        if (GameManager.instance.SpawnAvailabilityPercentage(def) >= 1.0f)
+        {
+            border.FadeTo(colorHighlight, 0.1f);
+        }
+        else
+        {
+            border.FadeTo(colorNormal, 0.1f);
+        }
 
-        var s = def.tooltipText;
+            var s = def.tooltipText;
         if (dynamicText) s = dynamicText.ModifyText(s);
 
         tooltip = TooltipManager.CreateTooltip();

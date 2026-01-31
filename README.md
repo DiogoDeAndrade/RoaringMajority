@@ -19,8 +19,6 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 ## Current
 
 * Basic protester action
-* Block UI when can't do recruitment
-* Add cooldown to recruitment
 * Ticker with messages (like this was a TV show)
 * Start protest (needs 3 available slots - spawns 3 basics immediately)
 
