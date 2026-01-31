@@ -20,7 +20,6 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 
 * Basic protester action
   * Emotes on action
-* People dropping out when morale is low
 
 ## Todo
 
@@ -31,8 +30,6 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
   * Buy bots (internet campaign)
   * TV system
 * Opposing crowd system
-* Tick system (update simulation)
-* Location action system 
 * Location background linked to actual location SO
 * Stance system
 * Polish

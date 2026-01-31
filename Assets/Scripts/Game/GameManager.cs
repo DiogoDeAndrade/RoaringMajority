@@ -211,9 +211,32 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
             Set(ds.Key, Get(ds.Key) + ds.Value);
         }
 
+        // Location tick
         foreach (var location in locations)
         {
             location.Value.Tick();
+
+            // Check for leaving
+            float morale = location.Value.Get(Globals.statMorale);
+            if (morale < Globals.leaveThreshould)
+            {
+                float p = Mathf.Pow((morale - Globals.leaveThreshould) / (1.0f - Globals.leaveThreshould), Globals.leaveThreshouldPower);
+                if (Random.Range(0.0f, 1.0f) < p)
+                {
+                    // One person leaves!
+                    var protester = location.Value.protesters.Random();
+                    location.Value.RemoveProtester(protester);
+
+                    var protesterObject = GetGameObject(protester);
+                    if (protesterObject)
+                    {
+                        protesterObject.MoveTo(GetSpawnPos(true), () =>
+                        {
+                            Destroy(protesterObject.gameObject);
+                        });
+                    }
+                }
+            }
         }
     }
 
@@ -367,8 +390,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
 
         if (animate)
         {
-            var spawnAreaTag = (leftSide) ? (Globals.tagProtestSpawnArea) : (Globals.tagOppositeSpawnArea);
-            var spawnPos = spawnAreaTag.FindFirst<PolygonCollider2D>().Random();
+            var spawnPos = GetSpawnPos(leftSide);
 
             protester.transform.position = spawnPos;
             protester.MoveTo(targetPos);
@@ -379,6 +401,14 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
         }
 
         refreshActions = true;
+    }
+
+    Vector3 GetSpawnPos(bool leftSide)
+    {
+        var spawnAreaTag = (leftSide) ? (Globals.tagProtestSpawnArea) : (Globals.tagOppositeSpawnArea);
+        var spawnPos = spawnAreaTag.FindFirst<PolygonCollider2D>().Random();
+
+        return spawnPos;
     }
 
     public Dictionary<Stat, float> GetUpkeeps()
@@ -439,5 +469,16 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
         if (locationData == null) return currentLocationData.protesterCount;
 
         return locationData.protesterCount;
+    }
+
+    public Protester GetGameObject(ProtesterData data)
+    {
+        var allProtesters = FindObjectsByType<Protester>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (var protester in allProtesters)
+        {
+            if (protester.protesterData == data) return protester;
+        }
+
+        return null;
     }
 }

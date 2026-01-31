@@ -44,6 +44,8 @@ public class Globals : GlobalsBase
     [SerializeField] private Vector2    _recruitCooldownRange = new Vector2(2.0f, 20.0f);
     [SerializeField] private Vector2Int _ppRange = new Vector2Int(5, 50);
     [SerializeField] private float      _ppPower = 1.5f;
+    [SerializeField] private float      _leaveThreshould = 0.4f;
+    [SerializeField] private float      _leaveThreshouldPower = 2.0f;
     [Header("Flavour")]
     [SerializeField] private Vector2    _newsUpdateTimerRange = new Vector2(10.0f, 20.0f);
     [SerializeField] private float      _newsUpdateProbJoke = 0.25f;
@@ -79,6 +81,8 @@ public class Globals : GlobalsBase
     public static Vector2Int ppRange => instance._ppRange;
     public static float ppPower => instance._ppPower;
     public static float tickTime => instance._tickTime;
+    public static float leaveThreshould => instance._leaveThreshould;
+    public static float leaveThreshouldPower => instance._leaveThreshouldPower;
     public static Vector2 recruitCooldownRange => instance._recruitCooldownRange;
 
     public static List<ProtesterDef> protesterTypeList => instance._protesterTypeList;

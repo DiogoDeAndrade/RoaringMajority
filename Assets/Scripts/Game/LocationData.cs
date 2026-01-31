@@ -135,4 +135,9 @@ public class LocationData : IUpkeepProvider, IActionProvider
 
         return (0.0f, 1.0f);
     }
+
+    internal void RemoveProtester(ProtesterData protester)
+    {
+        _protesters.Remove(protester);
+    }
 }

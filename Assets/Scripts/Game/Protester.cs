@@ -68,7 +68,7 @@ public class Protester : MonoBehaviour
         }
     }
 
-    public void MoveTo(Vector2 targetPos)
+    public void MoveTo(Vector2 targetPos, Action doneFunction = null)
     {
         float distance = Vector2.Distance(transform.position.xy(), targetPos);
 
@@ -82,6 +82,7 @@ public class Protester : MonoBehaviour
         {
             bounceBody.enabled = true;
             bounceWalk.enabled = false;
+            doneFunction?.Invoke();
         });
     }
 }
