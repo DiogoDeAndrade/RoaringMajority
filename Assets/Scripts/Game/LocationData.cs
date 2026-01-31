@@ -14,10 +14,12 @@ public class LocationData
     private LocationState           state;
     private Dictionary<Stat, float> values = new();
     private List<ProtesterData>     protesters = new();
+    private int                     _inactivityTicks;
 
     public event OnChangeStat onChangeStat;
 
     public bool isProtesting => state == LocationState.Protest;
+    public int inactivityTicks => _inactivityTicks;
 
     public LocationData(Location location)
     {
@@ -38,6 +40,7 @@ public class LocationData
     {
         float oldValue = Get(stat);
 
+        value = stat.ClampToLimit(value);
         values[stat] = value;
 
         onChangeStat?.Invoke(stat, oldValue, value);
@@ -64,5 +67,23 @@ public class LocationData
     public void AddProtester(ProtesterData pd)
     {
         protesters.Add(pd);
+    }
+
+    public void GetUpkeep(Dictionary<Stat, float> deltaStat)
+    {
+        if (isProtesting)
+        {
+            location.GetUpkeep(deltaStat, this);
+
+            foreach (var protester in protesters)
+            {
+                protester.GetUpkeep(deltaStat);
+            }
+        }        
+    }
+
+    public void Tick()
+    {
+        _inactivityTicks++;
     }
 }

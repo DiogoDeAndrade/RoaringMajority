@@ -1,7 +1,7 @@
 using UC;
 using UnityEngine;
 
-public class SupportTooltip : TooltipDynamicText
+public class SupportTooltip : UpkeepTooltip
 {
     public override string ModifyText(string baseText)
     {
@@ -18,6 +18,6 @@ public class SupportTooltip : TooltipDynamicText
 
         s += "</color>";
 
-        return s;
+        return base.ModifyText(s);
     }
 }

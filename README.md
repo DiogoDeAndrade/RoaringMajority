@@ -19,7 +19,10 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 ## Current
 
 * Basic protester action
-* Morale loss over time
+* Block UI when can't do recruitment
+* Add cooldown to recruitment
+* Ticker with messages (like this was a TV show)
+* Start protest (needs 3 available slots - spawns 3 basics immediately)
 
 ## Todo
 
@@ -37,6 +40,7 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 * Polish
   * Better tooltip font (spacing is crap)
   * Sort/Rescale with Y
+  * Combat text on change variables
 
 ## Art
 

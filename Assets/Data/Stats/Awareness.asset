@@ -17,3 +17,6 @@ MonoBehaviour:
   color: {r: 0.5882353, g: 0.69411767, b: 0.90588236, a: 1}
   icon: {fileID: 21300000, guid: 2eb3d973686dc244fb854cb1488c5204, type: 3}
   tooltipText: How much city-wide or national attention the movement is receiving.
+  limitType: 3
+  limit: 0
+  range: {x: 0, y: 100}

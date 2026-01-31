@@ -47,7 +47,7 @@ public class Protester : MonoBehaviour
             UpdateVisuals();
             if (_protesterData == null)
             {
-                _protesterData = new ProtesterData(def);
+                _protesterData = new ProtesterData(def, GameManager.instance.currentLocationData);
                 GameManager.instance.currentLocationData.AddProtester(_protesterData);
             }
         }

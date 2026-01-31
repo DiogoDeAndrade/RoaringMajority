@@ -14,3 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Location
   displayName: University
   backgroundImage: {fileID: 21300000, guid: 0a019aba8e1c83a4f8cdf977069765a1, type: 3}
+  upkeepFunctions:
+  - rid: 8767884664732647505
+  references:
+    version: 2
+    RefIds:
+    - rid: 8767884664732647505
+      type: {class: UFConstant, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
+        constantValue: -0.25

@@ -20,12 +20,22 @@ public class ProtesterDef : ScriptableObject
     public List<BodySprite> bodySprites;
     public List<Sprite>     maskSprites;
     [Header("Stats")]
-    public int              cost = 1;
+    public int                  cost = 1;
+    [SerializeReference]
+    public List<UpkeepFunction> upkeepFunctions;
 
     public bool CanSpawn()
     {
         if (cost > GameManager.instance.availablePP) return false;
 
         return true;
+    }
+
+    public void GetUpkeep(Dictionary<Stat, float> deltaStat, ProtesterData protesterData)
+    {
+        foreach (var upkeepFunction in upkeepFunctions)
+        {
+            upkeepFunction.RunUpkeep(deltaStat, protesterData);
+        }
     }
 }

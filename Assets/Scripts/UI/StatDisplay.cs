@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] 
-    private Stat        stat;
+    public  Stat        stat;
     [SerializeField] 
     private Image       iconImage;
     [SerializeField] 

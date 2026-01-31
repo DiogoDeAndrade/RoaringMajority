@@ -17,3 +17,6 @@ MonoBehaviour:
   color: {r: 0.69803923, g: 0.2627451, b: 0.3019608, a: 1}
   icon: {fileID: 21300000, guid: 022f757e0e99ac444ae1cd0caf544aa6, type: 3}
   tooltipText: How close the situation is to escalation.
+  limitType: 3
+  limit: 0
+  range: {x: 0, y: 100}

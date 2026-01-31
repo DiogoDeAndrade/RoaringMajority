@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 6085267083244125024}
   - component: {fileID: 1805329923795638940}
   - component: {fileID: 7473569231479585715}
+  - component: {fileID: 3610315195770067642}
   m_Layer: 5
   m_Name: StatDisplay
   m_TagString: Untagged
@@ -169,6 +170,18 @@ MonoBehaviour:
   colorBar: {fileID: 7439281357457026987}
   labelText: {fileID: 5188346786791158619}
   valueText: {fileID: 2049202220962939248}
+--- !u!114 &3610315195770067642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088548297736428832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89646562ac4c2844a5c3b635ee423b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpkeepTooltip
 --- !u!1 &2405712153183566444
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +459,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '{0}'
+  m_text: '{0:F0}'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 29924058f5df2554ba6dec6a998e8da8, type: 2}
   m_sharedMaterial: {fileID: -6682838605689841580, guid: 29924058f5df2554ba6dec6a998e8da8, type: 2}

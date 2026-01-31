@@ -2,10 +2,12 @@ using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UC;
 
 public class GameManager : MonoBehaviour
 {
+    public enum GameState { Menu, Started };
+    [SerializeField]
+    public GameState            state = GameState.Menu;
     [SerializeField] 
     private Protester           protesterPrefab;
     [Header("Debug")]
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
     private LocationData                        _currentLocationData;
     private Dictionary<Stat, float>             values = new();
     private Dictionary<Location, LocationData>  locations = new();
+    private float                               tickTimer;
 
     public event OnChangeStat onChangeStat;
 
@@ -57,10 +60,14 @@ public class GameManager : MonoBehaviour
             InitLocation();
         }
 #endif
+
+        tickTimer = Time.time;
     }
 
     void StartGame()
     {
+        state = GameState.Started;
+
         Set(Globals.statSupport, Globals.startSupport);
         Set(Globals.statAwareness, Globals.startAwareness);
         Set(Globals.statMoney, Globals.startMoney);
@@ -90,10 +97,39 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        float simulationTimeScale = 1.0f;
+
+        if (Input.GetKey(KeyCode.Alpha1)) simulationTimeScale = 2.0f;
+        if (Input.GetKey(KeyCode.Alpha2)) simulationTimeScale = 4.0f;
+        if (Input.GetKey(KeyCode.Alpha3)) simulationTimeScale = 8.0f;
+        if (Input.GetKey(KeyCode.Alpha4)) simulationTimeScale = 16.0f;
+
+        tickTimer -= Time.deltaTime * simulationTimeScale;
+        if (tickTimer <= 0.0f)
+        {
+            GameTick();
+            tickTimer = Globals.tickTime;
+        }
         UpdateDerivedStats();
         if (isOnLocation)
         {
             UpdateRecruitmentButtons();
+        }
+    }
+
+    void GameTick()
+    {
+        // Run upkeep
+        var deltaStats = GetUpkeeps();
+
+        foreach (var ds in deltaStats)
+        {
+            Set(ds.Key, Get(ds.Key) + ds.Value);
+        }
+
+        foreach (var location in locations)
+        {
+            location.Value.Tick();
         }
     }
 
@@ -146,6 +182,7 @@ public class GameManager : MonoBehaviour
 
         float oldValue = Get(stat);
 
+        value = stat.ClampToLimit(value);
         values[stat] = value;
 
         if (oldValue != value)
@@ -158,7 +195,7 @@ public class GameManager : MonoBehaviour
         if (!def.CanSpawn()) return false;
 
         // Add logic entity
-        ProtesterData pd = new ProtesterData(def);
+        ProtesterData pd = new ProtesterData(def, currentLocationData);
         currentLocationData.AddProtester(pd);
 
         Spawn(pd, true, true);
@@ -186,6 +223,17 @@ public class GameManager : MonoBehaviour
         {
             protester.transform.position = targetPos;
         }
+    }
+
+    public Dictionary<Stat, float> GetUpkeeps()
+    {
+        Dictionary<Stat, float> deltaStats = new();
+        foreach (var location in locations)
+        {
+            location.Value.GetUpkeep(deltaStats);
+        }
+
+        return deltaStats;
     }
 
     public bool isOnLocation => _currentLocation != null;
