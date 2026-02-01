@@ -18,8 +18,7 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 
 ## Current
 
-* Protest over
-  * Morale = zero
+* Actions: ticker/emote/say
 * Protest successfull
   * Morale > 90 or Morale > 70 and Visibility > 50
 * Add organizer
