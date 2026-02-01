@@ -18,15 +18,13 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 
 ## Current
 
-* Actions: ticker/emote/say
+* Make first build (itch.io + GGJ site)
 * Protest successfull
   * Morale > 90 or Morale > 70 and Visibility > 50
-* Add organizer
-  * Rally & Reassure action (+morale, -tension, -visibility)
-  * Rotate shifts (+morale, morale decay reduced) - ?
 * Add journalist
   * Call press (+visibility, +tension)
 * Tension > 80 -> Make some sort of event to demonstrate the concept
+* Show effects of actions on tooltip
 * Title screen
 
 ## Todo
@@ -43,6 +41,7 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 * Polish
   * Better tooltip font (spacing is crap)
   * Combat text on change variables
+  * Spread protesters a bit
 
 ## Art
 
@@ -63,6 +62,12 @@ Image process notes:
 - [Announcement icons](https://www.flaticon.com/free-icons/chanting) created by Dewi Sari - [Flaticon], free to use with attribution.
 - [Brochure icons](https://www.flaticon.com/free-icons/brochure) created by Freepik - [Flaticon], free to use with attribution.
 - [Song icons](https://www.flaticon.com/free-icons/song) created by Freepik - [Flaticon], free to use with attribution.
+- [Unfair icons](https://www.flaticon.com/free-icons/unfair) created by Fusion5085 - [Flaticon], free to use with attribution.
+- [Check out icons](https://www.flaticon.com/free-icons/check-out) created by Icongeek26 - [Flaticon], free to use with attribution.
+- [Charity icons](https://www.flaticon.com/free-icons/charity) created by Freepik - [Flaticon], free to use with attribution.
+- [Apple icons](https://www.flaticon.com/free-icons/apple) created by Freepik - [Flaticon], free to use with attribution.
+- [Clap icons](https://www.flaticon.com/free-icons/clap) created by Freepik - [Flaticon], free to use with attribution.
+- [Water icons](https://www.flaticon.com/free-icons/water) created by Good Ware - [Flaticon], free to use with attribution.
 - Font [Boomer Tantrum](https://chequered.ink/product/boomer-tantrum/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - Font [Fake News](https://chequered.ink/product/fake-news/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - Font [Front Page News](https://chequered.ink/product/front-page-news/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
@@ -84,6 +89,7 @@ Image process notes:
 ## Screenshots
 
 ![Art Test](Screenshots/dev_art_test.png)
+![Gameplay](Screenshots/gameplay01.png)
 
 ## Metadata
 

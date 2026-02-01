@@ -51,13 +51,7 @@ public class Cause : ScriptableObject, IActionProvider
     public string GetStartText(Dictionary<string, string> translator = null)
     {
         string txt = startItems.GetRandom();
-        if (translator != null)
-        {
-            foreach (var t in translator)
-            {
-                txt = txt.Replace(t.Key, t.Value);
-            }
-        }
+        txt = txt.FindReplace(translator);
         return txt;
     }
 

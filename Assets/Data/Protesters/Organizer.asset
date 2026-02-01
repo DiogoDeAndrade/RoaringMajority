@@ -1,0 +1,232 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8716e693bf8d69049a43532af3a3aa76, type: 3}
+  m_Name: Organizer
+  m_EditorClassIdentifier: Assembly-CSharp::ProtesterDef
+  displayName: Organizer
+  icon: {fileID: 21300000, guid: 9cd3032d84097104cb20bbc4098bfc0c, type: 3}
+  color: {r: 0.5882353, g: 0.69411767, b: 0.90588236, a: 1}
+  tooltipText: 'Organizer
+
+    Cost: {COST} Protester Point
+
+
+    Keeps the protest
+    focused and organized, boosting the efficiency of crowd actions.
+
+    Helps maintain
+    cohesion when spirits falter, preventing small losses from turning into mass
+    discouragement.'
+  bodySprites:
+  - bodySprite: {fileID: 21300000, guid: caa31138a3958c847845a65951785f0e, type: 3}
+    offset: {x: -4, y: 135, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 5b7d88e9649ffd74fa0d9d94f5cde70e, type: 3}
+    offset: {x: 0, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 8983c391c4781db4c8fb68f4ef2699e4, type: 3}
+    offset: {x: -9, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 8af19a97972420445b77df738d06c88f, type: 3}
+    offset: {x: -5, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: c43a533d6395afd4e82ddbd6f8cf9e0c, type: 3}
+    offset: {x: -2, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 7ba658de349bd6244ae80748c8a44b0f, type: 3}
+    offset: {x: -5, y: 128, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 9318a94ee1574ca43a145ca0b140347e, type: 3}
+    offset: {x: -5, y: 116, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: c0144ff306433124796fc6811174b82b, type: 3}
+    offset: {x: -5, y: 123, z: -0.01}
+  maskSprites:
+  - {fileID: 21300000, guid: ea2155dabf9303a43bb2411b519b44a1, type: 3}
+  - {fileID: 21300000, guid: 9cd3032d84097104cb20bbc4098bfc0c, type: 3}
+  - {fileID: 21300000, guid: 5e896914a0c694746a58e7bd3733f92c, type: 3}
+  - {fileID: 21300000, guid: 2cc699b8bcddfa749963b4dd1f6ab09c, type: 3}
+  cost: 2
+  upkeepFunctions:
+  - rid: 9093484562410373229
+  actions:
+  - rid: 9093484562410373194
+  - rid: 9093484562410373195
+  - rid: 9093484562410373196
+  references:
+    version: 2
+    RefIds:
+    - rid: 9093484562410373194
+      type: {class: ActionFunction, ns: , asm: Assembly-CSharp}
+      data:
+        _displayName: Rally
+        _displayIcon: {fileID: 21300000, guid: 047e2997dba781949ac7bbd40d4cf37e, type: 3}
+        _tooltipName: 
+        _tooltipText: 'Brings the crowd together around a shared purpose.
+
+          Raises
+          Morale and eases Tension, but lowers Visibility as the protest turns inward.'
+        cooldown:
+          rid: 9093484562410373201
+        costs:
+        - rid: 9093484562410373233
+        conditions: []
+        actions:
+        - rid: 9093484562410373234
+        - rid: 9093484562410373235
+        - rid: 9093484562410373236
+    - rid: 9093484562410373195
+      type: {class: ActionFunction, ns: , asm: Assembly-CSharp}
+      data:
+        _displayName: Relief
+        _displayIcon: {fileID: 21300000, guid: e9c3cb1531fb3f24ca608f261f842b6f, type: 3}
+        _tooltipName: Rotate shifts
+        _tooltipText: 'Organizes rest, water, and basic needs across the crowd.
+
+          Improves
+          Morale over time, at the cost of Money.'
+        cooldown:
+          rid: 9093484562410373209
+        costs:
+        - rid: 9093484562410373237
+        conditions: []
+        actions:
+        - rid: 9093484562410373211
+        - rid: 9093484562410373238
+    - rid: 9093484562410373196
+      type: {class: ActionFunction, ns: , asm: Assembly-CSharp}
+      data:
+        _displayName: Donations
+        _displayIcon: {fileID: 21300000, guid: 719cbe50edf5a244085b11ee6a1e720a, type: 3}
+        _tooltipName: Request Donations
+        _tooltipText: "Encourages supporters nearby to contribute to the cause.\nGenerates
+          Money, but strains the crowd\u2019s energy and Morale."
+        cooldown:
+          rid: 9093484562410373214
+        costs:
+        - rid: 9093484562410373213
+        conditions: []
+        actions:
+        - rid: 9093484562410373215
+        - rid: 9093484562410373239
+        - rid: 9093484562410373216
+    - rid: 9093484562410373201
+      type: {class: CDConstant, ns: , asm: Assembly-CSharp}
+      data:
+        constantValue: 35
+    - rid: 9093484562410373209
+      type: {class: CDConstant, ns: , asm: Assembly-CSharp}
+      data:
+        constantValue: 60
+    - rid: 9093484562410373211
+      type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
+      data:
+        scaleMode: 0
+        stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
+        baseValue: 5
+        multiplier: 0.25
+    - rid: 9093484562410373213
+      type: {class: CFConstant, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
+        scaleMode: 1
+        value: 2
+    - rid: 9093484562410373214
+      type: {class: CDConstant, ns: , asm: Assembly-CSharp}
+      data:
+        constantValue: 60
+    - rid: 9093484562410373215
+      type: {class: ESay, ns: , asm: Assembly-CSharp}
+      data:
+        randomProtester: 1
+        protesterCount: 2
+        sentences:
+          originalElements:
+          - value: Every bit helps!
+            weight: 1
+          - value: Support the cause!
+            weight: 1
+          - value: If you can, chip in!
+            weight: 1
+          - value: 
+            weight: 1
+          withReplacement: 1
+    - rid: 9093484562410373216
+      type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
+      data:
+        scaleMode: 1
+        stat: {fileID: 11400000, guid: 43713b7f478a85444a28516755ee6a23, type: 2}
+        baseValue: 5
+        multiplier: 5
+    - rid: 9093484562410373229
+      type: {class: UFConstant, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
+        constantValue: 0.6
+    - rid: 9093484562410373233
+      type: {class: CFConstant, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: a05ff27077a194b40a50d92323ceac7b, type: 2}
+        scaleMode: 0
+        value: 5
+    - rid: 9093484562410373234
+      type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
+      data:
+        scaleMode: 0
+        stat: {fileID: 11400000, guid: 11bbbb5d5ab46c648a7c13ff037c13bc, type: 2}
+        baseValue: -3
+        multiplier: 0
+    - rid: 9093484562410373235
+      type: {class: EEmote, ns: , asm: Assembly-CSharp}
+      data:
+        randomProtester: 1
+        protesterCount: 5
+        emotes:
+        - sprites:
+          - {fileID: 21300000, guid: d26114fcad9998545b452bd4bea16671, type: 3}
+          - {fileID: 21300000, guid: 23df4b9be6efa5e44b3739b177def558, type: 3}
+          emoteCount: 2
+    - rid: 9093484562410373236
+      type: {class: ETickerText, ns: , asm: Assembly-CSharp}
+      data:
+        _tickerText:
+          originalElements:
+          - value: Organizers refocus the crowd at {LOCATION_NAME}.
+            weight: 1
+          - value: A rally steadies wavering protesters.
+            weight: 1
+          - value: 
+            weight: 2
+          withReplacement: 1
+        duration: 25
+    - rid: 9093484562410373237
+      type: {class: CFConstant, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 43713b7f478a85444a28516755ee6a23, type: 2}
+        scaleMode: 1
+        value: 1
+    - rid: 9093484562410373238
+      type: {class: EEmote, ns: , asm: Assembly-CSharp}
+      data:
+        randomProtester: 1
+        protesterCount: 4
+        emotes:
+        - sprites:
+          - {fileID: 21300000, guid: 36f11381d9674294c91c2f1e108c861a, type: 3}
+          - {fileID: 21300000, guid: 7f0eb911725c1834bad65a65dc88e4a7, type: 3}
+          emoteCount: 1
+    - rid: 9093484562410373239
+      type: {class: ETickerText, ns: , asm: Assembly-CSharp}
+      data:
+        _tickerText:
+          originalElements:
+          - value: Donations pour in near {LOCATION_NAME}.
+            weight: 1
+          - value: Organizers collect funds to support the protest.
+            weight: 1
+          - value: Organizers collect funds to support the protest.
+            weight: 5
+          withReplacement: 1
+        duration: 15

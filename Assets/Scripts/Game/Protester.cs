@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using UC;
@@ -108,5 +109,11 @@ public class Protester : MonoBehaviour
     public void Emote(List<Sprite> sprites, int emoteCount)
     {
         emoter.Emote(sprites, emoteCount);
+    }
+
+    [Button("Generate")]
+    void TestGeneration()
+    {
+        UpdateVisuals();
     }
 }

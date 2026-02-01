@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using UC.Interaction;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ProtesterDef", menuName = "RM/ProtesterDef")]
 public class ProtesterDef : ScriptableObject
 {
-    [System.Serializable]
+    [Serializable]
     public struct BodySprite
     {
         public Sprite   bodySprite;

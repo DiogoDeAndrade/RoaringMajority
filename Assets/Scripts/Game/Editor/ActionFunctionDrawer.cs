@@ -18,6 +18,11 @@ public class CooldownFunctionDrawer : BaseFunctionDrawer<CooldownFunction>
 }
 
 
+[CustomPropertyDrawer(typeof(ExecutionFunction), true)]
+public class ExecutionFunctionDrawer : BaseFunctionDrawer<ExecutionFunction>
+{
+}
+
 [CustomPropertyDrawer(typeof(ActionFunction), true)]
 public class ActionFunctionDrawer : BaseFunctionDrawer<ActionFunction>
 {

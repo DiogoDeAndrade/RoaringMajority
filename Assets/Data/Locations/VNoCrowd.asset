@@ -17,6 +17,8 @@ MonoBehaviour:
   text: 'The crowd disperses.
 
     This protest has failed!'
+  actions:
+  - rid: 9093484562410373220
   references:
     version: 2
     RefIds:
@@ -26,3 +28,24 @@ MonoBehaviour:
         stat: {fileID: 11400000, guid: 685e1bcf46baafe41a2c9baff4d27ab1, type: 2}
         comparisonType: 5
         referenceValue: 0
+    - rid: 9093484562410373220
+      type: {class: ETickerText, ns: , asm: Assembly-CSharp}
+      data:
+        _tickerText:
+          originalElements:
+          - value: The protest at {LOCATION_NAME} gradually thins out as morale collapses,
+              and participants disperse.
+            weight: 1
+          - value: With spirits low and numbers dwindling, the demonstration at {LOCATION_NAME}
+              comes to an end.
+            weight: 1
+          - value: Attendance drops sharply and the protest quietly dissolves.
+            weight: 1
+          - value: Lacking energy and coordination, the crowd at {LOCATION_NAME}
+              disperses without incident.
+            weight: 1
+          - value: What began as a show of unity fades as protesters leave {LOCATION_NAME},
+              bringing the action to a close.
+            weight: 1
+          withReplacement: 1
+        duration: 30

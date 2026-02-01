@@ -32,13 +32,21 @@ MonoBehaviour:
     overall presence.'
   bodySprites:
   - bodySprite: {fileID: 21300000, guid: caa31138a3958c847845a65951785f0e, type: 3}
-    offset: {x: -4, y: 135, z: 0}
+    offset: {x: -4, y: 135, z: -0.01}
   - bodySprite: {fileID: 21300000, guid: 5b7d88e9649ffd74fa0d9d94f5cde70e, type: 3}
-    offset: {x: 0, y: 130, z: 0}
+    offset: {x: 0, y: 130, z: -0.01}
   - bodySprite: {fileID: 21300000, guid: 8983c391c4781db4c8fb68f4ef2699e4, type: 3}
-    offset: {x: -9, y: 130, z: 0}
+    offset: {x: -9, y: 130, z: -0.01}
   - bodySprite: {fileID: 21300000, guid: 8af19a97972420445b77df738d06c88f, type: 3}
-    offset: {x: -5, y: 130, z: 0}
+    offset: {x: -5, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: c43a533d6395afd4e82ddbd6f8cf9e0c, type: 3}
+    offset: {x: -2, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 7ba658de349bd6244ae80748c8a44b0f, type: 3}
+    offset: {x: -5, y: 128, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 9318a94ee1574ca43a145ca0b140347e, type: 3}
+    offset: {x: -5, y: 116, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: c0144ff306433124796fc6811174b82b, type: 3}
+    offset: {x: -5, y: 123, z: -0.01}
   maskSprites:
   - {fileID: 21300000, guid: 4aa18f71a26bc6b429d4f35ceab505b0, type: 3}
   - {fileID: 21300000, guid: 31a7a0fe28a4ebf468c90b908887f548, type: 3}
@@ -46,9 +54,9 @@ MonoBehaviour:
   upkeepFunctions:
   - rid: 8767884664732647521
   actions:
-  - rid: 8767884664732647659
-  - rid: 8767884664732647681
-  - rid: 8767884664732647682
+  - rid: 9093484562410373194
+  - rid: 9093484562410373195
+  - rid: 9093484562410373196
   references:
     version: 2
     RefIds:
@@ -60,13 +68,58 @@ MonoBehaviour:
         maxInactivityTicks: 5
         inactivityBaseValue: 0
         inactivityScaleValue: -0.2
-    - rid: 8767884664732647659
-      type: {class: AFChangeStats, ns: , asm: Assembly-CSharp}
+    - rid: 9093484562410373194
+      type: {class: ActionFunction, ns: , asm: Assembly-CSharp}
       data:
         _displayName: Chant
         _displayIcon: {fileID: 21300000, guid: 6704067398dc9134bb422c54fd878341, type: 3}
         _tooltipName: 
         _tooltipText: The crowd chants in unison, boosting Morale and Visibility.
+        cooldown:
+          rid: 9093484562410373201
+        costs: []
+        conditions: []
+        actions:
+        - rid: 9093484562410373200
+        - rid: 9093484562410373203
+        - rid: 9093484562410373205
+        - rid: 9093484562410373206
+    - rid: 9093484562410373195
+      type: {class: ActionFunction, ns: , asm: Assembly-CSharp}
+      data:
+        _displayName: Shout
+        _displayIcon: {fileID: 21300000, guid: b5283719cb2427c45a76a1802e51484c, type: 3}
+        _tooltipName: 
+        _tooltipText: A sudden outburst energizes the crowd, increasing Morale and
+          Tension.
+        cooldown:
+          rid: 9093484562410373209
+        costs: []
+        conditions: []
+        actions:
+        - rid: 9093484562410373208
+        - rid: 9093484562410373210
+        - rid: 9093484562410373211
+        - rid: 9093484562410373212
+    - rid: 9093484562410373196
+      type: {class: ActionFunction, ns: , asm: Assembly-CSharp}
+      data:
+        _displayName: Flyers
+        _displayIcon: {fileID: 21300000, guid: acb5fe902ea8f2f43a278ddb64af1504, type: 3}
+        _tooltipName: Hand out flyers
+        _tooltipText: Distributes flyers to passersby, increasing Visibility without
+          escalating tensions.
+        cooldown:
+          rid: 9093484562410373214
+        costs:
+        - rid: 9093484562410373213
+        conditions: []
+        actions:
+        - rid: 9093484562410373215
+        - rid: 9093484562410373216
+    - rid: 9093484562410373200
+      type: {class: ETickerText, ns: , asm: Assembly-CSharp}
+      data:
         _tickerText:
           originalElements:
           - value: Protesters chant slogans in unison, drawing attention from across
@@ -80,33 +133,38 @@ MonoBehaviour:
           - value: 
             weight: 2
           withReplacement: 1
-        costs: []
-        conditions: []
-        cooldown:
-          rid: 8767884664732647703
-        sentences:
-          originalElements: []
-          withReplacement: 1
+        duration: 15
+    - rid: 9093484562410373201
+      type: {class: CDConstant, ns: , asm: Assembly-CSharp}
+      data:
+        constantValue: 60
+    - rid: 9093484562410373203
+      type: {class: EEmote, ns: , asm: Assembly-CSharp}
+      data:
+        randomProtester: 1
+        protesterCount: 3
         emotes:
         - sprites:
           - {fileID: 21300000, guid: 1a453b88d5721aa44b44e78be5b7d769, type: 3}
           - {fileID: 21300000, guid: efed0aa0634c50b4ebd0155cb4568f96, type: 3}
           emoteCount: 5
-        statsToChange:
-        - scaleMode: 1
-          stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
-          value: 0.5
-        - scaleMode: 1
-          stat: {fileID: 11400000, guid: a05ff27077a194b40a50d92323ceac7b, type: 2}
-          value: 0.25
-    - rid: 8767884664732647681
-      type: {class: AFChangeStats, ns: , asm: Assembly-CSharp}
+    - rid: 9093484562410373205
+      type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
       data:
-        _displayName: Shout
-        _displayIcon: {fileID: 21300000, guid: b5283719cb2427c45a76a1802e51484c, type: 3}
-        _tooltipName: 
-        _tooltipText: A sudden outburst energizes the crowd, increasing Morale and
-          Tension.
+        scaleMode: 1
+        stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
+        baseValue: 0
+        multiplier: 0.5
+    - rid: 9093484562410373206
+      type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
+      data:
+        scaleMode: 1
+        stat: {fileID: 11400000, guid: a05ff27077a194b40a50d92323ceac7b, type: 2}
+        baseValue: 0
+        multiplier: 0.25
+    - rid: 9093484562410373208
+      type: {class: ETickerText, ns: , asm: Assembly-CSharp}
+      data:
         _tickerText:
           originalElements:
           - value: Heated shouts erupt from the crowd, raising tensions on site.
@@ -115,13 +173,19 @@ MonoBehaviour:
             weight: 1
           - value: Protesters shout slogans loudly, escalating the atmosphere.
             weight: 1
-          - value: Protesters shout slogans loudly, escalating the atmosphere.
+          - value: 
             weight: 2
           withReplacement: 1
-        costs: []
-        conditions: []
-        cooldown:
-          rid: 8767884664732647704
+        duration: 15
+    - rid: 9093484562410373209
+      type: {class: CDConstant, ns: , asm: Assembly-CSharp}
+      data:
+        constantValue: 15
+    - rid: 9093484562410373210
+      type: {class: ESay, ns: , asm: Assembly-CSharp}
+      data:
+        randomProtester: 1
+        protesterCount: 4
         sentences:
           originalElements:
           - value: Stand together!
@@ -153,37 +217,35 @@ MonoBehaviour:
           - value: 
             weight: 4
           withReplacement: 1
-        emotes: []
-        statsToChange:
-        - scaleMode: 1
-          stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
-          value: 0.25
-        - scaleMode: 1
-          stat: {fileID: 11400000, guid: 11bbbb5d5ab46c648a7c13ff037c13bc, type: 2}
-          value: 0.5
-    - rid: 8767884664732647682
-      type: {class: AFChangeStats, ns: , asm: Assembly-CSharp}
+    - rid: 9093484562410373211
+      type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
       data:
-        _displayName: Flyers
-        _displayIcon: {fileID: 21300000, guid: acb5fe902ea8f2f43a278ddb64af1504, type: 3}
-        _tooltipName: Hand out flyers
-        _tooltipText: Distributes flyers to passersby, increasing Visibility without
-          escalating tensions.
-        _tickerText:
-          originalElements:
-          - value: Protesters distribute flyers to passersby, spreading their message.
-            weight: 1
-          - value: Flyers circulate around the area as organizers reach out to the
-              public.
-            weight: 1
-          - value: Demonstrators hand out leaflets to raise awareness of their cause.
-            weight: 1
-          withReplacement: 1
-        costs:
-        - rid: 8767884664732647685
-        conditions: []
-        cooldown:
-          rid: 8767884664732647705
+        scaleMode: 1
+        stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
+        baseValue: 0
+        multiplier: 0.25
+    - rid: 9093484562410373212
+      type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
+      data:
+        scaleMode: 1
+        stat: {fileID: 11400000, guid: 11bbbb5d5ab46c648a7c13ff037c13bc, type: 2}
+        baseValue: 0
+        multiplier: 0.5
+    - rid: 9093484562410373213
+      type: {class: CFConstant, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 43713b7f478a85444a28516755ee6a23, type: 2}
+        scaleMode: 1
+        value: 4
+    - rid: 9093484562410373214
+      type: {class: CDConstant, ns: , asm: Assembly-CSharp}
+      data:
+        constantValue: 120
+    - rid: 9093484562410373215
+      type: {class: ESay, ns: , asm: Assembly-CSharp}
+      data:
+        randomProtester: 1
+        protesterCount: 2
         sentences:
           originalElements:
           - value: "Take one \u2014 it explains why we\u2019re here."
@@ -197,26 +259,10 @@ MonoBehaviour:
           - value: 
             weight: 3
           withReplacement: 1
-        emotes: []
-        statsToChange:
-        - scaleMode: 1
-          stat: {fileID: 11400000, guid: a05ff27077a194b40a50d92323ceac7b, type: 2}
-          value: 1
-    - rid: 8767884664732647685
-      type: {class: CFConstant, ns: , asm: Assembly-CSharp}
+    - rid: 9093484562410373216
+      type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
       data:
-        stat: {fileID: 11400000, guid: 43713b7f478a85444a28516755ee6a23, type: 2}
         scaleMode: 1
-        value: 10
-    - rid: 8767884664732647703
-      type: {class: CDConstant, ns: , asm: Assembly-CSharp}
-      data:
-        constantValue: 60
-    - rid: 8767884664732647704
-      type: {class: CDConstant, ns: , asm: Assembly-CSharp}
-      data:
-        constantValue: 15
-    - rid: 8767884664732647705
-      type: {class: CDConstant, ns: , asm: Assembly-CSharp}
-      data:
-        constantValue: 120
+        stat: {fileID: 11400000, guid: a05ff27077a194b40a50d92323ceac7b, type: 2}
+        baseValue: 0
+        multiplier: 1

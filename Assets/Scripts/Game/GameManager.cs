@@ -1,11 +1,9 @@
 using NaughtyAttributes;
 using System.Collections.Generic;
 using UC;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 
-public class GameManager : MonoBehaviour, IUpkeepProvider
+public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 {
     public enum GameState { Menu, Started };
     [SerializeField]
@@ -179,6 +177,8 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
                     var victory = _currentLocation.GetVictoryCondition(_currentLocationData);
                     if (victory)
                     {
+                        victory.RunAction();
+
                         endProtestDialog = DialogBox.CreateBox(victory.text, true, Globals.prefabDialogBox, mainUI,
                             yesAction: (dialogBox) =>
                             {
@@ -518,13 +518,25 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
 
     public Protester GetProtester(ProtesterData data)
     {
-        var allProtesters = FindObjectsByType<Protester>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-        foreach (var protester in allProtesters)
+        if (data != null)
         {
-            if (protester.protesterData == data) return protester;
+            var allProtesters = FindObjectsByType<Protester>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (var protester in allProtesters)
+            {
+                if (protester.protesterData == data) return protester;
+            }
         }
 
         return null;
     }
 
+    public LocationData GetLocation()
+    {
+        return _currentLocationData;
+    }
+
+    public Protester GetProtester()
+    {
+        return GetProtester(_currentLocationData.protesters.Random());
+    }
 }

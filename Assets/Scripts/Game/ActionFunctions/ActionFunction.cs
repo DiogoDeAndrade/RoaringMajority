@@ -29,15 +29,15 @@ public abstract class CooldownFunction
 
 
 [Serializable]
-public abstract class ActionFunction
+public abstract class ExecutionFunction
 {
-    [Serializable]
-    struct Emote
-    {
-        public List<Sprite> sprites;
-        public int          emoteCount;
-    }
+    public abstract bool Execute(IActionProvider mainObject);
+}
 
+[Serializable]
+[PolymorphicName("Default")]
+public class ActionFunction
+{
     [SerializeField] 
     private string _displayName;
     [SerializeField] 
@@ -46,19 +46,15 @@ public abstract class ActionFunction
     private string _tooltipName;
     [SerializeField, TextArea] 
     private string _tooltipText;
-    [SerializeField]
-    private StringProbList  _tickerText;
 
+    [SerializeReference]
+    private CooldownFunction        cooldown;
     [SerializeReference]
     private List<CostFunction>      costs;
     [SerializeReference]
     private List<ConditionFunction> conditions;
     [SerializeReference]
-    private CooldownFunction        cooldown;
-    [SerializeField]
-    private StringProbList          sentences;
-    [SerializeField]
-    private List<Emote>             emotes;
+    private List<ExecutionFunction> actions;
 
     public string displayName => _displayName;
     public string tooltipName => string.IsNullOrEmpty(_tooltipName) ? displayName : _tooltipName;
@@ -113,40 +109,21 @@ public abstract class ActionFunction
                 location?.SetCooldown(_displayName, cooldown.GetCooldown(mainObject));
             }
             location?.NotifyAction();
-
-            if ((_tickerText != null) && (_tickerText.Count > 0))
-            {
-                var str = _tickerText.Get();
-                if (!string.IsNullOrEmpty(str))
-                {
-                    Ticker.AddNews(str, 15.0f);
-                }
-            }
-
-            if ((sentences != null) && (sentences.Count > 0))
-            {
-                var text = sentences.Get();
-
-                if (!string.IsNullOrEmpty(text))
-                {
-                    var protester = mainObject.GetProtester();
-                    protester?.Say(text, 2.0f);
-                }
-            }
-
-            if ((emotes != null) && (emotes.Count > 0))
-            {
-                var emote = emotes.Random();
-                if ((emote.sprites != null) && (emote.sprites.Count > 0) && (emote.emoteCount > 0))
-                {
-                    var protester = mainObject.GetProtester();
-                    protester?.Emote(emote.sprites, emote.emoteCount);
-                }
-            }
         }
     }
 
-    protected abstract bool RunActionActual(IActionProvider mainObject);
+    protected bool RunActionActual(IActionProvider mainObject)
+    {
+        bool ret = false;
+        if ((actions != null) && (actions.Count > 0))
+        {
+            foreach (var e in actions)
+            {
+                ret |= e.Execute(mainObject);
+            }
+        }
+        return ret;
+    }
 
     public string GetDefaultCostTooltip(IActionProvider provider)
     {
