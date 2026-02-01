@@ -18,12 +18,12 @@ Gameplay alternates between:
 
 The challenge is to balance numbers, mask types, and intent, while reacting to police presence, counter-groups, and emergent chaos.
 
+The current prototype only has one location/cause working (barely, needed a bunch of stuff still).
+
 ## Current
 
-* Make first build (itch.io + GGJ site)
 * Add journalist
   * Call press (+visibility, +tension)
-* Title screen
 
 ## Todo
 
@@ -36,6 +36,11 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
   * TV system
 * Opposing crowd system
 * Stance system
+* Main Menu screen
+  * Start
+  * Credits
+  * Select Cause
+  * Exit
 * Polish
   * Better tooltip font (spacing is crap)
   * Combat text on change variables

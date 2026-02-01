@@ -1431,7 +1431,7 @@ MonoBehaviour:
   autoStartGame: 1
   autoStartCause: {fileID: 11400000, guid: 6c30ee4f8d8fe7d4ea078a55bbdc6819, type: 2}
   debugStartLocation: {fileID: 11400000, guid: 51c095496e265b747aebb6ccf56a735a, type: 2}
-  autoStartProtest: 1
+  autoStartProtest: 0
 --- !u!4 &815586633
 Transform:
   m_ObjectHideFlags: 0

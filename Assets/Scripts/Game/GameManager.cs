@@ -58,15 +58,17 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 
     void Start()
     {
-        // Define locations
-
 #if UNITY_EDITOR
+        if (debugStartLocation != null)
+        {
+            _currentLocation = debugStartLocation;
+            InitLocation();
+        }
+#else
+        // Define locations
         if (autoStartGame)
         {
             StartGame(autoStartCause);
-        }
-        if (debugStartLocation != null)
-        {
             _currentLocation = debugStartLocation;
             InitLocation();
         }
