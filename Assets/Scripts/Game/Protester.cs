@@ -21,9 +21,11 @@ public class Protester : MonoBehaviour
     [SerializeField]
     private Emoter          emoter;
 
-    BounceBody      bounceBody;
-    BounceWalk      bounceWalk;
-    ProtesterData   _protesterData;
+    BounceBody                  bounceBody;
+    BounceWalk                  bounceWalk;
+    ProtesterData               _protesterData;
+    ProtesterDef.BodySprite     bodySprite = null;
+    Sprite                      maskSprite = null;
 
     public ProtesterData protesterData
     {
@@ -70,10 +72,12 @@ public class Protester : MonoBehaviour
 
     void UpdateVisuals()
     {
-        var bodySprite = def.bodySprites.Random();
+        if (bodySprite == null) bodySprite = def.bodySprites.Random();
+        if (maskSprite == null) maskSprite = def.maskSprites.Random();
+
         bodyRenderer.sprite = bodySprite.bodySprite;
         maskRenderer.transform.localPosition = bodySprite.offset;
-        maskRenderer.sprite = def.maskSprites.Random();
+        maskRenderer.sprite = maskSprite;
 
         bodyRenderer.flipX = turnLeft;
         if (turnLeft)

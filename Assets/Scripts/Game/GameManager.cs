@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System.Collections.Generic;
 using UC;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
 public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 {
@@ -197,6 +198,9 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
                             {
                                 _currentLocationData.EndProtest();
                                 endProtestDialog = null;
+
+                                EverybodyLeaves();
+
                                 return true;
                             },
                             noAction: (dialogBox) =>
@@ -292,6 +296,25 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
                         });
                     }
                 }
+            }
+        }
+    }
+
+    void EverybodyLeaves()
+    {
+        // One person leaves!
+        List<ProtesterData> protesters = new(_currentLocationData.protesters);
+        foreach (var protester in protesters)
+        {
+            _currentLocationData.RemoveProtester(protester);
+
+            var protesterObject = GetProtester(protester);
+            if (protesterObject)
+            {
+                protesterObject.MoveTo(GetSpawnPos(true), () =>
+                {
+                    Destroy(protesterObject.gameObject);
+                });
             }
         }
     }

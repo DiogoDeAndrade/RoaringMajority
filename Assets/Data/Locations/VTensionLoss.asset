@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ada74b897a81b49bb7d72ffe6dd092, type: 3}
+  m_Name: VTensionLoss
+  m_EditorClassIdentifier: Assembly-CSharp::LocationVictory
+  conditions:
+  - rid: 9093484562410373252
+  text: 'Internal tensions fracture the group.
+
+    The protest collapses from within.'
+  actions:
+  - rid: 9093484562410373253
+  references:
+    version: 2
+    RefIds:
+    - rid: 9093484562410373252
+      type: {class: CStatCondition, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 11bbbb5d5ab46c648a7c13ff037c13bc, type: 2}
+        comparisonType: 4
+        referenceValue: 70
+    - rid: 9093484562410373253
+      type: {class: ETickerText, ns: , asm: Assembly-CSharp}
+      data:
+        _tickerText:
+          originalElements:
+          - value: Internal strife fractures the protest at {LOCATION_NAME}.
+            weight: 1
+          - value: Rising tensions tear the protest group apart.
+            weight: 1
+          - value: Infighting overwhelms the movement.
+            weight: 1
+          - value: The protest at {LOCATION_NAME} collapses under internal pressure.
+            weight: 1
+          withReplacement: 1
+        duration: 15

@@ -7,7 +7,7 @@ using UnityEngine;
 public class ProtesterDef : ScriptableObject
 {
     [Serializable]
-    public struct BodySprite
+    public class BodySprite
     {
         public Sprite   bodySprite;
         public Vector3  offset;

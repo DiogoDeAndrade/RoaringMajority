@@ -21,6 +21,9 @@ MonoBehaviour:
   actions: []
   victoryConditions:
   - {fileID: 11400000, guid: b4abfb8a94d4b914aa34a9fc9b1b99d6, type: 2}
+  - {fileID: 11400000, guid: 268ce6a5dba6d2b47a71d3715d84c551, type: 2}
+  - {fileID: 11400000, guid: 939cf8054538ede4fa33e4216053dd29, type: 2}
+  - {fileID: 11400000, guid: fc75580c8bf5bb042a228b77c6184de2, type: 2}
   references:
     version: 2
     RefIds:

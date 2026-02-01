@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ada74b897a81b49bb7d72ffe6dd092, type: 3}
+  m_Name: VMoraleWin
+  m_EditorClassIdentifier: Assembly-CSharp::LocationVictory
+  conditions:
+  - rid: 5466724565638971468
+  text: '<color=#FFFF00>VICTORY!</color>
+
+
+    The crowd remains united and determined.
+
+    Officials
+    take note and move to address the demands.'
+  actions:
+  - rid: 9093484562410373220
+  references:
+    version: 2
+    RefIds:
+    - rid: 5466724565638971468
+      type: {class: CStatCondition, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
+        comparisonType: 4
+        referenceValue: 95
+    - rid: 9093484562410373220
+      type: {class: ETickerText, ns: , asm: Assembly-CSharp}
+      data:
+        _tickerText:
+          originalElements:
+          - value: The crowd holds firm. Officials move to engage.
+            weight: 1
+          - value: Sustained unity compels an official response.
+            weight: 1
+          - value: The protest succeeds. Authorities commit to action.
+            weight: 1
+          - value: High morale signals legitimacy. Officials step in.
+            weight: 1
+          withReplacement: 1
+        duration: 30

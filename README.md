@@ -19,11 +19,8 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 ## Current
 
 * Make first build (itch.io + GGJ site)
-* Protest successfull
-  * Morale > 90 or Morale > 70 and Visibility > 50
 * Add journalist
   * Call press (+visibility, +tension)
-* Tension > 80 -> Make some sort of event to demonstrate the concept
 * Title screen
 
 ## Todo
