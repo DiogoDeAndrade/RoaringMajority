@@ -17,6 +17,7 @@ public class Globals : GlobalsBase
     [SerializeField] private Stat _statMoney;
     [SerializeField] private Stat _statMaxPP;
     [SerializeField] private Stat _statPP;
+    [SerializeField] private Stat _statCrowdSize;
     [Header("Data Lists")]
     [SerializeField] private List<ProtesterDef> _protesterTypeList;
     [SerializeField] private List<Stat>         _statList;
@@ -46,6 +47,7 @@ public class Globals : GlobalsBase
     [SerializeField] private float          _newsUpdateProSide = 0.5f;
     [SerializeField] private Vector2        _newsDefaultDurationRange = new Vector2(25.0f, 35.0f);
     [SerializeField] private List<string>   _leaveSentences;
+    [SerializeField] private float          _protestRestartTime = 30.0f;
 
     public static Stat statTension => instance._statTension;
     public static Stat statMorale => instance._statMorale;
@@ -56,6 +58,7 @@ public class Globals : GlobalsBase
     public static Stat statMoney => instance._statMoney;
     public static Stat statMaxPP => instance._statMaxPP;
     public static Stat statPP => instance._statPP;
+    public static Stat statCrowdSize => instance._statCrowdSize;
     public static float startTension => instance._startTension;
     public static float startMorale => instance._startMorale;
     public static float startVisibility => instance._startVisibility;
@@ -83,6 +86,7 @@ public class Globals : GlobalsBase
     public static float newsUpdateProSide => instance._newsUpdateProSide;
     public static Vector2 newsDefaultDurationRange => instance._newsDefaultDurationRange;
     public static List<string> leaveSentences => instance._leaveSentences;
+    public static float protestRestartTime => instance._protestRestartTime;
 
 
     protected static Globals _instance = null;

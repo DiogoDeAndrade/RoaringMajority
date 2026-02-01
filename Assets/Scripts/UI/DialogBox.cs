@@ -84,8 +84,11 @@ public class DialogBox : MonoBehaviour
 
         yesTextElement = yesButton.GetComponentInChildren<TextMeshProUGUI>();
         if (yesTextElement) yesTextElement.text = yesText;
+        if (string.IsNullOrEmpty(yesTextElement.text)) yesButton.gameObject.SetActive(false);
+        
         noTextElement = noButton.GetComponentInChildren<TextMeshProUGUI>();
         if (noTextElement) noTextElement.text = noText;
+        if (string.IsNullOrEmpty(noTextElement.text)) noButton.gameObject.SetActive(false);
     }
 
     public static DialogBox CreateBox(string textString, bool isModal, DialogBox dialogPrefab, RectTransform container, 

@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
     private float                               recruitCooldown = 0.0f;
     private float                               recruitCooldownMax = 1.0f;
     private DialogBox                           startProtestDialog;
+    private DialogBox                           endProtestDialog;
     private float                               newsTimer;
     private bool                                refreshActions;
 
@@ -171,33 +172,68 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
                 UpdateActionButtons();
             }
 
-            if (!currentLocationData.isProtesting)
+            if (_currentLocationData.isProtesting)
             {
-                if (startProtestDialog == null)
+                if (endProtestDialog == null)
                 {
-                    int requireCount = 0;
-                    foreach (var p in Globals.startProtesters)
+                    var victory = _currentLocation.GetVictoryCondition(_currentLocationData);
+                    if (victory)
                     {
-                        requireCount += p.cost;
+                        endProtestDialog = DialogBox.CreateBox(victory.text, true, Globals.prefabDialogBox, mainUI,
+                            yesAction: (dialogBox) =>
+                            {
+                                _currentLocationData.EndProtest();
+                                endProtestDialog = null;
+                                return true;
+                            },
+                            noAction: (dialogBox) =>
+                            {
+                                endProtestDialog = null;
+                                return true;
+                            },
+                            yesText: "CONTINUE",
+                            noText: "");
+                        
+                        _currentLocationData.StopProtest();
+                        refreshActions = true;
                     }
+                }
+            }
+            else
+            {
+                if (_currentLocationData.restartCooldown <= 0.0f)
+                {
+                    if (startProtestDialog == null)
+                    {
+                        int requireCount = 0;
+                        foreach (var p in Globals.startProtesters)
+                        {
+                            requireCount += p.cost;
+                        }
 
-                    var message = "START PROTEST?";
-                    message += "\n\n";
-                    message += $"Requires <color=#{Globals.statPP.color.ToHex()}>{requireCount} PP</color>";
-                    startProtestDialog = DialogBox.CreateBox(message, true, Globals.prefabDialogBox, mainUI,
-                        yesAction : (dialogBox) =>
-                        {
-                            return StartProtest();
-                        },
-                        noAction : (dialogBox) =>
-                        {
-                            dialogBox = null;
-                            return true;
-                        },
-                        yesCondition : (dialogBox) =>
-                        {
-                            return (Get(Globals.statPP) + requireCount) <= Get(Globals.statMaxPP);
-                        });
+                        var message = "START PROTEST?";
+                        message += "\n\n";
+                        message += $"Requires <color=#{Globals.statPP.color.ToHex()}>{requireCount} PP</color>";
+                        startProtestDialog = DialogBox.CreateBox(message, true, Globals.prefabDialogBox, mainUI,
+                            yesAction: (dialogBox) =>
+                            {
+                                if (StartProtest())
+                                {
+                                    dialogBox = null;
+                                    return true;
+                                }
+                                return false;
+                            },
+                            noAction: (dialogBox) =>
+                            {
+                                dialogBox = null;
+                                return true;
+                            },
+                            yesCondition: (dialogBox) =>
+                            {
+                                return (Get(Globals.statPP) + requireCount) <= Get(Globals.statMaxPP);
+                            });
+                    }
                 }
             }
         }
@@ -261,6 +297,12 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
             pp += location.GetPP();
         }
         Set(Globals.statPP, pp);
+
+        // Evaluate local stats
+        foreach (var location in locations.Values)
+        {
+            location.UpdateDerivedStats();
+        }   
     }
 
     void UpdateRecruitmentButtons()
@@ -268,7 +310,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
         var buttons = FindObjectsByType<RecruitButton>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach (var button in buttons)
         {
-            button.gameObject.SetActive(IsAvailable(button.protesterType));
+            button.gameObject.SetActive((_currentLocationData.isProtesting) && (IsAvailable(button.protesterType)));
         }
     }
 
@@ -281,41 +323,44 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
             Destroy(button.gameObject);
         }
 
-        // Get action from cause
-        Dictionary<string, (ActionFunction function, IActionProvider provider)> actions = new();
-
-        foreach (var action in _currentCause.actions)
+        if (_currentLocationData.isProtesting)
         {
-            if (actions.ContainsKey(action.displayName)) continue;
+            // Get action from cause
+            Dictionary<string, (ActionFunction function, IActionProvider provider)> actions = new();
 
-            actions.Add(action.displayName, (action, _currentCause));
-        }
-
-        // Get action from location
-        foreach (var action in _currentLocationData.location.actions)
-        {
-            if (actions.ContainsKey(action.displayName)) continue;
-
-            actions.Add(action.displayName, (action, _currentLocationData));
-        }
-
-        // Get actions from protesters
-        var protesters = _currentLocationData.protesters;
-        foreach (var protester in protesters)
-        {
-            foreach (var action in protester.def.actions)
+            foreach (var action in _currentCause.actions)
             {
                 if (actions.ContainsKey(action.displayName)) continue;
 
-                actions.Add(action.displayName, (action, protester));
+                actions.Add(action.displayName, (action, _currentCause));
             }
-        }
 
-        // Add action buttons
-        foreach (var action in actions)
-        {
-            var actionButton = Instantiate(Globals.prefabActionButton, actionButtonContainer);
-            actionButton.Set(action.Value.function, action.Value.provider);
+            // Get action from location
+            foreach (var action in _currentLocationData.location.actions)
+            {
+                if (actions.ContainsKey(action.displayName)) continue;
+
+                actions.Add(action.displayName, (action, _currentLocationData));
+            }
+
+            // Get actions from protesters
+            var protesters = _currentLocationData.protesters;
+            foreach (var protester in protesters)
+            {
+                foreach (var action in protester.def.actions)
+                {
+                    if (actions.ContainsKey(action.displayName)) continue;
+
+                    actions.Add(action.displayName, (action, protester));
+                }
+            }
+
+            // Add action buttons
+            foreach (var action in actions)
+            {
+                var actionButton = Instantiate(Globals.prefabActionButton, actionButtonContainer);
+                actionButton.Set(action.Value.function, action.Value.provider);
+            }
         }
 
         refreshActions = false;
@@ -469,13 +514,6 @@ public class GameManager : MonoBehaviour, IUpkeepProvider
         Ticker.AddNews(item, 30.0f);
 
         return true;
-    }
-
-    public float GetCrowdSize(LocationData locationData)
-    {
-        if (locationData == null) return currentLocationData.protesterCount;
-
-        return locationData.protesterCount;
     }
 
     public Protester GetProtester(ProtesterData data)

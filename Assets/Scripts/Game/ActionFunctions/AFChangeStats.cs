@@ -26,7 +26,7 @@ public class AFChangeStats : ActionFunction
             switch (stat.scaleMode)
             {
                 case ScaleMode.ScaleWithCrowd:
-                    value = value * GameManager.instance.GetCrowdSize(loc);
+                    value = value * GameManager.instance.Get(Globals.statCrowdSize, loc);
                     break;
             }
 

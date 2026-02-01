@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
-using UC;
-using Unity.VisualScripting;
-using UnityEngine;
 
 public enum LocationState
 {
     Idle,
-    Protest
+    Protest,
+    Stop,
+    End
 }
 
 public class LocationData : IUpkeepProvider, IActionProvider
@@ -24,10 +22,12 @@ public class LocationData : IUpkeepProvider, IActionProvider
     private List<ProtesterData>             _protesters = new();
     private Dictionary<string, Cooldown>    _cooldowns = new();
     private int                             _inactivityTicks;
+    private float                           _restartCooldown = float.NegativeInfinity;
 
     public event OnChangeStat onChangeStat;
 
     public bool isProtesting => state == LocationState.Protest;
+    public float restartCooldown => (state == LocationState.Stop) ? Globals.protestRestartTime : ((state == LocationState.End) ? _restartCooldown : 0.0f);
     public int inactivityTicks => _inactivityTicks;
     public List<ProtesterData> protesters => _protesters;
     public int protesterCount => _protesters.Count;
@@ -65,6 +65,16 @@ public class LocationData : IUpkeepProvider, IActionProvider
         Set(Globals.statMorale, Globals.startMorale);
         Set(Globals.statVisibility, Globals.startVisibility);
     }
+    public void StopProtest()
+    {
+        state = LocationState.Stop;
+    }
+
+    public void EndProtest()
+    {
+        state = LocationState.End;
+        _restartCooldown = Globals.protestRestartTime;
+    }
 
     public int GetPP()
     {
@@ -99,6 +109,15 @@ public class LocationData : IUpkeepProvider, IActionProvider
         foreach (var cd in _cooldowns)
         {
             cd.Value.cooldown -= deltaTime;
+        }
+
+        if (state == LocationState.End)
+        {
+            _restartCooldown -= deltaTime;
+            if (_restartCooldown <= 0.0f)
+            {
+                state = LocationState.Idle;
+            }
         }
     }
 
@@ -144,5 +163,10 @@ public class LocationData : IUpkeepProvider, IActionProvider
     public Protester GetProtester()
     {
         return null;
+    }
+
+    public void UpdateDerivedStats()
+    {
+        Set(Globals.statCrowdSize, protesterCount);
     }
 }

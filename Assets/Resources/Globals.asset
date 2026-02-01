@@ -29,6 +29,7 @@ MonoBehaviour:
   _statMoney: {fileID: 11400000, guid: 43713b7f478a85444a28516755ee6a23, type: 2}
   _statMaxPP: {fileID: 11400000, guid: aef30bcd36db6b74f9e7836d1a55b426, type: 2}
   _statPP: {fileID: 11400000, guid: 1932c64503cc61a44a7adeb55ce3e33a, type: 2}
+  _statCrowdSize: {fileID: 11400000, guid: 685e1bcf46baafe41a2c9baff4d27ab1, type: 2}
   _protesterTypeList:
   - {fileID: 11400000, guid: 30da5eae037357c448f59917be511ed2, type: 2}
   _statList:
@@ -70,3 +71,4 @@ MonoBehaviour:
   - "Sorry\u2026 I need to leave."
   - This is going nowhere.
   - This protest is falling apart.
+  _protestRestartTime: 30

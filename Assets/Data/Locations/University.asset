@@ -19,6 +19,8 @@ MonoBehaviour:
   upkeepFunctions:
   - rid: 8767884664732647505
   actions: []
+  victoryConditions:
+  - {fileID: 11400000, guid: b4abfb8a94d4b914aa34a9fc9b1b99d6, type: 2}
   references:
     version: 2
     RefIds:

@@ -18,7 +18,7 @@ public class CFConstant : CostFunction
         switch (scaleMode)
         {
             case ScaleMode.ScaleWithCrowd:
-                ret *= GameManager.instance.GetCrowdSize(mainObject.GetLocation());
+                ret *= GameManager.instance.Get(Globals.statCrowdSize, mainObject.GetLocation());
                 break;
         }
 
