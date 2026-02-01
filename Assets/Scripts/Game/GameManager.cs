@@ -2,7 +2,6 @@ using NaughtyAttributes;
 using System.Collections.Generic;
 using UC;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 
 public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 {

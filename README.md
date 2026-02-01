@@ -1,5 +1,7 @@
 # THE ROARING MAJORITY
 
+![Title](Screenshots/title.png)
+
 Developed for [2026 Global Game Jam](https://globalgamejam.org/2026), with theme Mask, this project is a small experimental management/strategy game about crowds, protests, and identity. The core idea is to explore masks as both cosmetic and gameplay elements: anonymity, symbolism, protection, provocation.
 
 The project is intentionally scoped to be solo‑dev friendly and fun to build within a tight jam timeframe, while still allowing expressive systemic play.
@@ -40,6 +42,7 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
   * Spread protesters a bit
   * Show cooldown on recruit button
   * Show effects of actions on tooltip
+  * Customize cursor/icons
 * Design
   * Improve cooldown on recruit
 
