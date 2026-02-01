@@ -24,7 +24,6 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 * Add journalist
   * Call press (+visibility, +tension)
 * Tension > 80 -> Make some sort of event to demonstrate the concept
-* Show effects of actions on tooltip
 * Title screen
 
 ## Todo
@@ -42,6 +41,10 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
   * Better tooltip font (spacing is crap)
   * Combat text on change variables
   * Spread protesters a bit
+  * Show cooldown on recruit button
+  * Show effects of actions on tooltip
+* Design
+  * Improve cooldown on recruit
 
 ## Art
 

@@ -125,8 +125,21 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
             if (Input.GetKey(KeyCode.Alpha3)) simulationTimeScale = 8.0f;
             if (Input.GetKey(KeyCode.Alpha4)) simulationTimeScale = 16.0f;
 
+            if (Input.GetKeyDown(KeyCode.F1)) Cheat(Globals.statMorale, 10.0f);
+            if (Input.GetKeyDown(KeyCode.F2)) Cheat(Globals.statTension, 10.0f);
+            if (Input.GetKeyDown(KeyCode.F3)) Cheat(Globals.statVisibility, 10.0f);
+            if (Input.GetKeyDown(KeyCode.F4)) Cheat(Globals.statSupport, 10.0f);
+            if (Input.GetKeyDown(KeyCode.F5)) Cheat(Globals.statVolatility, 10.0f);
+            if (Input.GetKeyDown(KeyCode.F6)) Cheat(Globals.statAwareness, 10.0f);
+            if (Input.GetKeyDown(KeyCode.F7)) Cheat(Globals.statMoney, 50.0f);
+
             ElapseSimulation(Time.deltaTime * simulationTimeScale);
         }
+    }
+
+    void Cheat(Stat stat, float deltaValue)
+    {
+        Set(stat, (Input.GetKey(KeyCode.LeftShift) ? (-1.0f) : (1.0f)) * deltaValue + Get(stat));
     }
 
     void UpdateTicker()
