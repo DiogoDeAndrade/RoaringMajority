@@ -22,10 +22,10 @@ The current prototype only has one location/cause working (barely, needed a bunc
 
 ## Current
 
-* Add journalist
-  * Call press (+visibility, +tension)
 * Fine tune a bit
 * Counterprotesters show up when tension > 50
+* More than one person can quit at a time
+* Change tooltip of variable from upkeep to "change per tick" and account for buffs
 
 ## Todo
 
@@ -45,11 +45,11 @@ The current prototype only has one location/cause working (barely, needed a bunc
   * Exit
 * Polish
   * Better tooltip font (spacing is crap)
-  * Combat text on change variables
   * Spread protesters a bit
   * Show cooldown on recruit button
-  * Show effects of actions on tooltip
   * Customize cursor/icons
+  * Shake bar on increment/decrement
+  * Protester animation changes with tension/morale
 * Design
   * Improve cooldown on recruit
 
@@ -78,6 +78,8 @@ Image process notes:
 - [Apple icons](https://www.flaticon.com/free-icons/apple) created by Freepik - [Flaticon], free to use with attribution.
 - [Clap icons](https://www.flaticon.com/free-icons/clap) created by Freepik - [Flaticon], free to use with attribution.
 - [Water icons](https://www.flaticon.com/free-icons/water) created by Good Ware - [Flaticon], free to use with attribution.
+- [Coverage icons](https://www.flaticon.com/free-icons/coverage) created by Ryan Adryawan - [Flaticon], free to use with attribution.
+- [Media relations icons](https://www.flaticon.com/free-icons/media-relations) created by Ryan gravisio - [Flaticon], free to use with attribution.
 - Font [Boomer Tantrum](https://chequered.ink/product/boomer-tantrum/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - Font [Fake News](https://chequered.ink/product/fake-news/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - Font [Front Page News](https://chequered.ink/product/front-page-news/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)

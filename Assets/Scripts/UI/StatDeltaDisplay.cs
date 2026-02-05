@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using TMPro;
 using UC;
@@ -7,15 +8,28 @@ using UnityEngine.UI;
 
 public class StatDeltaDisplay : MonoBehaviour
 {
-    [SerializeField] private float              displayDuration = 2.0f;  
-    [SerializeField] private float              fadeDuration = 0.1f;
-    [SerializeField] private float              speed = 10.0f;
-    [SerializeField] private Sprite             iconPositive;
-    [SerializeField] private Color              colorPositive = Color.white;
-    [SerializeField] private Sprite             iconNegative;
-    [SerializeField] private Color              colorNegative = Color.white;
-    [SerializeField] private Image              imageElement;
-    [SerializeField] private TextMeshProUGUI    textElement;
+    [SerializeField] 
+    private float              displayDuration = 2.0f;  
+    [SerializeField] 
+    private float              fadeDuration = 0.1f;
+    [SerializeField] 
+    private float              speed = 10.0f;
+    [SerializeField] 
+    private Sprite             iconPositive;
+    [SerializeField] 
+    private Sprite             iconNegative;
+    [SerializeField] 
+    private bool               iconColorFromStat = true;
+    [SerializeField, HideIf(nameof(iconColorFromStat))] 
+    private Color              colorPositive = Color.white;
+    [SerializeField, HideIf(nameof(iconColorFromStat))] 
+    private Color              colorNegative = Color.white;
+    [SerializeField] 
+    private Image              imageElement;
+    [SerializeField] 
+    private TextMeshProUGUI    textElement;
+
+    bool isUp = true;
 
     private void Start()
     {
@@ -26,7 +40,7 @@ public class StatDeltaDisplay : MonoBehaviour
     {
         var rt = transform as RectTransform;
 
-        rt.Move(Vector3.up * displayDuration * speed, displayDuration).EaseFunction(Ease.Sqr);
+        rt.Move(Vector3.up * displayDuration * speed * ((isUp) ? (1.0f) : (-1.0f)), displayDuration).EaseFunction(Ease.Sqr);
         yield return new WaitForSeconds(displayDuration - fadeDuration);
 
         var canvasGroup = GetComponent<CanvasGroup>();
@@ -44,12 +58,14 @@ public class StatDeltaDisplay : MonoBehaviour
         if (deltaValue > 0.0f)
         {
             imageElement.sprite = iconPositive;
-            imageElement.color = colorPositive;
+            imageElement.color = (iconColorFromStat) ? (stat.color) : (colorPositive);
         }
         else
         {
+            isUp = false;
+            isUp = false;
             imageElement.sprite = iconNegative;
-            imageElement.color = colorNegative;
+            imageElement.color = (iconColorFromStat) ? (stat.color) : (colorNegative);
         }
 
         var rt = transform as RectTransform;

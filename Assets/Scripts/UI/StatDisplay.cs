@@ -71,7 +71,8 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         if (!string.IsNullOrEmpty(baseText))
         {
-            float deltaValue = newValue - oldValue;
+            // We only want to display the delta if the value changed, and if it changed visually (so integer > 0)
+            float deltaValue = Mathf.Round(newValue) - Mathf.Round(oldValue);
 
             if ((statDeltaPrefab) && (deltaValue != 0.0f))
             {
@@ -79,7 +80,7 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             }
             else
             {
-                valueText.text = string.Format(baseText, newValue);
+                valueText.text = string.Format(baseText, Mathf.Round(newValue));
             }
         }
     }
@@ -92,7 +93,7 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         while (deltaDisplay != null)
             yield return null;
 
-        valueText.text = string.Format(baseText, newValue);
+        valueText.text = string.Format(baseText, Mathf.Round(newValue));
     }   
 
     [Button("Force Update")]

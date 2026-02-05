@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 public enum LocationState
@@ -23,6 +24,7 @@ public class LocationData : IUpkeepProvider, IActionProvider
     private Dictionary<string, Cooldown>    _cooldowns = new();
     private int                             _inactivityTicks;
     private float                           _restartCooldown = float.NegativeInfinity;
+    private List<BuffDef.BaseBuffData>      _buffs = new();
 
     public event OnChangeStat onChangeStat;
 
@@ -111,6 +113,18 @@ public class LocationData : IUpkeepProvider, IActionProvider
             cd.Value.cooldown -= deltaTime;
         }
 
+        var itBuffs = new List<BuffDef.BaseBuffData>(_buffs);
+        foreach (var buff in itBuffs)
+        {
+            if (buff.isRealtime)
+            {
+                if (!buff.Tick(this))
+                {
+                    _buffs.Remove(buff);
+                }
+            }
+        }
+
         if (state == LocationState.End)
         {
             _restartCooldown -= deltaTime;
@@ -124,6 +138,18 @@ public class LocationData : IUpkeepProvider, IActionProvider
     public void Tick()
     {
         _inactivityTicks++;
+
+        var itBuffs = new List<BuffDef.BaseBuffData>(_buffs);
+        foreach (var buff in itBuffs)
+        {
+            if (buff.isTurnBased)
+            {
+                if (!buff.Tick(this))
+                {
+                    _buffs.Remove(buff);
+                }
+            }
+        }
     }
 
     public LocationData GetLocation()
@@ -168,5 +194,12 @@ public class LocationData : IUpkeepProvider, IActionProvider
     public void UpdateDerivedStats()
     {
         Set(Globals.statCrowdSize, protesterCount);
+    }
+
+    public void AddBuff(IActionProvider caster, BuffDef buffDef)
+    {
+        var newBuff = buffDef.Instance(this);
+
+        if (newBuff != null) _buffs.Add(newBuff);
     }
 }

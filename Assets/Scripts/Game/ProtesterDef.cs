@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UC.Interaction;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ProtesterDef", menuName = "RM/ProtesterDef")]
@@ -23,13 +22,20 @@ public class ProtesterDef : ScriptableObject
     [Header("Stats")]
     public int                  cost = 1;
     [SerializeReference]
-    public List<UpkeepFunction> upkeepFunctions;
+    public List<ConditionFunction>  conditions;
     [SerializeReference]
-    public List<ActionFunction> actions;
+    public List<UpkeepFunction>     upkeepFunctions;
+    [SerializeReference]
+    public List<ActionFunction>     actions;
 
-    public bool CanSpawn()
+    public bool CanSpawn(IActionProvider actionProvider)
     {
         if (cost > GameManager.instance.availablePP) return false;
+
+        foreach (var condition in conditions)
+        {
+            if (!condition.Evaluate(actionProvider)) return false;
+        }
 
         return true;
     }

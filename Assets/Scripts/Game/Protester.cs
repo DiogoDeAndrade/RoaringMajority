@@ -97,7 +97,10 @@ public class Protester : MonoBehaviour
         bounceBody.Stop();
         bounceBody.enabled = false;
         bounceWalk.enabled = true;
-        transform.MoveToWorld(targetPos, distance / moveSpeed, "MoveProtester").Done(() =>
+
+        float posZ = LocationObject.GetZ(targetPos.y);
+
+        transform.MoveToWorld(targetPos.xyz(posZ), distance / moveSpeed, "MoveProtester").Done(() =>
         {
             bounceBody.enabled = true;
             bounceWalk.enabled = false;

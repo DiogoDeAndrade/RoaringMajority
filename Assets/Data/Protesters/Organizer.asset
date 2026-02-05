@@ -49,6 +49,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5e896914a0c694746a58e7bd3733f92c, type: 3}
   - {fileID: 21300000, guid: 2cc699b8bcddfa749963b4dd1f6ab09c, type: 3}
   cost: 2
+  conditions: []
   upkeepFunctions:
   - rid: 9093484562410373229
   actions:

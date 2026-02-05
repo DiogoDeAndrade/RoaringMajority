@@ -433,13 +433,14 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 
     public bool Spawn(ProtesterDef def, LocationData location = null)
     {
+        var loc = (location == null) ? (_currentLocationData) : (location);
+
         // Check if we have enough PP
-        if (!def.CanSpawn()) return false;
+        if (!def.CanSpawn(loc)) return false;
 
         // Add logic entity
         ProtesterData pd = new ProtesterData(def, currentLocationData);
 
-        var loc = (location == null) ? (_currentLocationData) : (location);
         loc.AddProtester(pd);
 
         Spawn(pd, true, true);
@@ -451,9 +452,10 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
         return true;
     }
 
-    public float SpawnAvailabilityPercentage(ProtesterDef def)
+    public float SpawnAvailabilityPercentage(ProtesterDef def, LocationData location = null)
     {
-        if (!def.CanSpawn()) return 0.0f;
+        var loc = (location == null) ? (_currentLocationData) : (location);
+        if (!def.CanSpawn(loc)) return 0.0f;
 
         float cd = GetRecruitmentCooldown();
         float t = 1.0f - Mathf.Clamp01(recruitCooldown / recruitCooldownMax);

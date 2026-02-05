@@ -32,6 +32,8 @@ MonoBehaviour:
   _statCrowdSize: {fileID: 11400000, guid: 685e1bcf46baafe41a2c9baff4d27ab1, type: 2}
   _protesterTypeList:
   - {fileID: 11400000, guid: 30da5eae037357c448f59917be511ed2, type: 2}
+  - {fileID: 11400000, guid: 3fd513665e7409c478b73dcd8d48fa30, type: 2}
+  - {fileID: 11400000, guid: 4e9efb49078a4a34b89d1344348f40da, type: 2}
   _statList:
   - {fileID: 11400000, guid: f1baa8d805eea6349aeef0ae7826a8ca, type: 2}
   - {fileID: 11400000, guid: 43713b7f478a85444a28516755ee6a23, type: 2}

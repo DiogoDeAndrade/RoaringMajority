@@ -1,0 +1,205 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8716e693bf8d69049a43532af3a3aa76, type: 3}
+  m_Name: Witness
+  m_EditorClassIdentifier: Assembly-CSharp::ProtesterDef
+  displayName: Witness
+  icon: {fileID: 21300000, guid: 92a91aa44a9c29d4f9c0fd4dd1ea486b, type: 3}
+  color: {r: 0.9529412, g: 0.85882354, b: 0.43529412, a: 1}
+  tooltipText: 'Journalist
+
+    Cost: {COST} Protester Point
+
+
+    Brings cameras
+    and attention to the protest.
+
+    Boosts visibility, but heightened exposure
+    can escalate tension.'
+  bodySprites:
+  - bodySprite: {fileID: 21300000, guid: caa31138a3958c847845a65951785f0e, type: 3}
+    offset: {x: -4, y: 135, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 5b7d88e9649ffd74fa0d9d94f5cde70e, type: 3}
+    offset: {x: 0, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 8983c391c4781db4c8fb68f4ef2699e4, type: 3}
+    offset: {x: -9, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 8af19a97972420445b77df738d06c88f, type: 3}
+    offset: {x: -5, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: c43a533d6395afd4e82ddbd6f8cf9e0c, type: 3}
+    offset: {x: -2, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 7ba658de349bd6244ae80748c8a44b0f, type: 3}
+    offset: {x: -5, y: 128, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 9318a94ee1574ca43a145ca0b140347e, type: 3}
+    offset: {x: -5, y: 116, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: c0144ff306433124796fc6811174b82b, type: 3}
+    offset: {x: -5, y: 123, z: -0.01}
+  maskSprites:
+  - {fileID: 21300000, guid: 92a91aa44a9c29d4f9c0fd4dd1ea486b, type: 3}
+  - {fileID: 21300000, guid: e635e21e4eb1d734fa8a9c1c98924a1e, type: 3}
+  cost: 3
+  conditions: []
+  upkeepFunctions:
+  - rid: 5466724660115144835
+  - rid: 5466724660115144836
+  actions:
+  - rid: 9093484562410373194
+  - rid: 9093484562410373195
+  references:
+    version: 2
+    RefIds:
+    - rid: 5466724660115144788
+      type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
+      data:
+        scaleMode: 1
+        stat: {fileID: 11400000, guid: a05ff27077a194b40a50d92323ceac7b, type: 2}
+        baseValue: 2
+        multiplier: 2
+    - rid: 5466724660115144835
+      type: {class: UFConstant, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 11bbbb5d5ab46c648a7c13ff037c13bc, type: 2}
+        constantValue: 0.25
+    - rid: 5466724660115144836
+      type: {class: UFConstant, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: a05ff27077a194b40a50d92323ceac7b, type: 2}
+        constantValue: 0.25
+    - rid: 5466724660115144859
+      type: {class: ESay, ns: , asm: Assembly-CSharp}
+      data:
+        randomProtester: 0
+        protesterCount: 1
+        sentences:
+          originalElements:
+          - value: We're going live here in {LOCATION_NAME}...
+            weight: 1
+          - value: People, I'm live here from the protest!
+            weight: 1
+          - value: We're still going strong here at {LOCATION_NAME}
+            weight: 1
+          withReplacement: 1
+    - rid: 5466724660115144867
+      type: {class: EAddBuff, ns: , asm: Assembly-CSharp}
+      data:
+        buffDef: {fileID: 11400000, guid: cef9338546a8338459f1a830ae5a27e4, type: 2}
+    - rid: 5466724660115144868
+      type: {class: ETickerText, ns: , asm: Assembly-CSharp}
+      data:
+        _tickerText:
+          originalElements:
+          - value: Media briefings highlight developments at {LOCATION_NAME}.
+            weight: 1
+          - value: Coverage of {LOCATION_NAME} begins to spread through news channels.
+            weight: 1
+          - value: Attention grows as press reports reference {LOCATION_NAME}.
+            weight: 1
+          withReplacement: 1
+        duration: 15
+    - rid: 9093484562410373194
+      type: {class: ActionFunction, ns: , asm: Assembly-CSharp}
+      data:
+        _displayName: Live
+        _displayIcon: {fileID: 21300000, guid: 093c1b42bf78612408e3da58f21259b2, type: 3}
+        _tooltipName: Live Coverage
+        _tooltipText: 'Broadcasts the protest in real time, drawing immediate public
+          attention.
+
+          Greatly increases visibility, but the spotlight intensifies
+          pressure and tension.'
+        cooldown:
+          rid: 9093484562410373201
+        costs: []
+        conditions: []
+        actions:
+        - rid: 9093484562410373234
+        - rid: 5466724660115144788
+        - rid: 9093484562410373235
+        - rid: 9093484562410373236
+        - rid: 5466724660115144859
+    - rid: 9093484562410373195
+      type: {class: ActionFunction, ns: , asm: Assembly-CSharp}
+      data:
+        _displayName: Outreach
+        _displayIcon: {fileID: 21300000, guid: 6e48fa59ed986c84ca4c0cd23846e8c6, type: 3}
+        _tooltipName: Press Outreach
+        _tooltipText: 'Shares curated information with external media outlets.
+
+          Increases
+          visibility over time, but requires resources and coordination.'
+        cooldown:
+          rid: 9093484562410373209
+        costs:
+        - rid: 9093484562410373237
+        conditions: []
+        actions:
+        - rid: 5466724660115144867
+        - rid: 9093484562410373238
+        - rid: 5466724660115144868
+    - rid: 9093484562410373201
+      type: {class: CDConstant, ns: , asm: Assembly-CSharp}
+      data:
+        constantValue: 40
+    - rid: 9093484562410373209
+      type: {class: CDConstant, ns: , asm: Assembly-CSharp}
+      data:
+        constantValue: 70
+    - rid: 9093484562410373234
+      type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
+      data:
+        scaleMode: 1
+        stat: {fileID: 11400000, guid: 11bbbb5d5ab46c648a7c13ff037c13bc, type: 2}
+        baseValue: 4
+        multiplier: 1
+    - rid: 9093484562410373235
+      type: {class: EEmote, ns: , asm: Assembly-CSharp}
+      data:
+        randomProtester: 1
+        protesterCount: 5
+        emotes:
+        - sprites:
+          - {fileID: 21300000, guid: d26114fcad9998545b452bd4bea16671, type: 3}
+          - {fileID: 21300000, guid: 23df4b9be6efa5e44b3739b177def558, type: 3}
+          emoteCount: 2
+    - rid: 9093484562410373236
+      type: {class: ETickerText, ns: , asm: Assembly-CSharp}
+      data:
+        _tickerText:
+          originalElements:
+          - value: Live footage from {LOCATION_NAME} begins circulating online.
+            weight: 1
+          - value: Live coverage from {LOCATION_NAME} draws widespread attention.
+            weight: 1
+          - value: Cameras roll as tensions rise at {LOCATION_NAME}.
+            weight: 1
+          - value: Live images from {LOCATION_NAME} intensify public scrutiny.
+            weight: 1
+          - value: A witness streams events unfolding at {LOCATION_NAME}.
+            weight: 1
+          withReplacement: 1
+        duration: 25
+    - rid: 9093484562410373237
+      type: {class: CFConstant, ns: , asm: Assembly-CSharp}
+      data:
+        stat: {fileID: 11400000, guid: 43713b7f478a85444a28516755ee6a23, type: 2}
+        scaleMode: 0
+        value: 25
+    - rid: 9093484562410373238
+      type: {class: EEmote, ns: , asm: Assembly-CSharp}
+      data:
+        randomProtester: 0
+        protesterCount: 4
+        emotes:
+        - sprites:
+          - {fileID: 21300000, guid: 093c1b42bf78612408e3da58f21259b2, type: 3}
+          - {fileID: 21300000, guid: b5283719cb2427c45a76a1802e51484c, type: 3}
+          - {fileID: 21300000, guid: 6e48fa59ed986c84ca4c0cd23846e8c6, type: 3}
+          emoteCount: 3
