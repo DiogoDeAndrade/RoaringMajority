@@ -25,7 +25,6 @@ The current prototype only has one location/cause working (barely, needed a bunc
 * Add journalist
   * Call press (+visibility, +tension)
 * Fine tune a bit
-* Add UI elements for win/loose variable
 * Counterprotesters show up when tension > 50
 
 ## Todo

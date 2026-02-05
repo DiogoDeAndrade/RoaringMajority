@@ -39,18 +39,18 @@ public class LocationData : IUpkeepProvider, IActionProvider
         state = LocationState.Idle;
     }
 
-    public float Get(Stat stat)
+    public float Get(Stat stat, float defaultValue = 0.0f)
     {
         if (stat == null) return 0.0f;
 
         if (values.TryGetValue(stat, out float value)) return value;
 
-        return 0.0f;
+        return defaultValue;
     }
 
     public void Set(Stat stat, float value)
     {
-        float oldValue = Get(stat);
+        float oldValue = Get(stat, value);
 
         value = stat.ClampToLimit(value);
         values[stat] = value;

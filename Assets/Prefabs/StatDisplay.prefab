@@ -1,5 +1,40 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &163707116191733263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5876183035677114915}
+  m_Layer: 5
+  m_Name: StatDeltaSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5876183035677114915
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163707116191733263}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6085267083244125024}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 78.8, y: -35}
+  m_SizeDelta: {x: 100, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1013941858907506147
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,6 +173,7 @@ RectTransform:
   - {fileID: 5277100073795702969}
   - {fileID: 3225161318853786899}
   - {fileID: 2807226228724455887}
+  - {fileID: 5876183035677114915}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -170,6 +206,8 @@ MonoBehaviour:
   colorBar: {fileID: 7439281357457026987}
   labelText: {fileID: 5188346786791158619}
   valueText: {fileID: 2049202220962939248}
+  statDeltaPrefab: {fileID: 9076501722851313729, guid: 24160ec00320ca141bc69e50482a4018, type: 3}
+  statDeltaSpawnPoint: {fileID: 5876183035677114915}
 --- !u!114 &3610315195770067642
 MonoBehaviour:
   m_ObjectHideFlags: 0

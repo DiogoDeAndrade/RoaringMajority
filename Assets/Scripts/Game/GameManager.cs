@@ -403,14 +403,14 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
         return true;
     }
 
-    public float Get(Stat stat, LocationData location = null)
+    public float Get(Stat stat, LocationData location = null, float defaultValue = 0.0f)
     {
         var loc = (location == null) ? (_currentLocationData) : (location);
-        if (stat.isLocal) return loc?.Get(stat) ?? 0.0f;
+        if (stat.isLocal) return loc?.Get(stat, defaultValue) ?? 0.0f;
 
         if (values.TryGetValue(stat, out float value)) return value;
 
-        return 0.0f;
+        return defaultValue;
     }
 
     public void Set(Stat stat, float value, LocationData location = null)
@@ -422,7 +422,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
             return;
         }
 
-        float oldValue = Get(stat);
+        float oldValue = Get(stat, defaultValue : value);
 
         value = stat.ClampToLimit(value);
         values[stat] = value;

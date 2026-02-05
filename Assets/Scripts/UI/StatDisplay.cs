@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System.Collections;
 using TMPro;
 using UC;
 using UnityEngine;
@@ -8,15 +9,19 @@ using UnityEngine.UI;
 public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] 
-    public  Stat        stat;
+    public  Stat                stat;
     [SerializeField] 
-    private Image       iconImage;
+    private Image               iconImage;
     [SerializeField] 
-    private Image       colorBar;
+    private Image               colorBar;
     [SerializeField]
-    private TextMeshProUGUI labelText;
+    private TextMeshProUGUI     labelText;
     [SerializeField]
-    private TextMeshProUGUI valueText;
+    private TextMeshProUGUI     valueText;
+    [SerializeField]
+    private StatDeltaDisplay    statDeltaPrefab;
+    [SerializeField]
+    private Transform           statDeltaSpawnPoint;
 
     Tooltip             tooltip;
     string              baseText;
@@ -63,9 +68,32 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         iconImage.sprite = stat.icon;
         colorBar.color = stat.color;
         labelText.text = stat.displayName;
+
         if (!string.IsNullOrEmpty(baseText))
-            valueText.text = string.Format(baseText, newValue);
+        {
+            float deltaValue = newValue - oldValue;
+
+            if ((statDeltaPrefab) && (deltaValue != 0.0f))
+            {
+                StartCoroutine(DisplayDeltaCR(newValue, deltaValue));
+            }
+            else
+            {
+                valueText.text = string.Format(baseText, newValue);
+            }
+        }
     }
+
+    IEnumerator DisplayDeltaCR(float newValue, float deltaValue)
+    {
+        var deltaDisplay = Instantiate(statDeltaPrefab, statDeltaSpawnPoint);
+        deltaDisplay.Set(stat, deltaValue);
+
+        while (deltaDisplay != null)
+            yield return null;
+
+        valueText.text = string.Format(baseText, newValue);
+    }   
 
     [Button("Force Update")]
     void ForceUpdate()
