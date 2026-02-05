@@ -58,13 +58,6 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 
     void Start()
     {
-#if UNITY_EDITOR
-        if (debugStartLocation != null)
-        {
-            _currentLocation = debugStartLocation;
-            InitLocation();
-        }
-#else
         // Define locations
         if (autoStartGame)
         {
@@ -72,7 +65,6 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
             _currentLocation = debugStartLocation;
             InitLocation();
         }
-#endif
 
         tickTimer = Time.time;
     }

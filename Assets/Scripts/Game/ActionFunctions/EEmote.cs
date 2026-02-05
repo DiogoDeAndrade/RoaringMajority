@@ -54,4 +54,14 @@ public class EEmote : ExecutionFunction
             protester?.Emote(emote.sprites, emote.emoteCount);
         }
     }
+
+    public override bool isStatDelta(IActionProvider mainObject)
+    {
+        return false;
+    }
+
+    public override string GetTooltip(IActionProvider mainObject)
+    {
+        return null;
+    }
 }

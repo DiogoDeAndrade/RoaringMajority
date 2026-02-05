@@ -30,4 +30,14 @@ public class ETickerText : ExecutionFunction
         }
         return true;
     }
+
+    public override bool isStatDelta(IActionProvider mainObject)
+    {
+        return false;
+    }
+
+    public override string GetTooltip(IActionProvider mainObject)
+    {
+        return null;
+    }
 }

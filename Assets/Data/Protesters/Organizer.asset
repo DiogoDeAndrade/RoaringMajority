@@ -58,6 +58,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 5466724660115144788
+      type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
+      data:
+        scaleMode: 0
+        stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
+        baseValue: 4
+        multiplier: 0
     - rid: 9093484562410373194
       type: {class: ActionFunction, ns: , asm: Assembly-CSharp}
       data:
@@ -75,6 +82,7 @@ MonoBehaviour:
         conditions: []
         actions:
         - rid: 9093484562410373234
+        - rid: 5466724660115144788
         - rid: 9093484562410373235
         - rid: 9093484562410373236
     - rid: 9093484562410373195

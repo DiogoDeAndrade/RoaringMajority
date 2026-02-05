@@ -12,14 +12,15 @@ public class ActionButtonTooltip : TooltipDynamicText
 
     public override string ModifyText(string baseText)
     {
-        var s = baseText;
         var function = actionButton.actionFunction;
         var provider = actionButton.actionProvider;
 
-        string costString = function.GetDefaultCostTooltip(provider);
-        if (!string.IsNullOrEmpty(costString))
+        var s = $"{function.tooltipName}\n{baseText}\n\n";
+
+        string resultString = function.GetDefaultResultTooltip(provider);
+        if (!string.IsNullOrEmpty(resultString))
         {
-            s = $"{function.tooltipName}\n{s}\n\nCost: {costString}";
+            s += $"{resultString}\n";
         }
         string cooldownString = function.GetDefaultCooldownTooltip(provider);
         if (!string.IsNullOrEmpty(cooldownString))
@@ -27,9 +28,9 @@ public class ActionButtonTooltip : TooltipDynamicText
             var location = provider.GetLocation();
             var cd = location.GetCooldown(function.displayName);
             if (cd.cooldown <= 0.0f)
-                s = $"{s}\nCooldown: {cooldownString}s";
+                s += $"Cooldown: {cooldownString}s\n";
             else
-                s = $"{s}\nCooldown: {Mathf.FloorToInt(cd.cooldown)}/{Mathf.FloorToInt(cd.maxCooldown)}";
+                s += $"Cooldown: {Mathf.FloorToInt(cd.cooldown)}/{Mathf.FloorToInt(cd.maxCooldown)}\n";
         }
 
         var protesterTypes = Globals.protesterTypeList;

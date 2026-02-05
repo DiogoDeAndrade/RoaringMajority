@@ -56,4 +56,14 @@ public class ESay : ExecutionFunction
             protester?.Say(text, 2.0f);
         }
     }
+
+    public override bool isStatDelta(IActionProvider mainObject)
+    {
+        return false;
+    }
+
+    public override string GetTooltip(IActionProvider mainObject)
+    {
+        return null;
+    }
 }

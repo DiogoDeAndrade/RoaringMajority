@@ -13,6 +13,8 @@ public interface IActionProvider
 public abstract class CostFunction
 {
     public abstract (Stat stat, float value) GetCost(IActionProvider mainObject);
+    public abstract bool isStatDelta(IActionProvider mainObject);
+    public abstract string GetTooltip(IActionProvider mainObject);
 }
 
 [Serializable]
@@ -32,6 +34,8 @@ public abstract class CooldownFunction
 public abstract class ExecutionFunction
 {
     public abstract bool Execute(IActionProvider mainObject);
+    public abstract bool isStatDelta(IActionProvider mainObject);
+    public abstract string GetTooltip(IActionProvider mainObject);
 }
 
 [Serializable]
@@ -125,29 +129,54 @@ public class ActionFunction
         return ret;
     }
 
-    public string GetDefaultCostTooltip(IActionProvider provider)
-    {
-        string ret = "";
-        foreach (var cost in costs)
-        {
-            var c = cost.GetCost(provider);
-            if (!string.IsNullOrEmpty(ret)) ret += " ";
-
-            var color = c.stat.color;
-            if (GameManager.instance.Get(c.stat) < c.value)
-                color = Color.red;
-
-            // We don't color the displayName because it will be colored by the other system that calls this
-            ret += $"<color=#{color.ToHex()}>{c.value}</color> {c.stat.displayName}";
-        }
-        return ret;
-    }
-
     public string GetDefaultCooldownTooltip(IActionProvider provider)
     {
         if (cooldown == null) return "";
 
         return $"{Mathf.FloorToInt(cooldown.GetCooldown(provider))}";
+    }
+    public string GetDefaultResultTooltip(IActionProvider provider)
+    {
+        string ret = "";
+
+        foreach (var cost in costs)
+        {
+            if (cost.isStatDelta(provider))
+            {
+                var tmp = cost.GetTooltip(provider);
+                if (!string.IsNullOrEmpty(tmp))
+                {
+                    if (!string.IsNullOrEmpty(ret)) ret += ", ";
+                    ret += tmp;
+                }
+            }
+        }
+        foreach (var action in actions)
+        {
+            if (action.isStatDelta(provider))
+            {
+                var tmp = action.GetTooltip(provider);
+                if (!string.IsNullOrEmpty(tmp))
+                {
+                    if (!string.IsNullOrEmpty(ret)) ret += ", ";
+                    ret += tmp;
+                }
+            }
+        }
+
+        foreach (var action in actions)
+        {
+            if (!action.isStatDelta(provider))
+            {
+                var tmp = action.GetTooltip(provider);
+                if (!string.IsNullOrEmpty(tmp))
+                {
+                    ret += tmp;
+                }
+            }
+        }
+
+        return ret;
     }
 
     public bool HasCooldown()
