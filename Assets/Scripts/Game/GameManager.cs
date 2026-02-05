@@ -272,21 +272,24 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
                 t = Mathf.Clamp01(t);
 
                 float p = Mathf.Pow(t, Globals.leaveThreshouldPower);
-                
-                if (Random.Range(0.0f, 1.0f) < p)
-                {
-                    // One person leaves!
-                    var protester = location.Value.protesters.Random();
-                    location.Value.RemoveProtester(protester);
 
-                    var protesterObject = GetProtester(protester);
-                    if (protesterObject)
+                for (int i = 0; i < location.Value.protesterCount; i++)
+                {
+                    if (Random.Range(0.0f, 1.0f) < p)
                     {
-                        protesterObject.Say(Globals.leaveSentences.Random(), 2.0f);
-                        protesterObject.MoveTo(GetSpawnPos(true), () =>
+                        // One person leaves!
+                        var protester = location.Value.protesters.Random();
+                        location.Value.RemoveProtester(protester);
+
+                        var protesterObject = GetProtester(protester);
+                        if (protesterObject)
                         {
-                            Destroy(protesterObject.gameObject);
-                        });
+                            protesterObject.Say(Globals.leaveSentences.Random(), 2.0f);
+                            protesterObject.MoveTo(GetSpawnPos(true), () =>
+                            {
+                                Destroy(protesterObject.gameObject);
+                            });
+                        }
                     }
                 }
             }

@@ -22,9 +22,8 @@ The current prototype only has one location/cause working (barely, needed a bunc
 
 ## Current
 
-* Fine tune a bit
-* Counterprotesters show up when tension > 50
-* More than one person can quit at a time
+* Fine tune
+* Counterprotesters show up when tension > 50, they leave if < 50
 * Change tooltip of variable from upkeep to "change per tick" and account for buffs
 
 ## Todo
@@ -50,6 +49,7 @@ The current prototype only has one location/cause working (barely, needed a bunc
   * Customize cursor/icons
   * Shake bar on increment/decrement
   * Protester animation changes with tension/morale
+  * Sounds
 * Design
   * Improve cooldown on recruit
 
