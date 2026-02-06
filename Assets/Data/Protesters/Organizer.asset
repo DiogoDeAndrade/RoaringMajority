@@ -15,6 +15,7 @@ MonoBehaviour:
   displayName: Organizer
   icon: {fileID: 21300000, guid: 9cd3032d84097104cb20bbc4098bfc0c, type: 3}
   color: {r: 0.5882353, g: 0.69411767, b: 0.90588236, a: 1}
+  protesterPrefab: {fileID: 2140368942696141523, guid: 3e1a85e082c945f4bb1bb1b7698933d2, type: 3}
   tooltipText: 'Organizer
 
     Cost: {COST} Protester Point
@@ -49,6 +50,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5e896914a0c694746a58e7bd3733f92c, type: 3}
   - {fileID: 21300000, guid: 2cc699b8bcddfa749963b4dd1f6ab09c, type: 3}
   cost: 2
+  globalCooldown: 15
   conditions: []
   upkeepFunctions:
   - rid: 9093484562410373229

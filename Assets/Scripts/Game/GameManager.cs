@@ -2,7 +2,7 @@ using NaughtyAttributes;
 using System.Collections.Generic;
 using UC;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
+using UnityMeshSimplifier.Internal;
 
 public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 {
@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
     private Cause                               _currentCause;
     private Location                            _currentLocation;
     private LocationData                        _currentLocationData;
+    private Location.Opposition                 _currentOpposition;
     private Dictionary<Stat, float>             values = new();
     private Dictionary<Location, LocationData>  locations = new();
     private float                               tickTimer;
@@ -209,6 +210,8 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
                         refreshActions = true;
                     }
                 }
+
+                HandleCounterProtest();
             }
             else
             {
@@ -297,23 +300,101 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
         }
     }
 
-    void EverybodyLeaves()
+    void EverybodyLeaves(bool leftSide= true, bool rightSide = true)
     {
-        // One person leaves!
-        List<ProtesterData> protesters = new(_currentLocationData.protesters);
+        List<ProtesterData> protesters = new();
+        if (leftSide) protesters.AddRange(_currentLocationData.protesters);
+        if (rightSide) protesters.AddRange(_currentLocationData.cProtesters);
         foreach (var protester in protesters)
         {
-            _currentLocationData.RemoveProtester(protester);
+            Leave(protester);
+        }
+    }
 
-            var protesterObject = GetProtester(protester);
-            if (protesterObject)
+    void Leave(ProtesterData protester)
+    {
+        _currentLocationData.RemoveProtester(protester);
+
+        var protesterObject = GetProtester(protester);
+        if (protesterObject)
+        {
+            var spawnPos = GetClosestSpawnPos(protesterObject.transform.position);
+
+            protesterObject.MoveTo(spawnPos, () =>
             {
-                protesterObject.MoveTo(GetSpawnPos(true), () =>
-                {
-                    Destroy(protesterObject.gameObject);
-                });
+                Destroy(protesterObject.gameObject);
+            });
+        }
+    }
+
+    void HandleCounterProtest()
+    {
+        // Check if there is opposition in this current range
+        float tension = Get(Globals.statTension, _currentLocationData);
+        var opposition = _currentLocation.GetOpposition(tension);
+        if (opposition == null)
+        {
+            // There shouldn't be opposition, if there is, remove them
+            if (_currentOpposition != null)
+            {
+                // Get rid of them
+                DisbandCurrentCounterProtest();
             }
         }
+        else
+        {
+            // There should be opposition, need to check if this is the correct opposition
+            if (_currentOpposition != null)
+            {
+                if (_currentOpposition != opposition)
+                {
+                    // It's different types, get rid of the old one
+                    DisbandCurrentCounterProtest();
+                }
+            }
+            else
+            {
+                // There is no current opposition, ticker text for new opposition
+                var txt = opposition.ticketText.Get();
+                var translator = new Dictionary<string, string>
+                {
+                    ["{LOCATION_NAME}"] = _currentLocation.newsName,
+                };
+                txt = txt.FindReplace(translator);
+
+                Ticker.AddNews(txt, 30.0f);
+            }
+            _currentOpposition = opposition;
+
+            // Spawn opposition protesters, if needed
+            int cProtesterCount = _currentLocationData.cProtesterCount;
+            int targetCount = Mathf.FloorToInt(Mathf.Lerp(opposition.protesterCounterRange.x, opposition.protesterCounterRange.y, (tension - opposition.tensionRange.x) / (opposition.tensionRange.y - opposition.tensionRange.x)));
+
+            if (cProtesterCount < targetCount)
+            {
+                // Spawn protesters
+                ProtesterData pd = new ProtesterData(_currentOpposition.archetypes.Random(), _currentLocationData);
+                _currentLocationData.AddCounterProtester(pd);
+
+                Spawn(pd, false, true);
+            }
+            else if (cProtesterCount > targetCount)
+            {
+                // Remove protesters
+                int deltaElements = cProtesterCount - targetCount;
+                for (int i = 0; i < deltaElements; i++)
+                {
+                    var protester = _currentLocationData.cProtesters.Random();
+                    Leave(protester);
+                }
+            }
+        }
+    }
+
+    void DisbandCurrentCounterProtest()
+    {
+        _currentOpposition = null;
+        EverybodyLeaves(false, true);
     }
 
     void UpdateDerivedStats()
@@ -469,7 +550,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 
     public void Spawn(ProtesterData pd, bool leftSide, bool animate)
     {
-        var protester = Instantiate(Globals.prefabProtester, LocationObject.instance.transform);
+        var protester = Instantiate(pd.def.protesterPrefab, LocationObject.instance.transform);
         protester.protesterData = pd;
 
         var stagingArea = (leftSide) ? (LocationObject.leftProtestArea) : (LocationObject.rightProtestArea);
@@ -496,6 +577,14 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
         var spawnPos = spawnArea.Random();
 
         return spawnPos;
+    }
+
+    private Vector2 GetClosestSpawnPos(Vector3 pos)
+    {
+        float dRight = Vector2.Distance(pos, LocationObject.rightSpawnArea.transform.position);
+        float dLeft = Vector2.Distance(pos, LocationObject.leftSpawnArea.transform.position);
+
+        return GetSpawnPos(dRight < dLeft);
     }
 
     float GetUpkeep(Stat stat, LocationData location = null)

@@ -1,9 +1,20 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+using UC;
 
 [CreateAssetMenu(fileName = "Location", menuName = "RM/Location")]
 public class Location : ScriptableObject
 {
+    [Serializable]
+    public class Opposition
+    {
+        public Vector2Int           tensionRange;
+        public Vector2Int           protesterCounterRange;    
+        public List<ProtesterDef>   archetypes;
+        public StringProbList       ticketText;
+    }
+
     public string                   displayName;
     public Sprite                   backgroundImage;
     public string                   newsName;
@@ -13,6 +24,7 @@ public class Location : ScriptableObject
     [SerializeReference]
     public List<ActionFunction>     actions;
     public List<LocationVictory>    victoryConditions;
+    public List<Opposition>         opposition;
 
     public void GetUpkeep(Dictionary<Stat, float> deltaStat, LocationData locationData)
     {
@@ -46,6 +58,21 @@ public class Location : ScriptableObject
                 }
             }
         }
+        return null;
+    }
+
+    public Opposition GetOpposition(float tension)
+    {
+        if (opposition == null) return null;
+
+        foreach (var op in opposition)
+        {
+            if ((tension >= op.tensionRange.x) && (tension <= op.tensionRange.y))
+            {
+                return op;
+            }
+        }
+
         return null;
     }
 }

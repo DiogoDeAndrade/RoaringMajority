@@ -21,6 +21,7 @@ public class LocationData : IUpkeepProvider, IActionProvider
     private LocationState                   state;
     private Dictionary<Stat, float>         values = new();
     private List<ProtesterData>             _protesters = new();
+    private List<ProtesterData>             _cProtesters = new();
     private Dictionary<string, Cooldown>    _cooldowns = new();
     private int                             _inactivityTicks;
     private float                           _restartCooldown = float.NegativeInfinity;
@@ -31,8 +32,10 @@ public class LocationData : IUpkeepProvider, IActionProvider
     public bool isProtesting => state == LocationState.Protest;
     public float restartCooldown => (state == LocationState.Stop) ? Globals.protestRestartTime : ((state == LocationState.End) ? _restartCooldown : 0.0f);
     public int inactivityTicks => _inactivityTicks;
-    public List<ProtesterData> protesters => _protesters;
     public int protesterCount => _protesters.Count;
+    public List<ProtesterData> protesters => _protesters;
+    public int cProtesterCount => _cProtesters.Count;
+    public List<ProtesterData> cProtesters => _cProtesters;
     public Location location => _location;
 
     public LocationData(Location location)
@@ -91,6 +94,11 @@ public class LocationData : IUpkeepProvider, IActionProvider
     public void AddProtester(ProtesterData pd)
     {
         _protesters.Add(pd);
+    }
+
+    internal void AddCounterProtester(ProtesterData pd)
+    {
+        _cProtesters.Add(pd);
     }
 
     public void GetUpkeep(Dictionary<Stat, float> deltaStat)
@@ -201,6 +209,7 @@ public class LocationData : IUpkeepProvider, IActionProvider
     public void RemoveProtester(ProtesterData protester)
     {
         _protesters.Remove(protester);
+        _cProtesters.Remove(protester);
     }
 
     public Protester GetProtester()
@@ -234,4 +243,5 @@ public class LocationData : IUpkeepProvider, IActionProvider
 
         return ret;
     }
+
 }

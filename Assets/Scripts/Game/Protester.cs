@@ -40,6 +40,8 @@ public class Protester : MonoBehaviour
         }
     }
 
+    public ProtesterDef protesterDef => def;
+
     private void Awake()
     {
         bounceBody = bodyRenderer.GetComponent<BounceBody>();

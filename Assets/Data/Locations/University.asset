@@ -24,6 +24,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 268ce6a5dba6d2b47a71d3715d84c551, type: 2}
   - {fileID: 11400000, guid: 939cf8054538ede4fa33e4216053dd29, type: 2}
   - {fileID: 11400000, guid: fc75580c8bf5bb042a228b77c6184de2, type: 2}
+  opposition:
+  - tensionRange: {x: 50, y: 100}
+    protesterCounterRange: {x: 5, y: 30}
+    archetypes:
+    - {fileID: 11400000, guid: 663b81b691a34244fb7e483c4c91dbdc, type: 2}
+    ticketText:
+      originalElements:
+      - value: A counter-protest forms near {LOCATION_NAME}, challenging the demonstration.
+        weight: 1
+      - value: Opposing groups arrive at {LOCATION_NAME}, raising tensions on the
+          ground.
+        weight: 1
+      - value: "Counter-protesters gather at {LOCATION_NAME}, disputing the protest\u2019s
+          message."
+        weight: 1
+      withReplacement: 1
   references:
     version: 2
     RefIds:

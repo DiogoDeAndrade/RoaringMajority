@@ -12,15 +12,17 @@ public class ProtesterDef : ScriptableObject
         public Vector3  offset;
     }
 
-    public string           displayName;
-    public Sprite           icon;
-    public Color            color = Color.white;
+    public string                   displayName;
+    public Sprite                   icon;
+    public Color                    color = Color.white;
+    public Protester                protesterPrefab;
     [TextArea]
-    public string           tooltipText;
-    public List<BodySprite> bodySprites;
-    public List<Sprite>     maskSprites;
+    public string                   tooltipText;
+    public List<BodySprite>         bodySprites;
+    public List<Sprite>             maskSprites;
     [Header("Stats")]
-    public int                  cost = 1;
+    public int                      cost = 1;
+    public float                    globalCooldown = 30.0f;
     [SerializeReference]
     public List<ConditionFunction>  conditions;
     [SerializeReference]

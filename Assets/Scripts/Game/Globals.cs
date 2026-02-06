@@ -23,7 +23,6 @@ public class Globals : GlobalsBase
     [SerializeField] private List<Stat>         _statList;
     [SerializeField] private List<ProtesterDef> _startProtesters;
     [Header("Prefabs")]
-    [SerializeField] private Protester      _prefabProtester;
     [SerializeField] private DialogBox      _prefabDialogBox;
     [SerializeField] private ActionButton   _prefabActionButton;
     [Header("Start Values")]
@@ -66,7 +65,6 @@ public class Globals : GlobalsBase
     public static float startVolatility => instance._startVolatility;
     public static float startAwareness => instance._startAwareness;
     public static float startMoney => instance._startMoney;
-    public static Protester prefabProtester => instance._prefabProtester;
     public static DialogBox prefabDialogBox => instance._prefabDialogBox;
     public static ActionButton prefabActionButton => instance._prefabActionButton;
 

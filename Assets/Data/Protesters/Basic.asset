@@ -15,6 +15,7 @@ MonoBehaviour:
   displayName: Basic Protester
   icon: {fileID: 21300000, guid: 4aa18f71a26bc6b429d4f35ceab505b0, type: 3}
   color: {r: 0.95686275, g: 0.7294118, b: 0.47843137, a: 1}
+  protesterPrefab: {fileID: 2140368942696141523, guid: 3e1a85e082c945f4bb1bb1b7698933d2, type: 3}
   tooltipText: 'Basic Protester
 
     Cost: {COST} Protester Point
@@ -51,6 +52,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4aa18f71a26bc6b429d4f35ceab505b0, type: 3}
   - {fileID: 21300000, guid: 31a7a0fe28a4ebf468c90b908887f548, type: 3}
   cost: 1
+  globalCooldown: 15
+  conditions: []
   upkeepFunctions:
   - rid: 8767884664732647521
   actions:
@@ -60,6 +63,14 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 5466724679113244779
+      type: {class: EAddBuff, ns: , asm: Assembly-CSharp}
+      data:
+        buffDef: {fileID: 11400000, guid: 3e9dc0613c628064aa1f370d49fb6604, type: 2}
+    - rid: 5466724679113244780
+      type: {class: EAddBuff, ns: , asm: Assembly-CSharp}
+      data:
+        buffDef: {fileID: 11400000, guid: 58131b9be5d8aa94d885abb286e2d4ad, type: 2}
     - rid: 8767884664732647521
       type: {class: UFBoredom, ns: , asm: Assembly-CSharp}
       data:
@@ -82,8 +93,8 @@ MonoBehaviour:
         actions:
         - rid: 9093484562410373200
         - rid: 9093484562410373203
-        - rid: 9093484562410373205
-        - rid: 9093484562410373206
+        - rid: 5466724679113244779
+        - rid: 5466724679113244780
     - rid: 9093484562410373195
       type: {class: ActionFunction, ns: , asm: Assembly-CSharp}
       data:
@@ -148,20 +159,6 @@ MonoBehaviour:
           - {fileID: 21300000, guid: 1a453b88d5721aa44b44e78be5b7d769, type: 3}
           - {fileID: 21300000, guid: efed0aa0634c50b4ebd0155cb4568f96, type: 3}
           emoteCount: 5
-    - rid: 9093484562410373205
-      type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
-      data:
-        scaleMode: 1
-        stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
-        baseValue: 0
-        multiplier: 0.5
-    - rid: 9093484562410373206
-      type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
-      data:
-        scaleMode: 1
-        stat: {fileID: 11400000, guid: a05ff27077a194b40a50d92323ceac7b, type: 2}
-        baseValue: 0
-        multiplier: 0.25
     - rid: 9093484562410373208
       type: {class: ETickerText, ns: , asm: Assembly-CSharp}
       data:

@@ -22,10 +22,6 @@ The current prototype only has one location/cause working (barely, needed a bunc
 
 ## Current
 
-* Fine tune
-* Action cooldown per type
-* Counterprotesters show up when tension > 50, they leave if < 50
-
 ## Todo
 
 * Transfer local variables to global
@@ -37,11 +33,7 @@ The current prototype only has one location/cause working (barely, needed a bunc
   * TV system
 * Opposing crowd system
 * Stance system
-* Main Menu screen
-  * Start
-  * Credits
-  * Select Cause
-  * Exit
+* Cause selection
 * Polish
   * Better tooltip font (spacing is crap)
   * Spread protesters a bit
@@ -50,6 +42,7 @@ The current prototype only has one location/cause working (barely, needed a bunc
   * Shake bar on increment/decrement
   * Protester animation changes with tension/morale
   * Sounds
+    * Sound options
 * Design
   * Improve cooldown on recruit
 
@@ -85,6 +78,7 @@ Image process notes:
 - Font [Front Page News](https://chequered.ink/product/front-page-news/) by [Checkered Ink](https://chequered.ink/), purchased and under the [Checkered Ink License](https://chequered.ink/wp-content/uploads/2025/01/License-Agreement-All-Fonts-Pack.pdf)
 - [Nanner 32 Palette](https://lospec.com/palette-list/nanner-32) by [Afterimage](https://lospec.com/afterimage)
 - [archimedes 64 Palette](https://lospec.com/palette-list/archimedes-64) by [Pythagoras_314](https://lospec.com/pythagoras314)
+- [UI Pack](https://kenney.nl/assets/ui-pack) by [Kenney](https://kenney.nl), [CC0] license.
 - Most background and character art generated with Dall-E and processed by [Diogo de Andrade]
 - Everything else done by [Diogo de Andrade], [CC0] license.
 

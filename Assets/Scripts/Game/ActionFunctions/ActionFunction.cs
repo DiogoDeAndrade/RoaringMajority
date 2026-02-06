@@ -85,7 +85,11 @@ public class ActionFunction
         }
 
         var location = mainObject.GetLocation();
+        var protester = mainObject.GetProtester();
+        var globalCooldown = location.GetCooldown($"GCD_{protester.protesterDef.displayName}");
         var cd = location.GetCooldown(displayName);
+
+        if (cd.cooldown < globalCooldown.cooldown) cd = globalCooldown;
 
         return 1.0f - Mathf.Clamp01(cd.cooldown / cd.maxCooldown);
     }
@@ -113,6 +117,10 @@ public class ActionFunction
             {
                 location?.SetCooldown(_displayName, cooldown.GetCooldown(mainObject));
             }
+
+            var protester = mainObject.GetProtester();
+            location?.SetCooldown($"GCD_{protester.protesterDef.displayName}", protester.protesterDef.globalCooldown);
+
             location?.NotifyAction();
         }
     }

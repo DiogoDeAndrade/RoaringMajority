@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8716e693bf8d69049a43532af3a3aa76, type: 3}
+  m_Name: DumbCollegeKids
+  m_EditorClassIdentifier: Assembly-CSharp::ProtesterDef
+  displayName: Dumb College Kids
+  icon: {fileID: 21300000, guid: 4aa18f71a26bc6b429d4f35ceab505b0, type: 3}
+  color: {r: 0.69803923, g: 0.2627451, b: 0.3019608, a: 1}
+  protesterPrefab: {fileID: 4349226573730820115, guid: 3de9aa656b5e81a4aaf571e54519bf92, type: 3}
+  tooltipText: 'Dumb College Kids
+
+    Cost: {COST} Protester Point
+
+
+    Represents
+    a small group of ordinary participants.
+
+    Consumes {COST} Protester Point
+    from your global capacity, which is determined by Support.
+
+
+    Basic Protesters
+    have no special abilities but are the most cost-effective way to increase your
+    overall presence.'
+  bodySprites:
+  - bodySprite: {fileID: 21300000, guid: caa31138a3958c847845a65951785f0e, type: 3}
+    offset: {x: -4, y: 135, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 5b7d88e9649ffd74fa0d9d94f5cde70e, type: 3}
+    offset: {x: 0, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 8983c391c4781db4c8fb68f4ef2699e4, type: 3}
+    offset: {x: -9, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 8af19a97972420445b77df738d06c88f, type: 3}
+    offset: {x: -5, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: c43a533d6395afd4e82ddbd6f8cf9e0c, type: 3}
+    offset: {x: -2, y: 130, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 7ba658de349bd6244ae80748c8a44b0f, type: 3}
+    offset: {x: -5, y: 128, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: 9318a94ee1574ca43a145ca0b140347e, type: 3}
+    offset: {x: -5, y: 116, z: -0.01}
+  - bodySprite: {fileID: 21300000, guid: c0144ff306433124796fc6811174b82b, type: 3}
+    offset: {x: -5, y: 123, z: -0.01}
+  maskSprites:
+  - {fileID: 21300000, guid: 94f1b21d34379c449b56ca5aae38e870, type: 3}
+  - {fileID: 21300000, guid: 77feb59013363bc46a492cbedba90c65, type: 3}
+  - {fileID: 21300000, guid: ed5bccf3137270b4fb7d9d8927b5b8f0, type: 3}
+  - {fileID: 21300000, guid: 923ae0147451c6740a0dc6f86a0af372, type: 3}
+  cost: 0
+  globalCooldown: 30
+  conditions: []
+  upkeepFunctions: []
+  actions: []
+  references:
+    version: 2
+    RefIds: []

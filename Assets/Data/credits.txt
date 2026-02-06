@@ -1,0 +1,21 @@
+THE ROARING MAJORITY
+<size=60%>A Game By Diogo de Andrade
+
+Art
+
+<size=60%>Fonts by Checkered Ink, purchased and licensed
+<size=60%>Archimedes 64 Palette by Pythagoras_314
+<size=60%>UI pack by Kenney, licensed through the CC0 license.
+<size=60%>Title, background and character art generated with Dall-E and processed by Diogo de Andrade
+<size=60%>Icons from Flaticon, free to use with attribution.
+<size=60%>Created by Chanut, Andrean Prabowo, Gregor Cresnar,
+<size=60%>Freepik, Dewi Sari, Fusion5085, Icongeek26, Good Ware
+<size=60%>Ryan Adryawan, Ryan gravisio
+<size=60%>Everything else done by Diogo de Andrade, CC0 license.
+
+Code
+<size=60%>Some code was adapted/refactored from the UnityCommon library, MIT license
+<size=60%>All remaining game source code by Diogo de Andrade, MIT license
+
+<size=60%>Full game source available at https://github.com/DiogoDeAndrade/RoaringMajority
+<size=60%>with complete credits (links, licences, etc)
