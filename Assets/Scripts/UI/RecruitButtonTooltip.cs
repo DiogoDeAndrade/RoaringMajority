@@ -1,6 +1,5 @@
 using UC;
 using UnityEngine;
-using UnityMeshSimplifier.Internal;
 
 public class RecruitButtonTooltip : TooltipDynamicText
 {
@@ -17,6 +16,16 @@ public class RecruitButtonTooltip : TooltipDynamicText
 
         var def = rb.protesterType;
         s = s.Replace("{COST}", $"<color=#{Globals.statMaxPP.color.ToHex()}>{def.cost}</color>");
+
+        // Check if we have a {REQUIREMENTS} tag, and if so, replace it with the actual requirements
+        if (s.IndexOf("{REQUIREMENTS}") >= 0)
+        {
+            string reqString = def.GetRequirementsTooltip(GameManager.instance);
+            if (!string.IsNullOrEmpty(reqString))
+            {
+                s = s.Replace("{REQUIREMENTS}", $"Requires: {reqString}");
+            }
+        }
 
         var protesterTypes = Globals.protesterTypeList;
         foreach (var pt in protesterTypes)

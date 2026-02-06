@@ -58,4 +58,20 @@ public class ProtesterDef : ScriptableObject
 
         return ret;
     }
+
+    public string GetRequirementsTooltip(IActionProvider actionProvider)
+    {
+        string ret = null;
+        foreach (var condition in conditions)
+        {
+            var tooltip = condition.GetTooltip(actionProvider);
+            if (!string.IsNullOrEmpty(tooltip))
+            {
+                if (string.IsNullOrEmpty(ret)) ret = tooltip;
+                else ret += $", {tooltip}";
+            }
+        }
+
+        return ret;
+    }
 }

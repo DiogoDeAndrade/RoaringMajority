@@ -21,6 +21,7 @@ public abstract class CostFunction
 public abstract class ConditionFunction
 {
     public abstract bool Evaluate(IActionProvider mainObject);
+    public abstract string GetTooltip(IActionProvider mainObject);
 }
 
 [Serializable]

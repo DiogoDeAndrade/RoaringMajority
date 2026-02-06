@@ -19,12 +19,14 @@ MonoBehaviour:
 
     Cost: {COST} Protester Point
 
+    {REQUIREMENTS}
 
-    Brings cameras
-    and attention to the protest.
 
-    Boosts visibility, but heightened exposure
-    can escalate tension.'
+    Brings
+    cameras and attention to the protest.
+
+    Boosts visibility, but heightened
+    exposure can escalate tension.'
   bodySprites:
   - bodySprite: {fileID: 21300000, guid: caa31138a3958c847845a65951785f0e, type: 3}
     offset: {x: -4, y: 135, z: -0.01}
@@ -46,7 +48,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 92a91aa44a9c29d4f9c0fd4dd1ea486b, type: 3}
   - {fileID: 21300000, guid: e635e21e4eb1d734fa8a9c1c98924a1e, type: 3}
   cost: 3
-  conditions: []
+  conditions:
+  - rid: 5466724679113244765
   upkeepFunctions:
   - rid: 5466724660115144835
   - rid: 5466724660115144836
@@ -104,6 +107,11 @@ MonoBehaviour:
             weight: 1
           withReplacement: 1
         duration: 15
+    - rid: 5466724679113244765
+      type: {class: CCrowdSize, ns: , asm: Assembly-CSharp}
+      data:
+        comparisonType: 4
+        referenceValue: 10
     - rid: 9093484562410373194
       type: {class: ActionFunction, ns: , asm: Assembly-CSharp}
       data:

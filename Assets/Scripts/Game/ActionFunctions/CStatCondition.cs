@@ -3,52 +3,23 @@ using UC;
 using UnityEngine;
 
 [Serializable]
-[PolymorphicName("Condition")]
-public class CStatCondition : ConditionFunction
-{
-    public enum Comparison
-    {
-        Equal,
-        NotEqual,
-        Greater,
-        Less,
-        GreaterOrEqual,
-        LessOrEqual
-    }
-    
+[PolymorphicName("Stat Condition")]
+public class CStatCondition : CComparisonCondition
+{   
     public Stat         stat;
-    public Comparison   comparisonType;
-    public float        referenceValue;
 
-    public override bool Evaluate(IActionProvider mainObject)
+    public override string GetTooltip(IActionProvider mainObject)
+    {
+        if (Evaluate(mainObject))
+            return $"<color=#{stat.color.ToHex()}>{stat.displayName}</color> {opString} {referenceValue}";
+        else
+            return $"<color=#FF0000>{stat.displayName} {opString} {referenceValue}</color>";
+    }
+
+    public override float GetValue(IActionProvider mainObject)
     {
         var location = mainObject.GetLocation();
 
-        var value = GameManager.instance.Get(stat, location);
-        bool b = false;
-        switch (comparisonType)
-        {
-            case Comparison.Equal:
-                b = (value == referenceValue);
-                break;
-            case Comparison.NotEqual:
-                b = (value != referenceValue);
-                break;
-            case Comparison.Greater:
-                b = (value > referenceValue);
-                break;
-            case Comparison.Less:
-                b = (value < referenceValue);
-                break;
-            case Comparison.GreaterOrEqual:
-                b = (value >= referenceValue);
-                break;
-            case Comparison.LessOrEqual:
-                b = (value <= referenceValue);
-                break;
-            default:
-                break;
-        }
-        return b;
+        return GameManager.instance.Get(stat, location);
     }
 }
