@@ -219,4 +219,19 @@ public class LocationData : IUpkeepProvider, IActionProvider
 
         if (newBuff != null) _buffs.Add(newBuff);
     }
+
+    public string GetBuffTooltip(Stat stat)
+    {
+        string ret = "";
+        foreach (var buff in _buffs)
+        {
+            var txt = buff.GetTooltip(stat, this);
+            if (!string.IsNullOrEmpty(txt))
+            {
+                ret += $"\n{txt}";
+            }
+        }
+
+        return ret;
+    }
 }

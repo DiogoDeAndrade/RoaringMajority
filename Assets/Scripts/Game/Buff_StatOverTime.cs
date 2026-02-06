@@ -9,14 +9,33 @@ public class Buff_StatOverTime : StatefulBuffDef<Buff_StatOverTime.Data>
     {
         public override bool Run(IActionProvider executor)
         {
-            var buff = (Buff_StatOverTime)def;
+            var buffDef = (Buff_StatOverTime)def;
 
-            float   value = buff.GetValue(caster);
+            float   value = buffDef.GetValue(caster);
             var     loc = caster.GetLocation();
-            var     newValue = GameManager.instance.Get(buff.stat, loc) + value;
-            GameManager.instance.Set(buff.stat, newValue, loc);
+            var     newValue = GameManager.instance.Get(buffDef.stat, loc) + value;
+            GameManager.instance.Set(buffDef.stat, newValue, loc);
 
             return true;
+        }
+
+        public override string GetTooltip(Stat stat, IActionProvider executor)
+        {
+            var buffDef = (Buff_StatOverTime)def;
+            if (buffDef.stat != stat) return null;
+
+            float   v = buffDef.GetValue(caster);
+            string  vString = ((v > 0.0f) ? "+" : "") + $"{v}";
+
+            switch (buffDef._clockType)
+            {
+                case ClockType.Realtime:
+                    return $"{buffDef._displayName}: <color=#{stat.color.ToHex()}>{vString}</color>/{buffDef._tickTime}s, for {duration}s";
+                case ClockType.TurnBased:
+                    return $"{buffDef._displayName}: <color=#{stat.color.ToHex()}>{vString}</color>/tick, for {Mathf.CeilToInt(duration)} ticks";
+            }
+            
+            throw new System.NotImplementedException();
         }
     }
 

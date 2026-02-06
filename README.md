@@ -23,10 +23,10 @@ The current prototype only has one location/cause working (barely, needed a bunc
 ## Current
 
 * Fine tune
-* Change tooltip of variable from upkeep to "change per tick" and account for buffs
 * Require 10 protesters for journalist
+* Action cooldown per type
 * Display protester count somewhere
-* Counterprotesters show up when tension > 50, they leave if < 50
+  * Counterprotesters show up when tension > 50, they leave if < 50
 
 ## Todo
 

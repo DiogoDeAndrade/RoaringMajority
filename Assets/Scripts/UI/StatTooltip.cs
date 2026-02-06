@@ -17,7 +17,7 @@ public class StatTooltip : TooltipDynamicText
         var txt = GameManager.instance.GetStatTooltip(stat);
         if (!string.IsNullOrEmpty(txt))
         {
-            baseText += "\n\n" + txt;
+            baseText += "\n" + txt;
         }
 
         return baseText;

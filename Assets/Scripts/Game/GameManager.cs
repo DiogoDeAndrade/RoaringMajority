@@ -570,19 +570,27 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 
     public string GetStatTooltip(Stat stat)
     {
-        var upkeep = GetUpkeep(stat);
-        int v = Mathf.RoundToInt(upkeep);
+        string  txt = "";
+        var     upkeep = GetUpkeep(stat);
+        int     v = Mathf.RoundToInt(upkeep);
         if (v != 0)
         {
-            var txt = $"<color=#{stat.color.ToHex()}>";
+            txt = $"\nUpkeep: <color=#{stat.color.ToHex()}>";
 
-            txt += $"{v}/tick";
-
-            txt += "</color>";
-
-            return txt;
+            txt += ((v > 0.0f) ? "+" : "") + $"{v}</color>/tick";
         }
 
-        return null;
+        var localTooltip = GetBuffTooltip(stat);
+        if (!string.IsNullOrEmpty(localTooltip))
+        {
+            txt += $"{localTooltip}";
+        }
+
+        return txt;
+    }
+
+    private string GetBuffTooltip(Stat stat)
+    {
+        return _currentLocationData.GetBuffTooltip(stat);
     }
 }

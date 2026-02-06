@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System;
 using UnityEngine;
 
 public abstract class BuffDef : ScriptableObject 
@@ -38,6 +39,7 @@ public abstract class BuffDef : ScriptableObject
         }
 
         public abstract bool Run(IActionProvider executor);
+        public abstract string GetTooltip(Stat stat, IActionProvider executor);
     }
 
     public enum ClockType { Realtime, TurnBased };
