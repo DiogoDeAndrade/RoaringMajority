@@ -21,6 +21,8 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 The current prototype only has one location/cause working (barely, needed a bunch of stuff still).
 
 ## Current
+* Sounds
+  * Sound options
 
 ## Todo
 
@@ -41,8 +43,6 @@ The current prototype only has one location/cause working (barely, needed a bunc
   * Customize cursor/icons
   * Shake bar on increment/decrement
   * Protester animation changes with tension/morale
-  * Sounds
-    * Sound options
 * Design
   * Improve cooldown on recruit
 
@@ -96,6 +96,7 @@ Image process notes:
 
 ![Art Test](Screenshots/dev_art_test.png)
 ![Gameplay](Screenshots/gameplay01.png)
+![Gameplay](Screenshots/gameplay02.png)
 
 ## Metadata
 

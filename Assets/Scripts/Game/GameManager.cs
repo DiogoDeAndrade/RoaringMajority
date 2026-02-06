@@ -1,18 +1,19 @@
 using NaughtyAttributes;
+using System.Collections;
 using System.Collections.Generic;
 using UC;
 using UnityEngine;
-using UnityMeshSimplifier.Internal;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 {
-    public enum GameState { Menu, Started };
+    public enum GameState { Menu, Started, Ended };
     [SerializeField]
     public GameState            state = GameState.Menu;
     [SerializeField]
-    private RectTransform       mainUI;
+    private Hypertag            tagMainUI;
     [SerializeField]
-    private RectTransform       actionButtonContainer;
+    private Hypertag            tagActionButtonContainer;
     [Header("Debug")]
     [SerializeField]
     private bool                autoStartGame;
@@ -36,6 +37,8 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
     private DialogBox                           endProtestDialog;
     private float                               newsTimer;
     private bool                                refreshActions;
+    private RectTransform                       mainUI => tagMainUI.FindFirst<RectTransform>();
+    private RectTransform                       actionButtonContainer => tagActionButtonContainer.FindFirst<RectTransform>();
 
     public event OnChangeStat onChangeStat;
 
@@ -61,20 +64,23 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
     void Start()
     {
         // Define locations
+#if UNITY_EDITOR
         if (autoStartGame)
         {
             StartGame(autoStartCause);
-            _currentLocation = debugStartLocation;
-            InitLocation();
         }
+#endif
 
         tickTimer = Time.time;
     }
 
-    void StartGame(Cause cause)
+    public void StartGame(Cause cause)
     {
         _currentCause = cause;
         state = GameState.Started;
+
+        locations = new();
+        values = new();
 
         Set(Globals.statSupport, Globals.startSupport);
         Set(Globals.statAwareness, Globals.startAwareness);
@@ -83,6 +89,9 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 
         recruitCooldown = 0.0f;
         newsTimer = Globals.newsUpdateTimerRange.Random();
+
+        _currentLocation = debugStartLocation;
+        InitLocation();
     }
 
     void InitLocation()
@@ -90,7 +99,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
         if (!locations.TryGetValue(_currentLocation, out _currentLocationData))
         {
             _currentLocationData = new LocationData(_currentLocation);
-            _currentLocationData.onChangeStat += (stat, oldValue, newValue) => onChangeStat?.Invoke(stat, oldValue, newValue);
+            _currentLocationData.onChangeStat += _currentLocationData_onChangeStat;
             locations[_currentLocation] = _currentLocationData;
         }
 
@@ -106,6 +115,19 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
         {
             StartProtest();
         }
+    }
+
+    void OnDestroy()
+    {
+        foreach (var location in locations)
+        {
+            location.Value.onChangeStat -= _currentLocationData_onChangeStat;
+        }
+    }
+
+    private void _currentLocationData_onChangeStat(Stat stat, float oldValue, float newValue)
+    {
+        onChangeStat?.Invoke(stat, oldValue, newValue);
     }
 
     void Update()
@@ -196,6 +218,8 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 
                                 EverybodyLeaves();
 
+                                StartCoroutine(BackToMainMenuCR());
+
                                 return true;
                             },
                             noAction: (dialogBox) =>
@@ -208,6 +232,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
                         
                         _currentLocationData.StopProtest();
                         refreshActions = true;
+                        state = GameState.Ended;
                     }
                 }
 
@@ -251,6 +276,16 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
                 }
             }
         }
+    }
+
+    IEnumerator BackToMainMenuCR()
+    {
+        yield return new WaitForSeconds(5.0f);
+
+        FullscreenFader.FadeOut(0.5f, Color.black, () =>
+        {
+            SceneManager.LoadScene(0);
+        });
     }
 
     void GameTick()
@@ -581,10 +616,10 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 
     private Vector2 GetClosestSpawnPos(Vector3 pos)
     {
-        float dRight = Vector2.Distance(pos, LocationObject.rightSpawnArea.transform.position);
-        float dLeft = Vector2.Distance(pos, LocationObject.leftSpawnArea.transform.position);
+        float dRight = Vector2.Distance(pos, LocationObject.rightSpawnArea.bounds.center);
+        float dLeft = Vector2.Distance(pos, LocationObject.leftSpawnArea.bounds.center);
 
-        return GetSpawnPos(dRight < dLeft);
+        return GetSpawnPos(dRight > dLeft);
     }
 
     float GetUpkeep(Stat stat, LocationData location = null)

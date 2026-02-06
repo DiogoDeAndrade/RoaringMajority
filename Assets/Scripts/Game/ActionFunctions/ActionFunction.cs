@@ -85,11 +85,15 @@ public class ActionFunction
         }
 
         var location = mainObject.GetLocation();
-        var protester = mainObject.GetProtester();
-        var globalCooldown = location.GetCooldown($"GCD_{protester.protesterDef.displayName}");
         var cd = location.GetCooldown(displayName);
 
-        if (cd.cooldown < globalCooldown.cooldown) cd = globalCooldown;
+        var protester = mainObject.GetProtester();
+        if (protester)
+        {
+            var globalCooldown = location.GetCooldown($"GCD_{protester.protesterDef.displayName}");
+
+            if (cd.cooldown < globalCooldown.cooldown) cd = globalCooldown;
+        }
 
         return 1.0f - Mathf.Clamp01(cd.cooldown / cd.maxCooldown);
     }

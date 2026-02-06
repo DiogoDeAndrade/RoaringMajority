@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ada74b897a81b49bb7d72ffe6dd092, type: 3}
+  m_Name: VVisWin
+  m_EditorClassIdentifier: Assembly-CSharp::LocationVictory
+  conditions:
+  - rid: 9093484562410373247
+  - rid: 5466724682048995459
+  text: 'VICTORY!
+
+
+    The protest falters on the ground.
+
+    Images of exhausted
+    demonstrators spread, and public sympathy turns the tide.'
+  actions:
+  - rid: 9093484562410373220
+  references:
+    version: 2
+    RefIds:
+    - rid: 5466724682048995459
+      type: {class: CStatCondition, ns: , asm: Assembly-CSharp}
+      data:
+        comparisonType: 5
+        referenceValue: 50
+        stat: {fileID: 11400000, guid: 247a21b4e4272c94b821d1d374e0367b, type: 2}
+    - rid: 9093484562410373220
+      type: {class: ETickerText, ns: , asm: Assembly-CSharp}
+      data:
+        _tickerText:
+          originalElements:
+          - value: Despite chaos, images from {LOCATION_NAME} spark widespread sympathy.
+            weight: 1
+          - value: Public sympathy grows as the protest struggles on the ground.
+            weight: 1
+          - value: Underdog narrative emerges from events at {LOCATION_NAME}.
+            weight: 1
+          - value: Public reaction softens as demonstrators are seen under pressure.
+            weight: 1
+          withReplacement: 1
+        duration: 30
+    - rid: 9093484562410373247
+      type: {class: CStatCondition, ns: , asm: Assembly-CSharp}
+      data:
+        comparisonType: 4
+        referenceValue: 95
+        stat: {fileID: 11400000, guid: a05ff27077a194b40a50d92323ceac7b, type: 2}

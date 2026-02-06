@@ -24,6 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 268ce6a5dba6d2b47a71d3715d84c551, type: 2}
   - {fileID: 11400000, guid: 939cf8054538ede4fa33e4216053dd29, type: 2}
   - {fileID: 11400000, guid: fc75580c8bf5bb042a228b77c6184de2, type: 2}
+  - {fileID: 11400000, guid: 3e6b55adc5621014989b1de47079d811, type: 2}
   opposition:
   - tensionRange: {x: 50, y: 100}
     protesterCounterRange: {x: 5, y: 30}

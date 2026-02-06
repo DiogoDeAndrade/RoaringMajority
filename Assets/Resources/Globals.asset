@@ -52,11 +52,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 30da5eae037357c448f59917be511ed2, type: 2}
   - {fileID: 11400000, guid: 30da5eae037357c448f59917be511ed2, type: 2}
   - {fileID: 11400000, guid: 30da5eae037357c448f59917be511ed2, type: 2}
-  _prefabProtester: {fileID: 2140368942696141523, guid: 3e1a85e082c945f4bb1bb1b7698933d2, type: 3}
   _prefabDialogBox: {fileID: 4714612813715113559, guid: 6428ae13822386644b8ab0e9ee080e83, type: 3}
   _prefabActionButton: {fileID: 3072527414511735236, guid: bc197496bd36f4b419a0f51bc1deaf78, type: 3}
   _startMorale: 50
-  _startTension: 30
+  _startTension: 45
   _startVisibility: 10
   _startSupport: 5
   _startVolatility: 0

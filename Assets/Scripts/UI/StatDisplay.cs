@@ -38,6 +38,11 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         ForceUpdate();
     }
 
+    void OnDestroy()
+    {
+        GameManager.instance.onChangeStat -= UpdateStat;
+    }
+
     private void UpdateStat(Stat stat, float oldValue, float newValue)
     {
         if ((stat != null) && (this.stat != stat)) return;
@@ -50,9 +55,9 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         if (stat.isLocal)
         {
-            if (GameManager.instance.isOnLocation)
+            if ((GameManager.instance.isOnLocation) && (GameManager.instance.state == GameManager.GameState.Started))
             {
-                var locationData = GameManager.instance.currentLocationData;                
+                var locationData = GameManager.instance.currentLocationData;   
                 gameObject.SetActive(locationData.isProtesting);
             }
             else

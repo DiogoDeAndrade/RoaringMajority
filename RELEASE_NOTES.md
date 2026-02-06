@@ -1,3 +1,11 @@
+# 1.0.2 (06/02/2026)
+
+- Fixed bugs with restart system
+
+# 1.0.1 (06/02/2026)
+
+- Fixed bugs with tooltips and with game over
+
 # 1.0.0 (06/02/2026)
 
 - Added main menu with credits

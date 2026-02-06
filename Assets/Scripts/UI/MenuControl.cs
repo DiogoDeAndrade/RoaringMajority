@@ -8,13 +8,23 @@ public class MenuControl : MonoBehaviour
     [SerializeField,Scene] private string   sceneName;
     [SerializeField] private CanvasGroup    menuGroup;
     [SerializeField] private CanvasGroup    creditsGroup;
+    [SerializeField] private Cause          _startCause;
 
     public void StartGame()
     {
         FullscreenFader.FadeOut(0.5f, Color.black, () =>
         {
+            startCause = _startCause;
+            SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
             SceneManager.LoadScene(sceneName);
         });
+    }
+
+    private static Cause startCause;
+    private static void SceneManager_activeSceneChanged(Scene arg0, Scene arg1)
+    {
+        GameManager.instance?.StartGame(startCause);
+        SceneManager.activeSceneChanged -= SceneManager_activeSceneChanged;
     }
 
     public void Credits()
