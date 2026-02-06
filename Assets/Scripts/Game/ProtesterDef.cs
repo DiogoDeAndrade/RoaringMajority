@@ -47,4 +47,15 @@ public class ProtesterDef : ScriptableObject
             upkeepFunction.RunUpkeep(deltaStat, protesterData);
         }
     }
+
+    public float GetUpkeep(Stat stat, ProtesterData protesterData)
+    {
+        float ret = 0.0f;
+        foreach (var upkeepFunction in upkeepFunctions)
+        {
+            ret += upkeepFunction.GetUpkeep(stat, protesterData);
+        }
+
+        return ret;
+    }
 }

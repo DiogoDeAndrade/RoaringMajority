@@ -15,11 +15,26 @@ public class UFBoredom : UpkeepFunction
 
     public override void RunUpkeep(Dictionary<Stat, float> deltaStat, IUpkeepProvider mainObject)
     {
+        float deltaValue = GetValue(mainObject);
+
+        if (!deltaStat.TryGetValue(stat, out var value))
+        {
+            value = deltaValue;
+        }
+        else
+        {
+            deltaStat[stat] = value + deltaValue;
+        }            
+    }
+
+    private float GetValue(IUpkeepProvider mainObject)
+    {
         var locationData = mainObject as LocationData;
         if (locationData == null)
         {
             locationData = (mainObject as ProtesterData).location;
         }
+
         float inactivityPenalty = 0.0f;
         if (locationData != null)
         {
@@ -29,11 +44,13 @@ public class UFBoredom : UpkeepFunction
                 inactivityPenalty = inactivityBaseValue + inactivityScaleValue * (inactivityTicks - maxInactivityTicks);
             }
         }
+        return normalValue + inactivityPenalty;
+    }
 
-        if (!deltaStat.TryGetValue(stat, out var value))
-        {
-            value = 0.0f;
-        }
-        deltaStat[stat] = value + normalValue + inactivityPenalty;
+    public override float GetUpkeep(Stat stat, IUpkeepProvider mainObject)
+    {
+        if (stat != this.stat) return 0.0f;
+
+        return GetValue(mainObject);
     }
 }

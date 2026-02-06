@@ -27,4 +27,9 @@ public class ProtesterData : IUpkeepProvider, IActionProvider
     {
         def.GetUpkeep(deltaStat, this);
     }
+
+    public float GetUpkeep(Stat stat)
+    {        
+        return def.GetUpkeep(stat, this);
+    }
 }

@@ -1,7 +1,7 @@
 using UC;
 using UnityEngine;
 
-public class SupportTooltip : UpkeepTooltip
+public class SupportTooltip : StatTooltip
 {
     public override string ModifyText(string baseText)
     {

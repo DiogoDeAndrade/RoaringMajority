@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 6085267083244125024}
   - component: {fileID: 1805329923795638940}
   - component: {fileID: 7473569231479585715}
-  - component: {fileID: 3610315195770067642}
+  - component: {fileID: 7161786949346138275}
   m_Layer: 5
   m_Name: StatDisplay
   m_TagString: Untagged
@@ -208,7 +208,7 @@ MonoBehaviour:
   valueText: {fileID: 2049202220962939248}
   statDeltaPrefab: {fileID: 9076501722851313729, guid: 24160ec00320ca141bc69e50482a4018, type: 3}
   statDeltaSpawnPoint: {fileID: 5876183035677114915}
---- !u!114 &3610315195770067642
+--- !u!114 &7161786949346138275
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,9 +217,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1088548297736428832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c89646562ac4c2844a5c3b635ee423b7, type: 3}
+  m_Script: {fileID: 11500000, guid: c27a18da492215f4cabfd03903e81751, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UpkeepTooltip
+  m_EditorClassIdentifier: Assembly-CSharp::StatTooltip
 --- !u!1 &2405712153183566444
 GameObject:
   m_ObjectHideFlags: 0

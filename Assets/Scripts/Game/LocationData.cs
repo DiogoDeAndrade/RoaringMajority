@@ -106,6 +106,23 @@ public class LocationData : IUpkeepProvider, IActionProvider
         }        
     }
 
+    public float GetUpkeep(Stat stat)
+    {
+        float ret = 0.0f;
+
+        if (isProtesting)
+        {
+            ret += _location.GetUpkeep(stat, this);
+
+            foreach (var protester in _protesters)
+            {
+                ret += protester.GetUpkeep(stat);
+            }
+        }
+
+        return ret;
+    }
+
     public void ElapseSimulation(float deltaTime)
     {
         foreach (var cd in _cooldowns)

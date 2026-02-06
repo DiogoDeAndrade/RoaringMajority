@@ -21,4 +21,11 @@ public class UFConstant : UpkeepFunction
             deltaStat[stat] = constantValue;
         }
     }
+
+    public override float GetUpkeep(Stat stat, IUpkeepProvider mainObject)
+    {
+        if (stat != this.stat) return 0.0f;
+
+        return constantValue;
+    }
 }

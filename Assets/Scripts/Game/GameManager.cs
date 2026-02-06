@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System.Collections.Generic;
 using UC;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
 public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 {
@@ -251,17 +252,17 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 
     void GameTick()
     {
-        // Run upkeep
-        var deltaStats = GetUpkeeps();
-
-        foreach (var ds in deltaStats)
-        {
-            Set(ds.Key, Get(ds.Key) + ds.Value);
-        }
-
         // Location tick
         foreach (var location in locations)
         {
+            var deltaStats = new Dictionary<Stat, float>();
+            location.Value.GetUpkeep(deltaStats);
+
+            foreach (var ds in deltaStats)
+            {
+                Set(ds.Key, Get(ds.Key) + ds.Value, location.Value);
+            }
+
             location.Value.Tick();
 
             // Check for leaving
@@ -497,18 +498,11 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
         return spawnPos;
     }
 
-    public Dictionary<Stat, float> GetUpkeeps()
+    float GetUpkeep(Stat stat, LocationData location = null)
     {
-        Dictionary<Stat, float> deltaStats = new();
-        
-        _currentCause.GetUpkeep(deltaStats, this);
+        var loc = (location == null) ? (_currentLocationData) : (location);
 
-        foreach (var location in locations)
-        {
-            location.Value.GetUpkeep(deltaStats);
-        }
-
-        return deltaStats;
+        return loc.GetUpkeep(stat);
     }
 
     public float GetRecruitmentCooldown()
@@ -572,5 +566,23 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
     public Protester GetProtester()
     {
         return GetProtester(_currentLocationData.protesters.Random());
+    }
+
+    public string GetStatTooltip(Stat stat)
+    {
+        var upkeep = GetUpkeep(stat);
+        int v = Mathf.RoundToInt(upkeep);
+        if (v != 0)
+        {
+            var txt = $"<color=#{stat.color.ToHex()}>";
+
+            txt += $"{v}/tick";
+
+            txt += "</color>";
+
+            return txt;
+        }
+
+        return null;
     }
 }

@@ -22,6 +22,18 @@ public class Location : ScriptableObject
         }
     }
 
+    public float GetUpkeep(Stat stat, LocationData locationData)
+    {
+        float ret = 0.0f;
+
+        foreach (var upkeepFunction in upkeepFunctions)
+        {
+            ret += upkeepFunction.GetUpkeep(stat, locationData);
+        }
+
+        return ret;
+    }
+
     public LocationVictory GetVictoryCondition(LocationData location)
     {
         if ((victoryConditions != null) && (victoryConditions.Count > 0))
