@@ -1,7 +1,7 @@
 # 0.9.0 (06/02/2026)
 
-- Improved tooltip on actions (consequences)
-- Added UI elements for win/loose variable
+- Improved tooltips
+- Added UI elements for win/loose stat
 - Added witness protester
 - More than one person can quit at a time
 

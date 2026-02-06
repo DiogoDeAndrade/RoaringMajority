@@ -9,14 +9,16 @@ public class SupportTooltip : StatTooltip
 
         s += "\n\n";
 
-        s += $"<color=#{Globals.statMaxPP.color.ToHex()}>";
+        s += $"";
 
         var pp = GameManager.instance.Get(Globals.statPP);
         var maxPP = GameManager.instance.Get(Globals.statMaxPP);
+        var crowdSize = GameManager.instance.GetCrowdSize();
 
-        s += $"Protester Points (PP) = {pp}/{maxPP}";
+        var cText = $"<color=#{Globals.statMaxPP.color.ToHex()}>";
 
-        s += "</color>";
+        s += $"Protester Points (PP) = {cText}{pp}</color>/{cText}{maxPP}</color>\n";
+        s += $"Protesters = {cText}{crowdSize}</color>";
 
         return base.ModifyText(s);
     }

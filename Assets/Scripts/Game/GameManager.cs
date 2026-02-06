@@ -593,4 +593,11 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
     {
         return _currentLocationData.GetBuffTooltip(stat);
     }
+
+    public int GetCrowdSize(LocationData location = null)
+    {
+        var loc = (location == null) ? (_currentLocationData) : (location);
+
+        return loc.protesterCount;
+    }
 }
