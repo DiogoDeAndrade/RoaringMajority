@@ -615,7 +615,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
         protester.protesterData = pd;
 
         var stagingArea = (leftSide) ? (LocationObject.leftProtestArea) : (LocationObject.rightProtestArea);
-        var targetPos = stagingArea.Random();
+        var targetPos = GetRandomPoint(stagingArea, 40.0f, -5.0f);
 
         if (animate)
         {
@@ -630,6 +630,35 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
         }
 
         refreshActions = true;
+    }
+
+    Vector3 GetRandomPoint(PolygonCollider2D polygonCollider2D, float clearRadius, float incRadius = -2.0f)
+    {
+        if (clearRadius > 0.0f)
+        {
+            var protesters = _currentLocationData.protesters;
+            for (int i = 0; i < 100; i++)
+            {
+                var pos = polygonCollider2D.Random();
+
+                // Check if there's someone in this point (accounting for people that might be moving there)
+                bool accept = true;
+                foreach (var protester in protesters)
+                {
+                    var protesterObj = GetProtester(protester);
+                    if (Vector2.Distance(protesterObj.stillPosition, pos) < clearRadius)
+                    {
+                        accept = false;
+                        break;
+                    }
+                }
+                if (accept) return pos;
+            }
+
+            GetRandomPoint(polygonCollider2D, clearRadius + incRadius, incRadius);
+        }
+
+        return polygonCollider2D.Random();
     }
 
     Vector3 GetSpawnPos(bool leftSide)

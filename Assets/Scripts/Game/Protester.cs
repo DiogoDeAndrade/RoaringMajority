@@ -26,7 +26,8 @@ public class Protester : MonoBehaviour
     ProtesterData               _protesterData;
     ProtesterDef.BodySprite     bodySprite = null;
     Sprite                      maskSprite = null;
-
+    Vector3?                    targetPos;
+    
     public ProtesterData protesterData
     {
         get
@@ -71,6 +72,15 @@ public class Protester : MonoBehaviour
         transform.position = transform.position.ChangeZ(posZ);
     }
 
+    public Vector2 stillPosition
+    {
+        get
+        {
+            if (targetPos.HasValue) return targetPos.Value;
+
+            return transform.position;
+        }
+    }
 
     void UpdateVisuals()
     {
@@ -100,12 +110,15 @@ public class Protester : MonoBehaviour
         bounceBody.enabled = false;
         bounceWalk.enabled = true;
 
+        this.targetPos = targetPos;
+
         float posZ = LocationObject.GetZ(targetPos.y);
 
         transform.MoveToWorld(targetPos.xyz(posZ), distance / moveSpeed, "MoveProtester").Done(() =>
         {
             bounceBody.enabled = true;
             bounceWalk.enabled = false;
+            this.targetPos = null;
             doneFunction?.Invoke();
         });
     }

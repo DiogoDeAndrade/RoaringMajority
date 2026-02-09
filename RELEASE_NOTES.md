@@ -1,4 +1,10 @@
-# 1.0.2 (06/02/2026)
+# 1.1.0 (09/02/2026 - GCC February)
+
+- Added sound
+- Added options (sound and gamma)
+- Protesters now spread out more 
+
+# 1.0.2 (06/02/2026 - GameBreak version)
 
 - Fixed bugs with restart system
 
@@ -18,6 +24,6 @@
 - More than one person can quit at a time
 - Actions now lock other actions for a while (per-archetype cooldown)
 
-# 0.8.0 (01/02/2026)
+# 0.8.0 (01/02/2026 - GGJ'26)
 
 - First release, Global Game Jam version
