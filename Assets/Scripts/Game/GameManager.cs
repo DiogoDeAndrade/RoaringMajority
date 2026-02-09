@@ -603,11 +603,12 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
         var loc = (location == null) ? (_currentLocationData) : (location);
         if (!def.CanSpawn(loc)) return 0.0f;
 
-        float cd = GetRecruitmentCooldown();
         float t = 1.0f - Mathf.Clamp01(recruitCooldown / recruitCooldownMax);
 
         return t;
     }
+
+    public (float cooldown, float maxCooldown) GetRecruitmentCooldownTime() => (recruitCooldown, recruitCooldownMax);
 
     public void Spawn(ProtesterData pd, bool leftSide, bool animate)
     {

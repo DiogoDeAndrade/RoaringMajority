@@ -38,6 +38,13 @@ public class RecruitButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     void Update()
     {
         filler.fillAmount = 1.0f - GameManager.instance.SpawnAvailabilityPercentage(def);
+
+        if ((filler.fillAmount < 1.0f) && (tooltip))
+        {
+            var s = def.tooltipText;
+            if (dynamicText) s = dynamicText.ModifyText(s);
+            tooltip.SetText(s);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -77,12 +84,12 @@ public class RecruitButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             border.FadeTo(colorNormal, 0.1f);
         }
 
-            var s = def.tooltipText;
-        if (dynamicText) s = dynamicText.ModifyText(s);
-
         Globals.sndHover?.Play();
 
         tooltip = TooltipManager.CreateTooltip();
+
+        var s = def.tooltipText;
+        if (dynamicText) s = dynamicText.ModifyText(s);
         tooltip.SetText(s);
     }
 

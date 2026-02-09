@@ -22,7 +22,6 @@ The current prototype only has one location/cause working (barely, needed a bunc
 
 ## Current
 * Protesters shouting
-* Show cooldown on recruit button
 * Customize cursor/icons
 * Shake bar on increment/decrement
 
