@@ -6,6 +6,7 @@
 - Recruit button now shows cooldown
 - Protester shouting is now cause related
 - Counter-protesters can now shout as well
+- New icons and cursor
 
 # 1.0.2 (06/02/2026 - GameBreak version)
 
