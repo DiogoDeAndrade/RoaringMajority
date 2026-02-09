@@ -21,8 +21,11 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 The current prototype only has one location/cause working (barely, needed a bunch of stuff still).
 
 ## Current
-* Sounds
-  * Sound options
+* Protesters shouting
+* Spread protesters a bit
+* Show cooldown on recruit button
+* Customize cursor/icons
+* Shake bar on increment/decrement
 
 ## Todo
 
@@ -38,10 +41,6 @@ The current prototype only has one location/cause working (barely, needed a bunc
 * Cause selection
 * Polish
   * Better tooltip font (spacing is crap)
-  * Spread protesters a bit
-  * Show cooldown on recruit button
-  * Customize cursor/icons
-  * Shake bar on increment/decrement
   * Protester animation changes with tension/morale
 * Design
   * Improve cooldown on recruit
@@ -84,6 +83,8 @@ Image process notes:
 
 ## Sound
 
+- Crowd sounds by [ShangusBurger](https://freesound.org/people/ShangusBurger/), [SpliceSound](https://freesound.org/people/SpliceSound/), [karymronda](https://freesound.org/people/karymronda/) and [poorenglishjuggler](https://freesound.org/people/poorenglishjuggler/), [CC0] license.
+- Music by [Suno](www.shttps://suno.com/)
 - Everything else done by [Diogo de Andrade], licensed through the [CC0] license.
 
 ## Code

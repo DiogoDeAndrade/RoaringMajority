@@ -78,3 +78,7 @@ MonoBehaviour:
   - This is going nowhere.
   - This protest is falling apart.
   _protestRestartTime: 30
+  _sndHover: {fileID: 11400000, guid: 62ac0fa2f16d70d4bb7c94ccd537c99f, type: 2}
+  _sndUnhover: {fileID: 11400000, guid: dd940832d26b5c4418f067b4678f8929, type: 2}
+  _sndSelect: {fileID: 11400000, guid: 35b0d8c7e47109248b0f64e1c3ade899, type: 2}
+  _sndFail: {fileID: 11400000, guid: 4331b8305085a78439fa8cf57a0a86e7, type: 2}

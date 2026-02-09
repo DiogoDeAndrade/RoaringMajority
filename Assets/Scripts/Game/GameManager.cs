@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
     private Hypertag            tagMainUI;
     [SerializeField]
     private Hypertag            tagActionButtonContainer;
+    [SerializeField]
+    private Hypertag            tagCrowdAudio;
+    [SerializeField]
+    private Hypertag            tagTensionAudio;
     [Header("Debug")]
     [SerializeField]
     private bool                autoStartGame;
@@ -39,6 +43,8 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
     private bool                                refreshActions;
     private RectTransform                       mainUI => tagMainUI.FindFirst<RectTransform>();
     private RectTransform                       actionButtonContainer => tagActionButtonContainer.FindFirst<RectTransform>();
+    private CrowdAudio                          crowdAudio;
+    private CrowdAudio                          tensionAudio;
 
     public event OnChangeStat onChangeStat;
 
@@ -132,6 +138,9 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 
     void Update()
     {
+        float crowdVolume = 0.0f;
+        float tensionVolume = 0.0f;
+        
         if (state == GameState.Started)
         {
             UpdateTicker();
@@ -152,6 +161,23 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
             if (Input.GetKeyDown(KeyCode.F7)) Cheat(Globals.statMoney, 50.0f);
 
             ElapseSimulation(Time.deltaTime * simulationTimeScale);
+
+            if ((_currentLocationData != null) && (_currentLocationData.isProtesting))
+            {
+                crowdVolume = Get(Globals.statPP) / Get(Globals.statMaxPP);
+                tensionVolume = Get(Globals.statTension) / 100.0f;
+            }
+        }
+
+        if (!crowdAudio) crowdAudio = tagCrowdAudio.FindFirst<CrowdAudio>();
+        if (crowdAudio)
+        {
+            crowdAudio.intensity = crowdVolume;
+        }
+        if (!tensionAudio) tensionAudio = tagTensionAudio.FindFirst<CrowdAudio>();
+        if (tensionAudio)
+        {
+            tensionAudio.intensity = tensionVolume;
         }
     }
 

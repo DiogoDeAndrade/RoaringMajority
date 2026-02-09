@@ -7,6 +7,7 @@ public class MenuControl : MonoBehaviour
 {
     [SerializeField,Scene] private string   sceneName;
     [SerializeField] private CanvasGroup    menuGroup;
+    [SerializeField] private CanvasGroup    optionsGroup;
     [SerializeField] private CanvasGroup    creditsGroup;
     [SerializeField] private Cause          _startCause;
 
@@ -25,6 +26,22 @@ public class MenuControl : MonoBehaviour
     {
         GameManager.instance?.StartGame(startCause);
         SceneManager.activeSceneChanged -= SceneManager_activeSceneChanged;
+    }
+
+    public void Options()
+    {
+        menuGroup.FadeOut(0.5f);
+        optionsGroup.FadeIn(0.5f);
+        optionsGroup.gameObject.SetActive(true);
+    }
+
+    public void BackFromOptions()
+    {
+        menuGroup.FadeIn(0.5f);
+        optionsGroup.FadeOut(0.5f).Done(() =>
+        {
+            optionsGroup.gameObject.SetActive(false);
+        });
     }
 
     public void Credits()

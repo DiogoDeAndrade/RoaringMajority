@@ -45,14 +45,24 @@ public class RecruitButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (GameManager.instance.SpawnAvailabilityPercentage(def) >= 1.0f)
         {
             if (GameManager.instance.Spawn(def))
+            {
                 border.color = colorClick;
+                Globals.sndSelect?.Play();
+            }
             else
+            {
                 border.color = colorClickFail;
+                Globals.sndFail?.Play();
+            }
 
             if (GameManager.instance.SpawnAvailabilityPercentage(def) >= 1.0f)
                 border.FadeTo(colorHighlight, 0.2f);
             else
                 border.FadeTo(colorNormal, 0.2f);
+        }
+        else
+        {
+            Globals.sndFail?.Play();
         }
     }
 
@@ -70,6 +80,8 @@ public class RecruitButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             var s = def.tooltipText;
         if (dynamicText) s = dynamicText.ModifyText(s);
 
+        Globals.sndHover?.Play();
+
         tooltip = TooltipManager.CreateTooltip();
         tooltip.SetText(s);
     }
@@ -77,6 +89,8 @@ public class RecruitButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerExit(PointerEventData eventData)
     {
         border.FadeTo(colorNormal, 0.1f);
+
+        Globals.sndUnhover?.Play();
 
         tooltip?.Remove();
         tooltip = null;

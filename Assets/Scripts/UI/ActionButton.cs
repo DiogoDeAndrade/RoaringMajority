@@ -61,6 +61,8 @@ public class ActionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if (_actionFunction.CanRun(_actionProvider) >= 1.0f)
         {
+            Globals.sndSelect?.Play();
+
             _actionFunction.RunAction(_actionProvider);
             border.color = colorClick;
 
@@ -68,6 +70,10 @@ public class ActionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 border.FadeTo(colorHighlight, 0.2f);
             else
                 border.FadeTo(colorNormal, 0.2f);
+        }
+        else
+        {
+            Globals.sndFail?.Play();
         }
     }
 
@@ -81,6 +87,8 @@ public class ActionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             border.FadeTo(colorNormal, 0.1f);
         }
+
+        Globals.sndHover?.Play();
 
         tooltip = TooltipManager.CreateTooltip();
         UpdateTooltip();
@@ -97,6 +105,8 @@ public class ActionButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerExit(PointerEventData eventData)
     {
         border.FadeTo(colorNormal, 0.1f);
+
+        Globals.sndUnhover?.Play();
 
         tooltip?.Remove();
         tooltip = null;

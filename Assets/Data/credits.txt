@@ -13,7 +13,14 @@ Art
 <size=60%>Ryan Adryawan, Ryan gravisio
 <size=60%>Everything else done by Diogo de Andrade, CC0 license.
 
+Sound
+
+<size=60%>Crowd sounds by ShangusBurger, SpliceSound, karymronda and poorenglishjuggler, CC0 license.
+<size=60%>Music by Suno
+<size=60%>Everything else done by Diogo de Andrade, CC0 license.
+
 Code
+
 <size=60%>Some code was adapted/refactored from the UnityCommon library, MIT license
 <size=60%>All remaining game source code by Diogo de Andrade, MIT license
 

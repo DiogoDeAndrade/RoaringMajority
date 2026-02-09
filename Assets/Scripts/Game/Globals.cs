@@ -47,6 +47,10 @@ public class Globals : GlobalsBase
     [SerializeField] private Vector2        _newsDefaultDurationRange = new Vector2(25.0f, 35.0f);
     [SerializeField] private List<string>   _leaveSentences;
     [SerializeField] private float          _protestRestartTime = 30.0f;
+    [SerializeField] private SoundDef       _sndHover;
+    [SerializeField] private SoundDef       _sndUnhover;
+    [SerializeField] private SoundDef       _sndSelect;
+    [SerializeField] private SoundDef       _sndFail;
 
     public static Stat statTension => instance._statTension;
     public static Stat statMorale => instance._statMorale;
@@ -85,6 +89,10 @@ public class Globals : GlobalsBase
     public static Vector2 newsDefaultDurationRange => instance._newsDefaultDurationRange;
     public static List<string> leaveSentences => instance._leaveSentences;
     public static float protestRestartTime => instance._protestRestartTime;
+    public static SoundDef sndHover => instance._sndHover;
+    public static SoundDef sndUnhover => instance._sndUnhover;
+    public static SoundDef sndSelect => instance._sndSelect;
+    public static SoundDef sndFail => instance._sndFail;
 
 
     protected static Globals _instance = null;

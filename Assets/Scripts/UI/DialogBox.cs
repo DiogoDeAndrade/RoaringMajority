@@ -15,6 +15,12 @@ public class DialogBox : MonoBehaviour
     private Button          noButton;
     [SerializeField]
     private Image           blockerElement;
+    [SerializeField]
+    private SoundDef        sndHover;
+    [SerializeField]
+    private SoundDef        sndUnhover;
+    [SerializeField]
+    private SoundDef        sndSelect;
 
     ButtonFunction  yesAction;
     ButtonFunction  noAction;
@@ -41,6 +47,8 @@ public class DialogBox : MonoBehaviour
 
     public void OnYes()
     {
+        sndSelect?.Play();
+
         if (yesAction == null) return;
 
         if (yesAction(this))
@@ -49,6 +57,8 @@ public class DialogBox : MonoBehaviour
 
     public void OnNo()
     {
+        sndSelect?.Play();
+
         if (noAction == null) return;
 
         if (noAction(this))
@@ -70,6 +80,15 @@ public class DialogBox : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void OnHoverButton()
+    {
+        sndHover?.Play();
+    }
+    public void OnLeaveButton()
+    {
+        sndUnhover?.Play();
     }
 
     private void Init(string textString, bool isModal, ButtonFunction yesAction, ButtonFunction noAction, string yesText, string noText, ButtonFunction yesCondition, ButtonFunction noCondition)
