@@ -21,7 +21,6 @@ The challenge is to balance numbers, mask types, and intent, while reacting to p
 The current prototype only has one location/cause working (barely, needed a bunch of stuff still).
 
 ## Current
-* Shake bar on increment/decrement
 
 ## Todo
 
