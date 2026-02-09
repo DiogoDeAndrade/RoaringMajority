@@ -208,6 +208,9 @@ MonoBehaviour:
   valueText: {fileID: 2049202220962939248}
   statDeltaPrefab: {fileID: 9076501722851313729, guid: 24160ec00320ca141bc69e50482a4018, type: 3}
   statDeltaSpawnPoint: {fileID: 5876183035677114915}
+  shakeIntensity: 20
+  shakeDuration: 0.25
+  shakeSpeed: 25
 --- !u!114 &7161786949346138275
 MonoBehaviour:
   m_ObjectHideFlags: 0

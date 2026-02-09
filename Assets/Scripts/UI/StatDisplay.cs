@@ -22,13 +22,22 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private StatDeltaDisplay    statDeltaPrefab;
     [SerializeField]
     private Transform           statDeltaSpawnPoint;
+    [SerializeField]
+    private float               shakeIntensity = 20.0f;
+    [SerializeField]
+    private float               shakeDuration = 0.5f;
+    [SerializeField]
+    private float               shakeSpeed = 5.0f;
 
+    RectTransform       rectTransform;
     Tooltip             tooltip;
     string              baseText;
     TooltipDynamicText  dynamicText;
+    Coroutine           shakeCR;
 
     void Start()
     {
+        rectTransform = transform as RectTransform;
         dynamicText = GetComponent<TooltipDynamicText>();
 
         GameManager.instance.onChangeStat += UpdateStat;
@@ -86,6 +95,11 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             else
             {
                 valueText.text = string.Format(baseText, Mathf.Round(newValue));
+                if (deltaValue != 0.0f)
+                {
+                    if (shakeCR != null) StopCoroutine(shakeCR);
+                    shakeCR = StartCoroutine(ShakeCR());
+                }
             }
         }
     }
@@ -99,12 +113,40 @@ public class StatDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             yield return null;
 
         valueText.text = string.Format(baseText, Mathf.Round(newValue));
-    }   
 
-    [Button("Force Update")]
+        if (shakeCR != null) StopCoroutine(shakeCR);
+        shakeCR = StartCoroutine(ShakeCR());
+    }
+
+    IEnumerator ShakeCR()
+    {
+        float timer = shakeDuration;
+        while (timer > 0.0f)
+        {
+            float t = timer / shakeDuration;
+
+            float angle = shakeIntensity * t * (Mathf.PerlinNoise1D(timer * shakeSpeed) * 2.0f - 1.0f);
+            rectTransform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+
+        rectTransform.rotation = Quaternion.identity;
+        shakeCR = null;
+    }
+
     void ForceUpdate()
     {
         UpdateStat(null, 0.0f, 0.0f);
+    }
+
+    [Button("Skin Refresh")]
+    void SkinRefresh()
+    {
+        iconImage.sprite = stat.icon;
+        colorBar.color = stat.color;
+        labelText.text = stat.displayName;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
