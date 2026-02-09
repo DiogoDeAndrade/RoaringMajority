@@ -4,6 +4,8 @@
 - Added options (sound and gamma)
 - Protesters now spread out more 
 - Recruit button now shows cooldown
+- Protester shouting is now cause related
+- Counter-protesters can now shout as well
 
 # 1.0.2 (06/02/2026 - GameBreak version)
 

@@ -49,6 +49,8 @@ MonoBehaviour:
   tagActionButtonContainer: {fileID: 11400000, guid: c4564a0d59fedaf4faaeaaea91786808, type: 2}
   tagCrowdAudio: {fileID: 11400000, guid: 870b8618bba007c48994e6d74e5f52cd, type: 2}
   tagTensionAudio: {fileID: 11400000, guid: 052622fbb5c427645aea44c1d7bed6c9, type: 2}
+  enableShouts: 1
+  timeBetweenShouts: {x: 5, y: 10}
   autoStartGame: 0
   autoStartCause: {fileID: 11400000, guid: 6c30ee4f8d8fe7d4ea078a55bbdc6819, type: 2}
   debugStartLocation: {fileID: 11400000, guid: 51c095496e265b747aebb6ccf56a735a, type: 2}

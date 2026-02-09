@@ -9,6 +9,7 @@ public class Cause : ScriptableObject, IActionProvider
     public News     newsItems;
     public News     jokeItems;
     public News     startItems;
+    public News     shoutItems;
 
     [SerializeReference]
     public List<UpkeepFunction> upkeepFunctions;
@@ -63,5 +64,10 @@ public class Cause : ScriptableObject, IActionProvider
     public Protester GetProtester()
     {
         return null;
+    }
+
+    public string GetRandomShout(bool faction)
+    {
+        return shoutItems.GetRandom(faction);
     }
 }

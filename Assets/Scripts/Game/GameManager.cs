@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
     public enum GameState { Menu, Started, Ended };
     [SerializeField]
     public GameState            state = GameState.Menu;
+    [Header("Tags")]
     [SerializeField]
     private Hypertag            tagMainUI;
     [SerializeField]
@@ -18,6 +19,11 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
     private Hypertag            tagCrowdAudio;
     [SerializeField]
     private Hypertag            tagTensionAudio;
+    [Header("Counter-Protest")]
+    [SerializeField]
+    private bool                enableShouts;
+    [SerializeField, MinMaxSlider(1.0f, 20.0f), ShowIf(nameof(enableShouts))]
+    private Vector2             timeBetweenShouts = new Vector2(5.0f, 10.0f);
     [Header("Debug")]
     [SerializeField]
     private bool                autoStartGame;
@@ -45,6 +51,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
     private RectTransform                       actionButtonContainer => tagActionButtonContainer.FindFirst<RectTransform>();
     private CrowdAudio                          crowdAudio;
     private CrowdAudio                          tensionAudio;
+    private float                               shoutTimer;
 
     public event OnChangeStat onChangeStat;
 
@@ -162,7 +169,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
 
             ElapseSimulation(Time.deltaTime * simulationTimeScale);
 
-            if ((_currentLocationData != null) && (_currentLocationData.isProtesting))
+            if ((isOnLocation) && (_currentLocationData != null) && (_currentLocationData.isProtesting))
             {
                 crowdVolume = Get(Globals.statPP) / Get(Globals.statMaxPP);
                 tensionVolume = Get(Globals.statTension) / 100.0f;
@@ -450,6 +457,29 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
                 }
             }
         }
+
+        if ((enableShouts) && (_currentLocationData.cProtesterCount > 0))
+        {
+            if (shoutTimer > 0.0f)
+            {
+                shoutTimer -= Time.deltaTime;
+                if (shoutTimer <= 0.0f)
+                {
+                    string text = _currentCause.GetRandomShout(false);
+
+                    int n = Random.Range(0, _currentLocationData.cProtesterCount);
+                    var cProtester = _currentLocationData.cProtesters[n];
+                    var cProtesterObj = GetProtester(cProtester);
+                    cProtesterObj.Say(text, 4.0f);
+
+                    shoutTimer = timeBetweenShouts.Random();
+                }
+            }
+            else if (shoutTimer == 0.0f)
+            {
+                shoutTimer = timeBetweenShouts.Random();
+            }
+        }
     }
 
     void DisbandCurrentCounterProtest()
@@ -616,7 +646,7 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
         protester.protesterData = pd;
 
         var stagingArea = (leftSide) ? (LocationObject.leftProtestArea) : (LocationObject.rightProtestArea);
-        var targetPos = GetRandomPoint(stagingArea, 40.0f, -5.0f);
+        var targetPos = GetRandomPoint(stagingArea, 40.0f, -5.0f, leftSide);
 
         if (animate)
         {
@@ -633,33 +663,42 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
         refreshActions = true;
     }
 
-    Vector3 GetRandomPoint(PolygonCollider2D polygonCollider2D, float clearRadius, float incRadius = -2.0f)
+    Vector3 GetRandomPoint(PolygonCollider2D poly, float clearRadius, float incRadius, bool faction)
     {
-        if (clearRadius > 0.0f)
+        // Safety: if someone passes a non-negative incRadius, don’t infinite-loop
+        if (incRadius >= 0f) incRadius = -Mathf.Abs(incRadius == 0f ? 1f : incRadius);
+
+        var protesters = (faction) ? (_currentLocationData.protesters) : (_currentLocationData.cProtesters);
+
+        // Try progressively smaller radii until we hit 0 (or less), then accept anything
+        for (float r = clearRadius; r > 0f; r += incRadius) // incRadius is negative here
         {
-            var protesters = _currentLocationData.protesters;
             for (int i = 0; i < 100; i++)
             {
-                var pos = polygonCollider2D.Random();
+                Vector2 pos = poly.Random();
 
-                // Check if there's someone in this point (accounting for people that might be moving there)
                 bool accept = true;
+                float r2 = r * r;
+
                 foreach (var protester in protesters)
                 {
                     var protesterObj = GetProtester(protester);
-                    if (Vector2.Distance(protesterObj.stillPosition, pos) < clearRadius)
+
+                    // Slightly faster than Distance()
+                    Vector2 d = protesterObj.stillPosition - pos;
+                    if (d.sqrMagnitude < r2)
                     {
                         accept = false;
                         break;
                     }
                 }
+
                 if (accept) return pos;
             }
-
-            GetRandomPoint(polygonCollider2D, clearRadius + incRadius, incRadius);
         }
 
-        return polygonCollider2D.Random();
+        // If we couldn’t satisfy any positive radius, just return any point
+        return poly.Random();
     }
 
     Vector3 GetSpawnPos(bool leftSide)
@@ -779,5 +818,10 @@ public class GameManager : MonoBehaviour, IUpkeepProvider, IActionProvider
         var loc = (location == null) ? (_currentLocationData) : (location);
 
         return loc.protesterCount;
+    }
+
+    public Cause GetCause()
+    {
+        return _currentCause;
     }
 }

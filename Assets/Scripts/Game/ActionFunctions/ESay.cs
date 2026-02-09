@@ -9,16 +9,24 @@ using UnityEngine.Rendering;
 [PolymorphicName("Say")]
 public class ESay : ExecutionFunction
 {
+    public enum Source { Inline, CauseShouts };
+
+    [SerializeField]
+    private Source          source = Source.Inline;
     [SerializeField]
     private bool            randomProtester;
     [SerializeField, ShowIf(nameof(randomProtester))]
     private int             protesterCount = 1;
-    [SerializeField]
+    [SerializeField, ShowIf(nameof(isInline))]
     private StringProbList  sentences;
+    [SerializeField]
+    private float           textDuration = 2.0f;
+
+    bool isInline => source == Source.Inline;
 
     public override bool Execute(IActionProvider mainObject)
     {
-        if ((sentences != null) && (sentences.Count > 0))
+        if (((sentences != null) && (sentences.Count > 0)) || (source != Source.Inline)) 
         {
             var translator = new Dictionary<string, string>
             {
@@ -47,13 +55,27 @@ public class ESay : ExecutionFunction
 
     void Say(Protester protester, Dictionary<string, string> translator)
     {
-        var text = sentences.Get();
+        string text = "";
+        switch (source)
+        {
+            case Source.Inline:
+                text = sentences.Get();
+                break;
+            case Source.CauseShouts:
+                {
+                    var cause = GameManager.instance.GetCause();
+                    text = cause.GetRandomShout(true);
+                }
+                break;
+            default:
+                break;
+        }        
 
         if (!string.IsNullOrEmpty(text))
         {
             text = text.FindReplace(translator);
 
-            protester?.Say(text, 2.0f);
+            protester?.Say(text, textDuration);
         }
     }
 

@@ -181,6 +181,7 @@ MonoBehaviour:
     - rid: 9093484562410373210
       type: {class: ESay, ns: , asm: Assembly-CSharp}
       data:
+        source: 1
         randomProtester: 1
         protesterCount: 4
         sentences:
@@ -214,6 +215,7 @@ MonoBehaviour:
           - value: 
             weight: 4
           withReplacement: 1
+        textDuration: 4
     - rid: 9093484562410373211
       type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
       data:
@@ -241,6 +243,7 @@ MonoBehaviour:
     - rid: 9093484562410373215
       type: {class: ESay, ns: , asm: Assembly-CSharp}
       data:
+        source: 0
         randomProtester: 1
         protesterCount: 2
         sentences:
@@ -256,6 +259,7 @@ MonoBehaviour:
           - value: 
             weight: 3
           withReplacement: 1
+        textDuration: 2
     - rid: 9093484562410373216
       type: {class: EChangeStat, ns: , asm: Assembly-CSharp}
       data:

@@ -16,7 +16,9 @@ MonoBehaviour:
   newsItems: {fileID: -6717292093753566159, guid: 6cab0ab724256ac4981e0ef7c465f151, type: 3}
   jokeItems: {fileID: -6717292093753566159, guid: 93126ea3e58154b4c8bc301f4676b0cd, type: 3}
   startItems: {fileID: -6717292093753566159, guid: cb7038abf83fde645a808788eed6b7e4, type: 3}
+  shoutItems: {fileID: -6717292093753566159, guid: cd56c5a61a5e7164dbfd2b6a40f044af, type: 3}
   upkeepFunctions: []
+  actions: []
   references:
     version: 2
     RefIds: []
